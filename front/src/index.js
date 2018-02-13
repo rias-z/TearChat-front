@@ -1,19 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import reducers from './reducers'
+import { createStore, applyMiddleware, compose } from 'redux'
+import reducer from './reducer'
+import thunk from 'redux-thunk'
+
+import App from './containers/App'
 
 
-let store = createStore(reducers)
+const devtool =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
+const store = createStore(
+  reducer,
+  compose(
+    applyMiddleware(thunk),
+    devtool
+  )
+)
 
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Route path='/' component={App} />
     </BrowserRouter>
   </Provider>
 ), document.getElementById('root'))
