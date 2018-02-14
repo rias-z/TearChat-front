@@ -22,6 +22,9 @@ export const apiTokenCheck = (input_access_token) => async (dispatch) => {
 
     dispatch(tokenCheckSuccess(user_id, user_name))
   } catch (err) {
+    // ローカルストレージを削除
+    localStorage.clear()
+
     dispatch(tokenCheckFailed())
   }
 }
