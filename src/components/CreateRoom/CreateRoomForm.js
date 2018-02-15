@@ -16,6 +16,15 @@ class CreateRoomForm extends Component {
   handleLoginSubmit = async (e) => {
     e.preventDefault()
 
+    // localStorageからaccess_tokenを取得
+    const access_token = localStorage.getItem('access_token')
+
+    // アクセストークンがない場合，ログアウト処理
+    if (!access_token){
+      this.props.logout()
+      return
+    }
+
     // フォームから取得
     const room_name = e.target.room_name.value
     const participants_number = e.target.participants_number.value
@@ -25,7 +34,7 @@ class CreateRoomForm extends Component {
       participants_number: participants_number
     }
 
-    const result = await apiCreateRoom(room_obj)
+    const result = await apiCreateRoom(room_obj, access_token)
 
     // Room作成成功時，ユーザはSession画面に遷移
     // 一時的にLobbyに遷移するようにmock
