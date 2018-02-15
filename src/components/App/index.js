@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 // containers
+import CreateRoom from '../../containers/CreateRoom'
 import Login from '../../containers/Login'
 import Lobby from '../../containers/Lobby'
 import MakePc from '../../containers/MakePc'
@@ -37,6 +38,7 @@ class App extends Component {
                 return (
                   <Switch>
                     <Route exact path='/' component={Lobby}/>
+                    <Route path='/create_room' component={CreateRoom}/>
                     <Route path='/make_pc' component={MakePc}/>
                     <Route path='/session' component={Session}/>
                   </Switch>

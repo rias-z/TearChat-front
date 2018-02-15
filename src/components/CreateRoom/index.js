@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CreateRoomForm from './CreateRoomForm'
 
 
 class CreateRoom extends Component {
@@ -6,6 +7,7 @@ class CreateRoom extends Component {
     return (
       <div className='CreateRoom'>
         <h2>CreateRoom</h2>
+        <CreateRoomForm {...this.props}/>
       </div>
     )
   }
