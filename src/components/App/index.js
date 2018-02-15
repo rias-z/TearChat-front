@@ -30,8 +30,8 @@ class App extends Component {
       return (
         <div className="App">
           <Switch>
-            <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
+            <Route path='/login' component={Login}/>
 
             {(() => {
               if ( this.props.is_authenticated ) {

@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { loginSuccess } from '../../App/action'
+import { successLogin } from '../../App/action'
 
 
 const endpoint = 'http://localhost:5000/api'
@@ -23,7 +23,7 @@ export const apiLoginRequest = (input_user_name, input_password) => async (dispa
     })
 
     // stateに保存
-    dispatch(loginSuccess(user_id, user_name))
+    dispatch(successLogin(user_id, user_name))
 
     return true
   } catch (err) {
