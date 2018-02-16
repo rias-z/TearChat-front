@@ -20,6 +20,13 @@ export const successLogin = (user_id, user_name) => {
   }
 }
 
+export const failedLogin = () => {
+  return {
+    type: 'FAILED_LOGIN',
+    error_message: 'failed Login'
+  }
+}
+
 export const logout = () => {
   return {
     type: 'LOGOUT'

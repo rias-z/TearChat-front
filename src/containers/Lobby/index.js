@@ -1,22 +1,28 @@
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import Lobby from '../../components/Lobby'
-import * as selectors from './selectors'
+import React, { Component } from 'react'
 
-// dispatch
-import { apiGetCompactRooms } from './api'
+import RoomList from '../RoomList'
 
 
-const mapStateToProps = createStructuredSelector ({
-  isLoading: selectors.makeSelectIsLoading(),
-  rooms: selectors.makeSelectRooms()
-})
+class Lobby extends Component {
+  render() {
+    return (
+      <div className='Lobby'>
+        <h2>Lobby</h2>
 
-const mapDispatchToProps = (dispatch) => ({
-  apiGetCompactRooms: (rooms) => dispatch(apiGetCompactRooms(rooms))
-})
+        <h3>部屋一覧</h3>
+        <RoomList />
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Lobby)
+
+        <h3>部屋を作成する</h3>
+        <input
+          type='button' value='部屋を作成する'
+          onClick={() => {
+            this.props.history.push('/create_room')
+          }}
+        />
+      </div>
+    )
+  }
+}
+
+export default Lobby
