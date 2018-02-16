@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 class LoginForm extends Component {
   constructor(props) {
     super(props)
@@ -12,7 +13,7 @@ class LoginForm extends Component {
   handleLoginSubmit = async (e) => {
     e.preventDefault()
     // フォームから取得
-    const user_name = e.target.userName.value
+    const user_name = e.target.user_name.value
     const password = e.target.password.value
 
     const result = await this.props.apiLoginRequest(user_name, password)
@@ -34,7 +35,7 @@ class LoginForm extends Component {
         <h3>LoginForm</h3>
 
         <form onSubmit={this.handleLoginSubmit.bind(this)}>
-          name: <input name='userName' type='text' defaultValue='rias-z'/><br />
+          name: <input name='user_name' type='text' defaultValue='rias-z'/><br />
           pword: <input name='password' type='text' defaultValue='0000'/><br />
           <input type='submit' value='login'/>
         </form>

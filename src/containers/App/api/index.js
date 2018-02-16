@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { tokenCheckSuccess, tokenCheckFailed } from '../action'
+import { successTokenCheck, failedTokenCheck } from '../action'
 
 
 const endpoint = 'http://localhost:5000/api'
@@ -20,12 +20,12 @@ export const apiTokenCheck = (input_access_token) => async (dispatch) => {
       localStorage.setItem(key, res.body[key])
     })
 
-    dispatch(tokenCheckSuccess(user_id, user_name))
+    dispatch(successTokenCheck(user_id, user_name))
   } catch (err) {
     // ローカルストレージを削除
     localStorage.clear()
 
-    dispatch(tokenCheckFailed())
+    dispatch(failedTokenCheck())
   }
 }
 
