@@ -1,20 +1,20 @@
-export const tokenCheckSuccess = (user_id, user_name) => {
+export const successTokenCheck = (user_id, user_name) => {
   return {
-    type: 'TOKEN_CHECK_SUCCESS',
+    type: 'SUCCESS_TOKEN_CHECK',
     user_id: user_id,
     user_name: user_name
   }
 }
 
-export const tokenCheckFailed = () => {
+export const failedTokenCheck = () => {
   return {
-    type: 'TOKEN_CHECK_FAILED'
+    type: 'FAILED_TOKEN_CHECK'
   }
 }
 
-export const loginSuccess = (user_id, user_name) => {
+export const successLogin = (user_id, user_name) => {
   return {
-    type: 'LOGIN_SUCCESS',
+    type: 'SUCCESS_LOGIN',
     user_id: user_id,
     user_name: user_name
   }
