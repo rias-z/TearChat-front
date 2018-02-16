@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import App from './containers/App/reducer'
-import Lobby from './containers/Lobby/reducer'
+import RoomList from './containers/RoomList/reducer'
 
 
 export default combineReducers({
   App,
-  Lobby
+  RoomList
 })
