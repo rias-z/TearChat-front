@@ -10,7 +10,7 @@ class Lobby extends Component {
         <h2>Lobby</h2>
 
         <h3>部屋一覧</h3>
-        <RoomList />
+        <RoomList {...this.props}/>
 
 
         <h3>部屋を作成する</h3>

@@ -5,6 +5,7 @@ import Room from '../../components/Room'
 
 // dispatch
 import { apiGetCompactRooms } from './api'
+import { handleEnteredRoomSubmit } from './logic'
 
 
 class RoomList extends Component {
@@ -22,7 +23,7 @@ class RoomList extends Component {
               key={room.id} {...room}
               onClick={(e) => {
                 e.preventDefault()
-                console.log("click", room.id)
+                this.props.handleEnteredRoomSubmit(room.id)
               }}
             />
           ))}
@@ -43,8 +44,9 @@ const mapStateToProps = (state) => ({
   rooms: state.RoomList.rooms
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  apiGetCompactRooms: () => dispatch(apiGetCompactRooms())
+const mapDispatchToProps = (dispatch, getState) => ({
+  apiGetCompactRooms: () => dispatch(apiGetCompactRooms()),
+  handleEnteredRoomSubmit: (room_id) => dispatch(handleEnteredRoomSubmit(getState, room_id))
 })
 
 export default connect(
