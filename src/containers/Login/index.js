@@ -1,14 +1,12 @@
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import * as selectors from './selectors'
 import Login from '../../components/Login'
 
 // dispatch
 import { apiLoginRequest } from './api'
 
 
-const mapStateToProps = createStructuredSelector ({
-  is_authenticated: selectors.makeSelectIsAuthenticated()
+const mapStateToProps = (state) => ({
+  is_authenticated: state.App.is_authenticated
 })
 
 const mapDispatchToProps = (dispatch) => ({

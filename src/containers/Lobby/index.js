@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 import Lobby from '../../components/Lobby'
-import * as selectors from './selectors'
 
 // dispatch
 import { apiGetCompactRooms } from './api'
 
 
-const mapStateToProps = createStructuredSelector ({
-  isLoading: selectors.makeSelectIsLoading(),
-  rooms: selectors.makeSelectRooms()
+const mapStateToProps = (state) => ({
+  isLoading: state.Lobby.isLoading,
+  rooms: state.Lobby.rooms
 })
 
 const mapDispatchToProps = (dispatch) => ({

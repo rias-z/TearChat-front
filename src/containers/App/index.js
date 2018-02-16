@@ -1,7 +1,4 @@
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import * as selectors from './selectors'
-
 import App from '../../components/App'
 
 // dispatch
@@ -9,11 +6,11 @@ import { apiTokenCheck } from './api'
 import { logout } from './action'
 
 
-const mapStateToProps = createStructuredSelector ({
-  is_token_checked: selectors.makeSelectIsTokenChecked(),
-  is_authenticated: selectors.makeSelectIsAuthenticated(),
-  user_id: selectors.makeSelectUserId(),
-  user_name: selectors.makeSelectUserName()
+const mapStateToProps = (state) => ({
+  is_token_checked: state.App.is_token_checked,
+  is_authenticated: state.App.is_authenticated,
+  user_id: state.App.user_id,
+  user_name: state.App.user_name
 })
 
 const mapDispatchToState = (dispatch) => ({
