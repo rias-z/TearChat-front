@@ -23,7 +23,7 @@ export const apiEnterRoom = async (room_id) => {
     const access_token = localStorage.getItem('access_token')
     const token = 'Bearer ' + access_token
 
-    const res = await request
+    await request
       .post(endpoint + '/room/enter')
       .set({Authorization: token})
       .send({room_id: room_id})

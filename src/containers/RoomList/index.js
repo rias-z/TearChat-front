@@ -23,7 +23,7 @@ class RoomList extends Component {
               key={room.id} {...room}
               onClick={(e) => {
                 e.preventDefault()
-                this.props.handleEnteredRoomSubmit(room.id)
+                handleEnteredRoomSubmit(this.props, room.id)
               }}
             />
           ))}
@@ -45,8 +45,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  apiGetCompactRooms: () => dispatch(apiGetCompactRooms()),
-  handleEnteredRoomSubmit: (room_id) => dispatch(handleEnteredRoomSubmit(getState, room_id))
+  apiGetCompactRooms: () => dispatch(apiGetCompactRooms())
 })
 
 export default connect(
