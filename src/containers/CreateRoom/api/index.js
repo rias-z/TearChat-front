@@ -4,16 +4,14 @@ import request from 'superagent'
 const endpoint = 'http://localhost:5000/api'
 
 
-export const apiCreateRoom = async (room_obj, input_access_token) => {
+export const apiCreateRoom = async (token, room_obj) => {
   try {
-    const token = 'Bearer ' + input_access_token
-
-    await request
+    const res = await request
       .post(endpoint + '/room/create')
       .send({room_obj})
       .set({Authorization: token})
 
-    return true
+    return res.body
   } catch (err) {
     return false
   }
