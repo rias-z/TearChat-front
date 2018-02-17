@@ -7,8 +7,8 @@ export default (state=initialState, action) =>{
     case 'SUCCESS_INITIALIZED_ROOM_INFO': {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        room_id: action.room_info.id,
-        room_name: action.room_info.name
+        room_id: action.room_info.room_id,
+        room_name: action.room_info.room_name
       })
     }
     default:

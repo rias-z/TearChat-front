@@ -18,10 +18,10 @@ class RoomList extends Component {
         <div className='RoomList'>
           {this.props.rooms.map(room => (
             <Room
-              key={room.id} {...room}
+              key={room.room_id} {...room}
               onClick={(e) => {
                 e.preventDefault()
-                this.props.handleEnteredRoomSubmit(room.id)
+                this.props.handleEnteredRoomSubmit(room.room_id)
               }}
             />
           ))}
