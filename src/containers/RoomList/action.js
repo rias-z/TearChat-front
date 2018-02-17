@@ -1,13 +1,7 @@
-export const successGetCompactRooms = (rooms) => {
+export const successGetOmittedRooms = (rooms) => {
   return {
-    type: 'SUCCESS_GET_COMPACT_ROOMS',
+    type: 'SUCCESS_GET_OMITTED_ROOMS',
     rooms: rooms,
     isLoading: true
-  }
-}
-
-export const failedGetCompactRooms = () => {
-  return {
-    type: 'FAILED_GET_COMPACT_ROOMS'
   }
 }

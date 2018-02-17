@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 
 import Room from '../../components/Room'
 
-// dispatch
-import { apiGetCompactRooms } from './api'
-import { handleEnteredRoomSubmit } from './logic'
+import { initializedOmittedRooms, handleEnteredRoomSubmit } from './logic'
 
 
 class RoomList extends Component {
   componentWillMount() {
     // 簡易化したroomの情報を取得
-    this.props.apiGetCompactRooms()
+    this.props.initializedOmittedRooms()
   }
 
   render() {
@@ -23,7 +21,7 @@ class RoomList extends Component {
               key={room.id} {...room}
               onClick={(e) => {
                 e.preventDefault()
-                handleEnteredRoomSubmit(this.props, room.id)
+                this.props.handleEnteredRoomSubmit(room.id)
               }}
             />
           ))}
@@ -45,7 +43,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  apiGetCompactRooms: () => dispatch(apiGetCompactRooms())
+  initializedOmittedRooms: () => dispatch(initializedOmittedRooms()),
+  handleEnteredRoomSubmit: (room_id) => handleEnteredRoomSubmit(getState, room_id)
 })
 
 export default connect(

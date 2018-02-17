@@ -16,14 +16,14 @@ export default (state=initialState, action) => {
         user_name: action.user_name
       })
     }
-    case 'FAILED_TOKEN_CHECK': {
-      return Object.assign({}, state, {
-        is_token_checked: true,
-        is_authenticated: false,
-        user_id: null,
-        user_name: null
-      })
-    }
+    // case 'FAILED_TOKEN_CHECK': {
+    //   return Object.assign({}, state, {
+    //     is_token_checked: true,
+    //     is_authenticated: false,
+    //     user_id: null,
+    //     user_name: null
+    //   })
+    // }
     case 'SUCCESS_LOGIN': {
       return Object.assign({}, state, {
         is_authenticated: true,
@@ -38,6 +38,7 @@ export default (state=initialState, action) => {
     }
     case 'LOGOUT': {
       return Object.assign({}, state, {
+        is_token_checked: true,
         is_authenticated: false,
         user_id: null,
         user_name: null

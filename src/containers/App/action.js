@@ -6,12 +6,6 @@ export const successTokenCheck = (user_id, user_name) => {
   }
 }
 
-export const failedTokenCheck = () => {
-  return {
-    type: 'FAILED_TOKEN_CHECK'
-  }
-}
-
 export const successLogin = (user_id, user_name) => {
   return {
     type: 'SUCCESS_LOGIN',

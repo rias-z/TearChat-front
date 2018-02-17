@@ -1,22 +1,19 @@
 import request from 'superagent'
-import { successGetCompactRooms, failedGetCompactRooms } from '../action'
 
 
 const endpoint = 'http://localhost:5000/api'
 
 
-export const apiGetCompactRooms = () => async (dispatch) => {
+export const apiGetOmittedRooms = async () => {
   try {
     const res = await request
-      .get(endpoint + '/room/get/compact')
+      .get(endpoint + '/room/get/omitted')
 
-    dispatch(successGetCompactRooms(res.body))
+    return res.body
   } catch (err) {
-    console.log(err)
-    dispatch(failedGetCompactRooms())
+    return null
   }
 }
-
 
 export const apiEnterRoom = async (room_id) => {
   try {

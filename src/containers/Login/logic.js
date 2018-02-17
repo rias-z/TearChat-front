@@ -2,23 +2,19 @@ import { apiLoginRequest } from './api'
 import { successLogin, failedLogin } from '../App/action'
 
 
-export const handleLoginSubmit = (props, input_user_name, input_password) => async (dispatch) => {
-  const result = await apiLoginRequest(input_user_name, input_password)
+export const handleLoginSubmit = (props, user_name, password) => async (dispatch) => {
+  const result = await apiLoginRequest(user_name, password)
 
-  if (result) {
-    const {user_id, user_name} = result
-
-    // ローカルストレージに保存
-    Object.keys(result).forEach(key => {
-      localStorage.setItem(key, result[key])
-    })
-
-    // state更新
-    dispatch(successLogin(user_id, user_name))
-
-    // Lobbyに遷移
-    props.history.push('/')
-  } else {
+  if ( !result ) {
     dispatch(failedLogin())
+    return
   }
+  const {res_user_id, res_user_name} = result
+
+  Object.keys(result).forEach(key => {
+    localStorage.setItem(key, result[key])
+  })
+
+  dispatch(successLogin(res_user_id, res_user_name))
+  props.history.push('/')
 }
