@@ -1,12 +1,18 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Register from '../../components/Register'
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
+  return {
+  }
+}
+
+const mapDispatchToProps = () => {
   return {
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Register)

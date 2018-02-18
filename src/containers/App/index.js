@@ -18,34 +18,38 @@ import { initializedApp, logoutApp } from './logic'
 
 
 class App extends Component {
-  componentWillMount(){
+  componentWillMount() {
     this.props.initializedApp()
   }
 
   render() {
-    if ( this.props.is_token_checked ) {
+    if (this.props.isTokenChecked) {
       return (
-        <div className="App">
+        <div className='App'>
           <Header onClick={(e) => {
             e.preventDefault()
             this.props.logoutApp()
-          }}/>
+          }}
+          />
+
           <Switch>
-            <Route path='/register' component={Register}/>
-            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register} />
+            <Route path='/login' component={Login} />
 
             {(() => {
-              if ( this.props.is_authenticated ) {
+              if (this.props.isAuthenticated) {
                 return (
                   <Switch>
-                    <Route exact path='/' component={Lobby}/>
-                    <Route path='/create_room' component={CreateRoom}/>
-                    <Route path='/make_pc' component={MakePc}/>
-                    <Route path='/session' component={Session}/>
+                    <Route exact path='/' component={Lobby} />
+                    <Route path='/create_room' component={CreateRoom} />
+                    <Route path='/make_pc' component={MakePc} />
+                    <Route path='/session' component={Session} />
                   </Switch>
                 )
               } else {
-                return <Redirect to={'/login'} />
+                return (
+                  <Redirect to='/login' />
+                )
               }
             })()}
           </Switch>
@@ -53,7 +57,7 @@ class App extends Component {
       )
     } else {
       return (
-        <div className="App">
+        <div className='App'>
           Loading...
         </div>
       )
@@ -62,10 +66,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  is_token_checked: state.App.is_token_checked,
-  is_authenticated: state.App.is_authenticated,
-  user_id: state.App.user_id,
-  user_name: state.App.user_name
+  isTokenChecked: state.App.isTokenChecked,
+  isAuthenticated: state.App.isAuthenticated,
+  userId: state.App.userId,
+  userName: state.App.userName
 })
 
 const mapDispatchToState = (dispatch) => ({

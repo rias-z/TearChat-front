@@ -7,12 +7,12 @@ const endpoint = 'http://localhost:5000/api'
 export const apiGetOmittedRooms = async (token) => {
   const res = await request
     .get(endpoint + '/room/get/omitted')
-    .set({Authorization: token})
+    .set({ Authorization: token })
 
   return res.body
 }
 
-export const apiEnterRoom = async (token, room_id) => {
+export const apiEnterRoom = async (token, roomId) => {
   /* 選択したRoomに参加者登録する
    Returns:
      Ok: 特に何もしない
@@ -23,6 +23,6 @@ export const apiEnterRoom = async (token, room_id) => {
    */
   await request
     .post(endpoint + '/room/enter')
-    .set({Authorization: token})
-    .send({room_id: room_id})
+    .set({ Authorization: token })
+    .send({ room_id: roomId })
 }

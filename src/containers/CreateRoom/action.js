@@ -1,6 +1,6 @@
-export const failedCreateRoom = (error_message) => {
+export const failedCreateRoom = (errorMessage) => {
   return {
     type: 'FAILED_CREATE_ROOM',
-    error_message: error_message
+    errorMessage: errorMessage
   }
 }

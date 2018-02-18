@@ -12,28 +12,28 @@ export const initializedOmittedRooms = () => async (dispatch) => {
 
     dispatch(successGetOmittedRooms(result))
   } catch (err) {
-    const status_code = err.status
+    const statusCode = err.status
 
-    if ( status_code === 401 ) {
+    if (statusCode === 401) {
       localStorage.clear()
       dispatch(logout())
     }
   }
 }
 
-export const handleEnteredRoomSubmit = (props, input_room_id) => async (dispatch) => {
+export const handleEnteredRoomSubmit = (props, inputRoomId) => async (dispatch) => {
   try {
     const token = clientTokenCheck()
 
     // ここではRoomに参加者として登録するだけ
-    await apiEnterRoom(token, input_room_id)
+    await apiEnterRoom(token, inputRoomId)
 
-    localStorage.setItem('room_id', input_room_id)
+    localStorage.setItem('roomId', inputRoomId)
     props.history.push('/session')
   } catch (err) {
-    const status_code = err.status
+    const statusCode = err.status
 
-    if ( status_code === 401 ) {
+    if (statusCode === 401) {
       localStorage.clear()
       dispatch(logout())
     } else {

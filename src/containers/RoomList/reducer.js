@@ -1,10 +1,10 @@
 const initialState = {
   rooms: null,
   isLoading: false,
-  error_message: null
+  errorMessage: null
 }
 
-export default (state=initialState, action) =>{
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'SUCCESS_GET_OMITTED_ROOMS': {
       return Object.assign({}, state, {
@@ -14,7 +14,7 @@ export default (state=initialState, action) =>{
     }
     case 'FAILED_ENTERED_ROOM': {
       return Object.assign({}, state, {
-        error_message: action.error_message
+        errorMessage: action.errorMessage
       })
     }
     default:

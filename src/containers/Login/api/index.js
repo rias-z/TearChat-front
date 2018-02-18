@@ -4,10 +4,10 @@ import request from 'superagent'
 const endpoint = 'http://localhost:5000/api'
 
 
-export const apiLoginRequest = async (input_user_name, input_password) => {
+export const apiLoginRequest = async (inputUserName, inputPassword) => {
   const res = await request
     .post(endpoint + '/auth/login')
-    .send({'user_name': input_user_name, 'password': input_password})
+    .send({ 'userName': inputUserName, 'password': inputPassword })
 
   return res.body
 }

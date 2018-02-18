@@ -18,15 +18,16 @@ class RoomList extends Component {
         <div className='RoomList'>
           {this.props.rooms.map(room => (
             <Room
-              key={room.room_id} {...room}
+              key={room.roomId}
+              {...room}
               onClick={(e) => {
                 e.preventDefault()
-                this.props.handleEnteredRoomSubmit(room.room_id)
+                this.props.handleEnteredRoomSubmit(room.roomId)
               }}
             />
           ))}
 
-          {this.props.error_message}
+          {this.props.errorMessage}
         </div>
       )
     } else {
@@ -42,12 +43,12 @@ class RoomList extends Component {
 const mapStateToProps = (state) => ({
   isLoading: state.RoomList.isLoading,
   rooms: state.RoomList.rooms,
-  error_message: state.RoomList.error_message,
+  errorMessage: state.RoomList.errorMessage,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
   initializedOmittedRooms: () => dispatch(initializedOmittedRooms()),
-  handleEnteredRoomSubmit: (room_id) => dispatch(handleEnteredRoomSubmit(getState, room_id))
+  handleEnteredRoomSubmit: (roomId) => dispatch(handleEnteredRoomSubmit(getState, roomId))
 })
 
 export default connect(

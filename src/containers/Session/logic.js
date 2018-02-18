@@ -6,23 +6,23 @@ import { clientTokenCheck } from '../../helpers/utils'
 
 export const initializedRoomInfo = (props) => async (dispatch) => {
   try {
-    // room_idをlocalStorageから取得
-    const room_id = localStorage.getItem('room_id')
+    // roomIdをlocalStorageから取得
+    const roomId = localStorage.getItem('roomId')
 
-    // room_idがない場合，Lobbyに遷移
-    if (!room_id) {
+    // roomIdがない場合，Lobbyに遷移
+    if (!roomId) {
       props.history.push('/')
       return
     }
 
     const token = clientTokenCheck()
 
-    const room_info = await apiGetRoomInfoById(token, room_id)
-    dispatch(successInitializedRoomInfo(room_info))
+    const roomInfo = await apiGetRoomInfoById(token, roomId)
+    dispatch(successInitializedRoomInfo(roomInfo))
   } catch (err) {
-    const status_code = err.status
+    const statusCode = err.status
 
-    if ( status_code === 401 ) {
+    if (statusCode === 401) {
       localStorage.clear()
       dispatch(logout())
     }

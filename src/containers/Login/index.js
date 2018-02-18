@@ -7,7 +7,7 @@ import { handleLoginSubmit } from './logic'
 
 class Login extends Component {
   componentDidMount() {
-    if (this.props.is_authenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/')
     }
   }
@@ -17,30 +17,35 @@ class Login extends Component {
       <div className='Login'>
         <h2>Login</h2>
 
-         <form onSubmit={(e) => {
-           e.preventDefault()
-           this.props.handleLoginSubmit(
-             e.target.user_name.value, e.target.password.value
-           )
-         }}>
-           user_name: <input name='user_name' type='text' defaultValue='rias-z'/><br />
-           password: <input name='password' type='text' defaultValue='0000'/><br />
-           <input type='submit' value='login'/>
-         </form>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          this.props.handleLoginSubmit(
+            e.target.userName.value,
+            e.target.password.value
+          )
+        }}
+        >
+          userName: <input name='userName' type='text' defaultValue='rias-z' />
+          <br />
+          password: <input name='password' type='text' defaultValue='0000' />
+          <br />
+          <input type='submit' value='login' />
+        </form>
 
-         {this.props.error_message}
+        {this.props.errorMessage}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  is_authenticated: state.App.is_authenticated,
-  error_message: state.App.error_message
+  isAuthenticated: state.App.isAuthenticated,
+  errorMessage: state.App.errorMessage
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  handleLoginSubmit: (user_name, password) => dispatch(handleLoginSubmit(getState, user_name, password))
+  handleLoginSubmit: (userName, password) =>
+    dispatch(handleLoginSubmit(getState, userName, password))
 })
 
 export default connect(

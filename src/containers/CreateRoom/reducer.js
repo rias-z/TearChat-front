@@ -1,12 +1,12 @@
 const initialState = {
-  error_message: null
+  errorMessage: null
 }
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'FAILED_CREATE_ROOM': {
       return Object.assign({}, state, {
-        error_message: action.error_message
+        errorMessage: action.errorMessage
       })
     }
     default:

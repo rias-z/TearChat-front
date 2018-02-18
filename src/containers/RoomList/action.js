@@ -6,9 +6,9 @@ export const successGetOmittedRooms = (rooms) => {
   }
 }
 
-export const failedEnteredRoom = (error_message) => {
+export const failedEnteredRoom = (errorMessage) => {
   return {
     type: 'FAILED_ENTERED_ROOM',
-    error_message: error_message
+    errorMessage: errorMessage
   }
 }

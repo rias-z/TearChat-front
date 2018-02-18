@@ -12,9 +12,8 @@ export const initializedApp = () => async (dispatch) => {
       localStorage.setItem(key, result[key])
     })
 
-    const {user_id, user_name} = result
-    dispatch(successTokenCheck(user_id, user_name))
-
+    const { userId, userName } = result
+    dispatch(successTokenCheck(userId, userName))
   } catch (err) {
     localStorage.clear()
     dispatch(logout())

@@ -13,7 +13,7 @@ class Session extends Component {
     if (this.props.isLoading) {
       return (
         <div className='Session'>
-          [{this.props.room_id}] 部屋の名前: {this.props.room_name}
+          [{this.props.roomId}] 部屋の名前: {this.props.roomName}
         </div>
       )
     } else {
@@ -28,8 +28,8 @@ class Session extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.Session.isLoading,
-  room_id: state.Session.room_id,
-  room_name: state.Session.room_name
+  roomId: state.Session.roomId,
+  roomName: state.Session.roomName
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({

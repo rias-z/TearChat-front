@@ -8,7 +8,7 @@ const endpoint = 'http://localhost:5000/api'
 export const apiTokenCheck = async (token) => {
   const res = await request
     .get(endpoint + '/auth/token_check')
-    .set({Authorization: token})
+    .set({ Authorization: token })
 
   return res.body
 }

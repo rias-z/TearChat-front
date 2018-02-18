@@ -6,14 +6,14 @@ export const clientTokenCheck = () => {
       token: トークンデータ
     Exception: throwを発生させる
    */
-  const access_token = localStorage.getItem('access_token')
+  const accessToken = localStorage.getItem('accessToken')
 
-  if ( !access_token ) {
+  if (!accessToken) {
     const err = new Error('NoAccessToken')
     err.status = 401
 
     throw err
   }
 
-  return 'Bearer ' + access_token
+  return 'Bearer ' + accessToken
 }
