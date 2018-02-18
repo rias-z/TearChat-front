@@ -15,11 +15,12 @@ export const initializedApp = () => async (dispatch) => {
 
   // トークンチェック
   const token = 'Bearer ' + access_token
-  const result = apiTokenCheck(token)
+  const result = await apiTokenCheck(token)
 
   if ( !result ) {
     localStorage.clear()
     dispatch(logout())
+    return
   }
 
   Object.keys(result).forEach(key => {
