@@ -8,7 +8,7 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
   const room_id = localStorage.getItem('room_id')
 
   // room_idがない場合，Lobbyに遷移
-  if (!room_id) {
+  if ( !room_id ) {
     props.history.push('/')
     return
   }

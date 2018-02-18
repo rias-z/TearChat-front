@@ -27,11 +27,12 @@ export const handleCreateRoomSubmit = (props, form_room_info) => async (dispatch
 
   const result = await apiCreateRoom(token, room_obj)
 
-  // Room作成成功時，ユーザはSession画面に遷移
-  if (result) {
-    localStorage.setItem('room_id', result.room_id)
-    props.history.push("/session")
-  } else {
+  if ( !result ) {
     dispatch(failedCreateRoom("failed create"))
   }
+
+  // Room作成成功時，ユーザはSession画面に遷移
+  localStorage.setItem('room_id', result.room_id)
+  props.history.push("/session")
+
 }
