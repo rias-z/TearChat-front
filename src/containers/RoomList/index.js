@@ -25,6 +25,8 @@ class RoomList extends Component {
               }}
             />
           ))}
+
+          {this.props.error_message}
         </div>
       )
     } else {
@@ -39,12 +41,13 @@ class RoomList extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.RoomList.isLoading,
-  rooms: state.RoomList.rooms
+  rooms: state.RoomList.rooms,
+  error_message: state.RoomList.error_message,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
   initializedOmittedRooms: () => dispatch(initializedOmittedRooms()),
-  handleEnteredRoomSubmit: (room_id) => handleEnteredRoomSubmit(getState, room_id)
+  handleEnteredRoomSubmit: (room_id) => dispatch(handleEnteredRoomSubmit(getState, room_id))
 })
 
 export default connect(

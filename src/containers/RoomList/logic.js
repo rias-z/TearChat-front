@@ -1,26 +1,44 @@
-import { successGetOmittedRooms } from './action'
+import { successGetOmittedRooms, failedEnteredRoom } from './action'
+import { logout } from '../App/action'
 import { apiGetOmittedRooms, apiEnterRoom } from './api'
+import { clientTokenCheck } from '../../helpers/utils'
 
 
 // Roomの簡易情報を取得
 export const initializedOmittedRooms = () => async (dispatch) => {
-  const result = await apiGetOmittedRooms()
+  try {
+    const token = clientTokenCheck()
+    const result = await apiGetOmittedRooms(token)
 
-  if ( !result ) {
-    return
+    dispatch(successGetOmittedRooms(result))
+  } catch (err) {
+    const status_code = err.status
+
+    if ( status_code === 401 ) {
+      localStorage.clear()
+      dispatch(logout())
+    }
   }
-  dispatch(successGetOmittedRooms(result))
 }
 
-export const handleEnteredRoomSubmit = async (props, input_room_id) => {
-  // ここではRoomに参加者として登録するだけ
-  const result = await apiEnterRoom(input_room_id)
+export const handleEnteredRoomSubmit = (props, input_room_id) => async (dispatch) => {
+  try {
+    const token = clientTokenCheck()
 
-  // 参加不可の場合
-  if ( !result ) {
-    return
+    // ここではRoomに参加者として登録するだけ
+    await apiEnterRoom(token, input_room_id)
+
+    localStorage.setItem('room_id', input_room_id)
+    props.history.push('/session')
+  } catch (err) {
+    const status_code = err.status
+
+    if ( status_code === 401 ) {
+      localStorage.clear()
+      dispatch(logout())
+    } else {
+      // Room参加不可のエラーを細分化する
+      dispatch(failedEnteredRoom('failed enter room'))
+    }
   }
-
-  localStorage.setItem('room_id', input_room_id)
-  props.history.push('/session')
 }

@@ -6,14 +6,10 @@ const endpoint = 'http://localhost:5000/api'
 
 // アクセストークンからuser情報を取得する
 export const apiTokenCheck = async (token) => {
-  try {
-    const res = await request
-      .get(endpoint + '/auth/token_check')
-      .set({Authorization: token})
+  const res = await request
+    .get(endpoint + '/auth/token_check')
+    .set({Authorization: token})
 
-    return res.body
-  } catch (err) {
-    return null
-  }
+  return res.body
 }
 
