@@ -20,7 +20,8 @@ const PublicChat = (props) => (
       onSubmit={(e) => {
         e.preventDefault()
         props.handlePostPublicChatComment(
-          props.roomId, e.target.comment.value
+          props.roomId,
+          e.target.comment.value
         )
       }}
     />

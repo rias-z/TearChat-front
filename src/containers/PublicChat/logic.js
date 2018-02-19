@@ -12,6 +12,7 @@ export const handlePostPublicChatComment = (inputRoomId, inputComment) => async 
 
     dispatch(successPostPublicChatComment(result))
   } catch (err) {
+    // TODO コメント送信失敗時のエラーハンドリング
     console.log(err)
   }
 }

@@ -21,7 +21,7 @@ class Session extends Component {
           <br /><br />
           参加者
           {this.props.participateUsers.map(user => {
-            return(
+            return (
               <div key={user.userId}>
                 [{user.userId}] {user.userName}
               </div>
