@@ -17,8 +17,8 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
 
     const token = clientTokenCheck()
 
-    const roomInfo = await apiGetRoomInfoById(token, roomId)
-    dispatch(successInitializedRoomInfo(roomInfo))
+    const room = await apiGetRoomInfoById(token, roomId)
+    dispatch(successInitializedRoomInfo(room))
   } catch (err) {
     const statusCode = err.status
 

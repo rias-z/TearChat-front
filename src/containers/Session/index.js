@@ -14,6 +14,15 @@ class Session extends Component {
       return (
         <div className='Session'>
           [{this.props.roomId}] 部屋の名前: {this.props.roomName}
+          <br /><br />
+          参加者
+          {this.props.participateUsers.map(user => {
+            return(
+              <div key={user.userId}>
+                [{user.userId}] {user.userName}
+              </div>
+            )
+          })}
         </div>
       )
     } else {
@@ -29,7 +38,8 @@ class Session extends Component {
 const mapStateToProps = (state) => ({
   isLoading: state.Session.isLoading,
   roomId: state.Session.roomId,
-  roomName: state.Session.roomName
+  roomName: state.Session.roomName,
+  participateUsers: state.Session.participateUsers
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
