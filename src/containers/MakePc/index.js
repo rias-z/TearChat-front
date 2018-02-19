@@ -1,13 +1,19 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import MakePc from '../../components/MakePc'
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
+  return {
+  }
+}
+
+const mapDispatchToProps = () => {
   return {
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(MakePc)
 

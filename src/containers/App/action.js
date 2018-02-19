@@ -1,29 +1,23 @@
-export const successTokenCheck = (user_id, user_name) => {
+export const successTokenCheck = (userId, userName) => {
   return {
     type: 'SUCCESS_TOKEN_CHECK',
-    user_id: user_id,
-    user_name: user_name
+    userId: userId,
+    userName: userName
   }
 }
 
-export const failedTokenCheck = () => {
-  return {
-    type: 'FAILED_TOKEN_CHECK'
-  }
-}
-
-export const successLogin = (user_id, user_name) => {
+export const successLogin = (userId, userName) => {
   return {
     type: 'SUCCESS_LOGIN',
-    user_id: user_id,
-    user_name: user_name
+    userId: userId,
+    userName: userName
   }
 }
 
 export const failedLogin = () => {
   return {
     type: 'FAILED_LOGIN',
-    error_message: 'failed Login'
+    errorMessage: 'failed Login'
   }
 }
 

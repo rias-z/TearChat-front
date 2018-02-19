@@ -4,12 +4,11 @@ import request from 'superagent'
 const endpoint = 'http://localhost:5000/api'
 
 
-// アクセストークンからuser情報を取得する
-export const apiTokenCheck = async (token) => {
+export const apiGetRoomInfoById = async (token, roomId) => {
   const res = await request
-    .get(endpoint + '/auth/token_check')
+    .post(endpoint + '/room/get/info')
     .set({ Authorization: token })
+    .send({ roomId: roomId })
 
   return res.body
 }
-
