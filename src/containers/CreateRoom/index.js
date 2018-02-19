@@ -1,17 +1,33 @@
+import React from 'react'
 import { connect } from 'react-redux'
-import CreateRoom from '../../components/CreateRoom'
 
-// dispatch
-import { logout } from '../App/action'
+// components
+import CreateRoomForm from '../../components/CreateRoomForm'
+
+// logic
+import { handleCreateRoomSubmit } from './logic'
 
 
-const mapStateToProps = () => {
-  return {
-  }
-}
+const CreateRoom = (props) => (
+  <div className='CreateRoom'>
+    <h2>CreateRoom</h2>
+    <CreateRoomForm
+      errorMessage={props.errorMessage}
+      onSubmit={(e) => {
+        e.preventDefault()
+        props.handleCreateRoomSubmit(e.target)
+      }}
+    />
+  </div>
+)
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout())
+const mapStateToProps = (state) => ({
+  errorMessage: state.CreateRoom.errorMessage
+})
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  handleCreateRoomSubmit: (formRoomInfo) =>
+    dispatch(handleCreateRoomSubmit(getState, formRoomInfo))
 })
 
 export default connect(

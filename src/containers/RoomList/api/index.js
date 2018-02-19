@@ -1,35 +1,28 @@
 import request from 'superagent'
-import { successGetCompactRooms, failedGetCompactRooms } from '../action'
 
 
 const endpoint = 'http://localhost:5000/api'
 
 
-export const apiGetCompactRooms = () => async (dispatch) => {
-  try {
-    const res = await request
-      .get(endpoint + '/room/get/compact')
+export const apiGetOmittedRooms = async (token) => {
+  const res = await request
+    .get(endpoint + '/room/get/omitted')
+    .set({ Authorization: token })
 
-    dispatch(successGetCompactRooms(res.body))
-  } catch (err) {
-    console.log(err)
-    dispatch(failedGetCompactRooms())
-  }
+  return res.body
 }
 
-
-export const apiEnterRoom = async (room_id) => {
-  try {
-    const access_token = localStorage.getItem('access_token')
-    const token = 'Bearer ' + access_token
-
-    await request
-      .post(endpoint + '/room/enter')
-      .set({Authorization: token})
-      .send({room_id: room_id})
-
-    return true
-  } catch (err) {
-    return false
-  }
+export const apiEnterRoom = async (token, roomId) => {
+  /* 選択したRoomに参加者登録する
+   Returns:
+     Ok: 特に何もしない
+      200: 参加可能
+     Exception: throwを発生させる
+      401: Unauthorized
+      500: 参加不可
+   */
+  await request
+    .post(endpoint + '/room/enter')
+    .set({ Authorization: token })
+    .send({ room_id: roomId })
 }
