@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// container
+import PublicChat from '../PublicChat'
+
+// containers
 import { initializedRoomInfo } from './logic'
 
 
@@ -23,6 +27,8 @@ class Session extends Component {
               </div>
             )
           })}
+
+          <PublicChat />
         </div>
       )
     } else {

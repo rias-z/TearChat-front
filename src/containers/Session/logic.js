@@ -1,4 +1,5 @@
 import { successInitializedRoomInfo } from './action'
+import { successInitializedPublicChat } from '../PublicChat/action'
 import { logout } from '../App/action'
 import { apiGetRoomInfoById } from './api'
 import { clientTokenCheck } from '../../helpers/utils'
@@ -19,6 +20,9 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
 
     const room = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(room))
+
+    // PublicChatのactionを発行する
+    dispatch(successInitializedPublicChat(room.roomInfo.publicChat))
   } catch (err) {
     const statusCode = err.status
 
