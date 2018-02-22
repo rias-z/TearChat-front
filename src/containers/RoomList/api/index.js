@@ -24,5 +24,5 @@ export const apiEnterRoom = async (token, roomId) => {
   await request
     .post(endpoint + '/room/enter')
     .set({ Authorization: token })
-    .send({ room_id: roomId })
+    .send({ roomId: roomId })
 }

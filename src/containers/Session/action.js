@@ -1,7 +1,7 @@
-export const successInitializedRoomInfo = (roomInfo) => {
+export const successInitializedRoomInfo = (room) => {
   return {
     type: 'SUCCESS_INITIALIZED_ROOM_INFO',
-    roomInfo: roomInfo,
+    room: room,
     isLoading: true
   }
 }

@@ -1,7 +1,8 @@
 const initialState = {
   isLoading: false,
   roomId: null,
-  roomName: null
+  roomName: null,
+  participateUsers: null
 }
 
 export default (state = initialState, action) => {
@@ -9,8 +10,9 @@ export default (state = initialState, action) => {
     case 'SUCCESS_INITIALIZED_ROOM_INFO': {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        roomId: action.roomInfo.roomId,
-        roomName: action.roomInfo.roomName
+        roomId: action.room.roomInfo.roomId,
+        roomName: action.room.roomInfo.roomName,
+        participateUsers: action.room.participateUsers
       })
     }
     default:
