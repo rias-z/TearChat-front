@@ -9,11 +9,11 @@ export default (state = initialState, action) => {
         publicMessages: action.publicMessages
       })
     }
-    // case 'SUCCESS_POST_PUBLIC_CHAT_COMMENT': {
+    // case 'SUCCESS_POST_PUBLIC_MESSAGE': {
     //   return Object.assign({}, state, {
-    //     publicChat: [
-    //       ...state.publicChat,
-    //       action.publicChatComment
+    //     publicMessages: [
+    //       ...state.publicMessages,
+    //       action.publicMessage
     //     ]
     //   })
     // }

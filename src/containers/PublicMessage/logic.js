@@ -7,8 +7,8 @@ export const handlePostPublicMessageComment = (inputRoomId, inputComment) => asy
   try {
     const token = clientTokenCheck()
 
-    // 正常に受理された場合新しくstateに追加
     const result = await apiPostComment(token, inputRoomId, inputComment)
+
     // dispatch(successPostPublicMessage(result))
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング
