@@ -7,17 +7,17 @@ import { clientTokenCheck } from '../../helpers/utils'
 export const handleCreateRoomSubmit = (props, formRoomInfo) => async (dispatch) => {
   try {
     const roomName = formRoomInfo.roomName.value
-    const participantsNumber = formRoomInfo.participantsNumber.value
+    const capacity = formRoomInfo.capacity.value
 
     // バリデーションチェック
-    if (!roomName || !participantsNumber) {
+    if (!roomName || !capacity) {
       dispatch(failedCreateRoom('input required field!'))
       return
     }
 
     const roomObj = {
       roomName: roomName,
-      participantsNumber: participantsNumber
+      capacity: capacity
     }
 
     const token = clientTokenCheck()
