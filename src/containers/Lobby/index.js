@@ -7,11 +7,7 @@ const Lobby = (props) => (
   <div className='Lobby'>
     <h2>Lobby</h2>
 
-    <h3>部屋一覧</h3>
-    <RoomList
-      {...props}
-    />
-
+    <h3>PCを作成/編集する</h3>
 
     <h3>部屋を作成する</h3>
     <input
@@ -21,6 +17,12 @@ const Lobby = (props) => (
         props.history.push('/create_room')
       }}
     />
+
+    <h3>部屋一覧</h3>
+    <RoomList
+      {...props}
+    />
+
   </div>
 )
 

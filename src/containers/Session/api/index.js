@@ -12,3 +12,12 @@ export const apiGetRoomInfoById = async (token, roomId) => {
 
   return res.body
 }
+
+export const apiGetPublicMessage = async (token, roomId) => {
+  const res = await request
+    .post(endpoint + '/message/get/public')
+    .set({ Authorization: token })
+    .send({ roomId: roomId })
+
+  return res.body
+}

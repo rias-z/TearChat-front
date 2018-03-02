@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // container
-import PublicChat from '../PublicChat'
+import PublicMessage from '../PublicMessage'
 
 // containers
 import { initializedRoomInfo } from './logic'
@@ -19,16 +19,8 @@ class Session extends Component {
         <div className='Session'>
           [{this.props.roomId}] 部屋の名前: {this.props.roomName}
           <br /><br />
-          参加者
-          {this.props.participateUsers.map(user => {
-            return (
-              <div key={user.userId}>
-                [{user.userId}] {user.userName}
-              </div>
-            )
-          })}
 
-          <PublicChat />
+          <PublicMessage />
         </div>
       )
     } else {
@@ -45,7 +37,6 @@ const mapStateToProps = (state) => ({
   isLoading: state.Session.isLoading,
   roomId: state.Session.roomId,
   roomName: state.Session.roomName,
-  participateUsers: state.Session.participateUsers
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
