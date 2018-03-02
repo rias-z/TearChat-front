@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // container
-import PublicChat from '../PublicChat'
+import PublicMessage from '../PublicMessage'
 
 // containers
 import { initializedRoomInfo } from './logic'
@@ -28,7 +28,7 @@ class Session extends Component {
             )
           })}
 
-          <PublicChat />
+          <PublicMessage />
         </div>
       )
     } else {
