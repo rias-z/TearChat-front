@@ -1,7 +1,7 @@
 import { successInitializedRoomInfo } from './action'
 import { successInitializedPublicMessages } from '../PublicMessage/action'
 import { logout } from '../App/action'
-import { apiGetRoomInfoById } from './api'
+import { apiGetRoomInfoById, apiGetPublicMessage } from './api'
 import { clientTokenCheck } from '../../helpers/utils'
 
 
