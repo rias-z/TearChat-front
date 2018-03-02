@@ -18,8 +18,8 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
 
     const token = clientTokenCheck()
 
-    const room = await apiGetRoomInfoById(token, roomId)
-    dispatch(successInitializedRoomInfo(room))
+    const roomInfo = await apiGetRoomInfoById(token, roomId)
+    dispatch(successInitializedRoomInfo(roomInfo))
 
     const publicMessage = await apiGetPublicMessage(token, roomId)
     dispatch(successInitializedPublicMessages(publicMessage))
