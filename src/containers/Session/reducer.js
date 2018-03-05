@@ -2,6 +2,7 @@ const initialState = {
   isLoading: false,
   roomId: null,
   roomName: null,
+  socket: null,
 }
 
 export default (state = initialState, action) => {
@@ -11,6 +12,11 @@ export default (state = initialState, action) => {
         isLoading: action.isLoading,
         roomId: action.room.roomId,
         roomName: action.room.roomName,
+      })
+    }
+    case 'ADD_NEW_SOCKET': {
+      return Object.assign({}, state, {
+        socket: action.socket,
       })
     }
     default:

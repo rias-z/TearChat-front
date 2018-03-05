@@ -1,15 +1,15 @@
-import { apiPostComment } from './api'
-// import { successPostPublicMessage } from './action'
-import { clientTokenCheck } from '../../helpers/utils'
+import { apiPostMessageToPublic } from './api'
 
 
-export const handlePostPublicMessageComment = (inputRoomId, inputComment) => async (dispatch) => {
+export const handlePostMessageToPublic = (socket, _message) => {
   try {
-    const token = clientTokenCheck()
+    const messageInfo = {
+      'messageType': 'public',
+      'content': _message,
+    }
 
-    const result = await apiPostComment(token, inputRoomId, inputComment)
-
-    // dispatch(successPostPublicMessage(result))
+    // メッセージ送信
+    apiPostMessageToPublic(socket, messageInfo)
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング
     console.log(err)

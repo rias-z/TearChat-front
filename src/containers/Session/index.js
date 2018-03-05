@@ -1,50 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import io from 'socket.io-client'
 
 // container
 import PublicMessage from '../PublicMessage'
 
-// containers
-import { initializedRoomInfo } from './logic'
-
-const endpoint = 'http://localhost:5000'
+// logic
+import { initializedRoomInfo, updateMessage } from './logic'
 
 
 class Session extends Component {
-  constructor(props) {
-    super(props)
-
-    // socket
-    const socket = io(endpoint)
-    this.state = {
-      socket: socket,
-    }
-
-    this.init(socket)
-  }
-
   componentWillMount() {
     this.props.initializedRoomInfo()
-  }
-
-  // socket通信開始
-  init(socket) {
-    socket.on('connect', () => {
-      const roomId = localStorage.getItem('roomId')
-      const userId = localStorage.getItem('userId')
-      const userName = localStorage.getItem('userName')
-
-      socket.emit('connected', {
-          'roomId': roomId,
-          'userId': userId,
-          'userName': userName,
+      .then(() => {
+        this.props.socket.on('receiveMessage', messageInfo => {
+          this.props.updateMessage(messageInfo)
+        })
       })
-
-      socket.on('recieveMessage', (message) => {
-        console.log("recieveMessage:", message)
-      })
-    })
   }
 
   render() {
@@ -71,10 +42,12 @@ const mapStateToProps = (state) => ({
   isLoading: state.Session.isLoading,
   roomId: state.Session.roomId,
   roomName: state.Session.roomName,
+  socket: state.Session.socket,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  initializedRoomInfo: () => dispatch(initializedRoomInfo(getState))
+  initializedRoomInfo: () => dispatch(initializedRoomInfo(getState)),
+  updateMessage: (messageInfo) => dispatch(updateMessage(messageInfo)),
 })
 
 export default connect(
