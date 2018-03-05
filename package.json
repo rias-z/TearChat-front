@@ -16,6 +16,7 @@
     "redux-devtools": "^3.4.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
+    "socket.io-client": "^2.0.4",
     "superagent": "^3.8.2"
   },
   "devDependencies": {
