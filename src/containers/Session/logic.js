@@ -12,8 +12,7 @@ const endpoint = 'http://localhost:5000'
 export const initializedRoomInfo = (props) => async (dispatch) => {
   try {
     const roomId = localStorage.getItem('roomId')
-    const userId = localStorage.getItem('userId')
-    const userName = localStorage.getItem('userName')
+    const accessToken = localStorage.getItem('accessToken')
 
     // roomIdがない場合，Lobbyに遷移
     if (!roomId) {
@@ -35,9 +34,8 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
     const socket = io(endpoint)
     dispatch(addNewSocket(socket))
     socket.emit('connected', {
-        'roomId': roomId,
-        'userId': userId,
-        'userName': userName,
+      'roomId': roomId,
+      'accessToken': accessToken,
     })
   } catch (err) {
     const statusCode = err.status
