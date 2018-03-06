@@ -20,9 +20,17 @@ class Session extends Component {
 
   render() {
     if (this.props.isLoading) {
+      const members = this.props.membersInfo.map((member, index) => (
+        <li key={index}>{member.userName}</li>
+      ))
+
       return (
         <div className='Session'>
-          [{this.props.roomId}] 部屋の名前: {this.props.roomName}
+          [roomId:{this.props.roomId}] 部屋の名前: {this.props.roomName}
+          <br />
+          kp: {this.props.kpInfo.userName}
+          <br />
+          members: {members}
           <br /><br />
 
           <PublicMessage />
@@ -43,6 +51,8 @@ const mapStateToProps = (state) => ({
   roomId: state.Session.roomId,
   roomName: state.Session.roomName,
   socket: state.Session.socket,
+  kpInfo: state.Session.kpInfo,
+  membersInfo: state.Session.membersInfo,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({

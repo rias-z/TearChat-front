@@ -3,6 +3,8 @@ const initialState = {
   roomId: null,
   roomName: null,
   socket: null,
+  kpInfo: null,
+  membersInfo: []
 }
 
 export default (state = initialState, action) => {
@@ -12,6 +14,8 @@ export default (state = initialState, action) => {
         isLoading: action.isLoading,
         roomId: action.room.roomId,
         roomName: action.room.roomName,
+        kpInfo: action.room.kpInfo,
+        membersInfo: action.room.membersInfo,
       })
     }
     case 'ADD_NEW_SOCKET': {
