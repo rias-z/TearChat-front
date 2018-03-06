@@ -12,3 +12,10 @@ export const addNewSocket = (socket) => {
     socket: socket,
   }
 }
+
+export const updateActiveUsers = (activeUsers) => {
+  return {
+    type: 'UPDATE_ACTIVE_USERS',
+    activeUsers: activeUsers,
+  }
+}
