@@ -4,7 +4,8 @@ const initialState = {
   roomName: null,
   socket: null,
   kpInfo: null,
-  membersInfo: []
+  membersInfo: [],
+  activeUsers: [],
 }
 
 export default (state = initialState, action) => {
@@ -21,6 +22,11 @@ export default (state = initialState, action) => {
     case 'ADD_NEW_SOCKET': {
       return Object.assign({}, state, {
         socket: action.socket,
+      })
+    }
+    case 'UPDATE_ACTIVE_USERS': {
+      return Object.assign({}, state, {
+        activeUsers: action.activeUsers,
       })
     }
     default:
