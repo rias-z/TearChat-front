@@ -6,7 +6,7 @@ import PublicMessageList from '../../components/PublicMessageList'
 import PublicMessageForm from '../../components/PublicMessageForm'
 
 // logic
-import { handlePostPublicMessageComment } from './logic'
+import { handlePostMessageToPublic } from './logic'
 
 
 const PublicMessage = (props) => (
@@ -19,9 +19,9 @@ const PublicMessage = (props) => (
     <PublicMessageForm
       onSubmit={(e) => {
         e.preventDefault()
-        props.handlePostPublicMessageComment(
-          props.roomId,
-          e.target.content.value
+        props.handlePostMessageToPublic(
+          props.socket,
+          e.target.content.value,
         )
       }}
     />
@@ -31,12 +31,13 @@ const PublicMessage = (props) => (
 const mapStateToProps = (state) => ({
   userId: state.App.userId,
   roomId: state.Session.roomId,
+  socket: state.Session.socket,
   publicMessages: state.PublicMessage.publicMessages,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handlePostPublicMessageComment: (roomId, comment) =>
-    dispatch(handlePostPublicMessageComment(roomId, comment))
+  handlePostMessageToPublic: (socket, message) =>
+    handlePostMessageToPublic(socket, message)
 })
 
 export default connect(

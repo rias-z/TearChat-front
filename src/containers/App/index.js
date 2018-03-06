@@ -26,10 +26,12 @@ class App extends Component {
     if (this.props.isTokenChecked) {
       return (
         <div className='App'>
-          <Header onClick={(e) => {
-            e.preventDefault()
-            this.props.logoutApp()
-          }}
+          <Header
+            onClick={(e) => {
+              e.preventDefault()
+              this.props.logoutApp()
+            }}
+            userName={this.props.userName}
           />
 
           <Switch>

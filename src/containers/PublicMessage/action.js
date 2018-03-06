@@ -5,9 +5,9 @@ export const successInitializedPublicMessages = (publicMessages) => {
   }
 }
 
-// export const successPostPublicMessage = (message) => {
-//   return {
-//     type: 'SUCCESS_POST_PUBLIC_MESSAGE',
-//     publicMessage: message,
-//   }
-// }
+export const successUpdateMessageToPublic = (message) => {
+  return {
+    type: 'SUCCESS_UPDATE_MESSAGE_TO_PUBIC',
+    message: message,
+  }
+}

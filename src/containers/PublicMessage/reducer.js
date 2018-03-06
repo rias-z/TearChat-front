@@ -9,14 +9,14 @@ export default (state = initialState, action) => {
         publicMessages: action.publicMessages
       })
     }
-    // case 'SUCCESS_POST_PUBLIC_MESSAGE': {
-    //   return Object.assign({}, state, {
-    //     publicMessages: [
-    //       ...state.publicMessages,
-    //       action.publicMessage
-    //     ]
-    //   })
-    // }
+    case 'SUCCESS_UPDATE_MESSAGE_TO_PUBIC': {
+      return Object.assign({}, state, {
+        publicMessages: [
+          ...state.publicMessages,
+          action.message
+        ]
+      })
+    }
     default:
       return state
   }

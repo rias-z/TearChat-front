@@ -2,6 +2,10 @@ const initialState = {
   isLoading: false,
   roomId: null,
   roomName: null,
+  socket: null,
+  kpInfo: null,
+  membersInfo: [],
+  activeUsers: [],
 }
 
 export default (state = initialState, action) => {
@@ -11,6 +15,18 @@ export default (state = initialState, action) => {
         isLoading: action.isLoading,
         roomId: action.room.roomId,
         roomName: action.room.roomName,
+        kpInfo: action.room.kpInfo,
+        membersInfo: action.room.membersInfo,
+      })
+    }
+    case 'ADD_NEW_SOCKET': {
+      return Object.assign({}, state, {
+        socket: action.socket,
+      })
+    }
+    case 'UPDATE_ACTIVE_USERS': {
+      return Object.assign({}, state, {
+        activeUsers: action.activeUsers,
       })
     }
     default:
