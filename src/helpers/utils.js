@@ -1,10 +1,7 @@
 export const clientTokenCheck = () => {
-  /** localStorageから取得したアクセストークンをトークンとして返す
-   *  アクセストークンがない場合はログアウトさせる
-   *  Returns:
-   *    Ok:
-   *      token: トークンデータ
-   *    Exception: throwを発生させる
+  /**
+   * localStorageから取得したアクセストークンをトークンとして返す
+   * @return アクセストークン
    */
   const accessToken = localStorage.getItem('accessToken')
 

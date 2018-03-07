@@ -5,13 +5,10 @@ const endpoint = 'http://localhost:5000/api'
 
 
 export const apiTokenCheck = async (token) => {
-  /** アクセストークンからユーザ情報を取得する
-   *  Returns:
-   *    200:
-   *      userId:       (int)
-   *      userName:     (str)
-   *      accessToken:  (str)
-   *    500: 不正
+  /**
+   * アクセストークンからユーザ情報を取得する
+   * @param {string}  token アクセストークン
+   * @return {Object} res.body  ユーザ情報
    */
   const res = await request
     .get(endpoint + '/auth/token_check')

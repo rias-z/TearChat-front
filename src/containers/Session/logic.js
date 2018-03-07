@@ -34,8 +34,8 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
     const socket = io(endpoint)
     dispatch(addNewSocket(socket))
     socket.emit('connected', {
-      'roomId': roomId,
-      'accessToken': accessToken,
+      roomId: roomId,
+      accessToken: accessToken,
     })
   } catch (err) {
     const statusCode = err.status

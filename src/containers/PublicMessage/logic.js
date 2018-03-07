@@ -4,8 +4,8 @@ import { apiPostMessageToPublic } from './api'
 export const handlePostMessageToPublic = (socket, _message) => {
   try {
     const messageInfo = {
-      'messageType': 'public',
-      'content': _message,
+      messageType: 'public',
+      content: _message,
     }
 
     // メッセージ送信

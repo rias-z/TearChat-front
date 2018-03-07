@@ -5,19 +5,11 @@ const endpoint = 'http://localhost:5000/api'
 
 
 export const apiGetRoomInfoById = async (token, roomId) => {
-  /** Roomの情報を取得する
-   *  Returns:
-   *    roomId:       (int)
-   *    roomName:     (str)
-   *    capacity:     (int)
-   *    status:       (str)
-   *    membersInfo:  (dict)
-   *      userId:    (int)
-   *      userName:  (str)
-   *      channelId: (int)
-   *    kpInfo:       (dict)
-   *      userId:   (int)
-   *      userName: (str)
+  /**
+   * Roomの情報を取得する
+   * @params {string}  token  アクセストークン
+   * @params {int}  roomId
+   * @return {Object}  res.body  部屋情報
    */
   const res = await request
     .post(endpoint + '/room/get/info')
