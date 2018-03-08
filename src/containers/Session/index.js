@@ -5,28 +5,17 @@ import { connect } from 'react-redux'
 import PublicMessage from '../PublicMessage'
 
 // logic
-import { initializedRoomInfo, updateMessage } from './logic'
-
-// action
-import { updateActiveUsers } from './action'
+import { initializedRoomInfo } from './logic'
 
 
 class Session extends Component {
   componentWillMount() {
-    this.props.initializedRoomInfo()
-      .then(() => {
-        this.props.socket.on('receiveMessage', messageInfo => {
-          this.props.updateMessage(messageInfo)
-        })
-
-        this.props.socket.on('receiveActiveUser', activeUsers => {
-          this.props.updateActiveUsers(activeUsers)
-        })
-      })
+    // 部屋情報初期化
+    this.props.initializedRoomInfo(this.props)
   }
 
   componentWillUnmount() {
-    // Sessionから離れる場合，socketをdisconnectする
+    // 部屋退出時，socketをdisconnectする
     this.props.socket.disconnect()
   }
 
@@ -74,10 +63,8 @@ const mapStateToProps = (state) => ({
   activeUsers: state.Session.activeUsers,
 })
 
-const mapDispatchToProps = (dispatch, getState) => ({
-  initializedRoomInfo: () => dispatch(initializedRoomInfo(getState)),
-  updateMessage: (messageInfo) => dispatch(updateMessage(messageInfo)),
-  updateActiveUsers: (activeUsers) => dispatch(updateActiveUsers(activeUsers)),
+const mapDispatchToProps = (dispatch) => ({
+  initializedRoomInfo: () => dispatch(initializedRoomInfo()),
 })
 
 export default connect(

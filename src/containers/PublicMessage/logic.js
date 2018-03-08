@@ -1,6 +1,3 @@
-import { apiPostMessageToPublic } from './api'
-
-
 export const handlePostMessageToPublic = (socket, _message) => {
   try {
     const messageInfo = {
@@ -9,7 +6,7 @@ export const handlePostMessageToPublic = (socket, _message) => {
     }
 
     // メッセージ送信
-    apiPostMessageToPublic(socket, messageInfo)
+    socket.postMessage(messageInfo)
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング
     console.log(err)

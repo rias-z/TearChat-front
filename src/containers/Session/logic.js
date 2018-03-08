@@ -1,12 +1,11 @@
 import { successInitializedRoomInfo, addNewSocket } from './action'
-import { successInitializedPublicMessages, successUpdateMessageToPublic } from '../PublicMessage/action'
+import { successInitializedPublicMessages } from '../PublicMessage/action'
 import { logout } from '../App/action'
 import { apiGetRoomInfoById, apiGetPublicMessage } from './api'
 import { clientTokenCheck } from '../../helpers/utils'
 
-import io from 'socket.io-client'
-
-const endpoint = 'http://localhost:5000'
+// socket
+import webSocket from '../../socket'
 
 
 export const initializedRoomInfo = (props) => async (dispatch) => {
@@ -31,12 +30,12 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
     dispatch(successInitializedPublicMessages(publicMessage))
 
     // socket通信開始
-    const socket = io(endpoint)
-    dispatch(addNewSocket(socket))
-    socket.emit('connected', {
-      roomId: roomId,
-      accessToken: accessToken,
-    })
+    const ws = new webSocket()
+    ws.connected(roomId, accessToken)
+    ws.receiveMessage(dispatch)
+    ws.receiveActiveUser(dispatch)
+
+    dispatch(addNewSocket(ws))
   } catch (err) {
     const statusCode = err.status
 
@@ -45,11 +44,4 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
       dispatch(logout())
     }
   }
-}
-
-export const updateMessage = (messageInfo) => (dispatch) => {
-  // TODO public | private | group でdispatch先を分ける
-  // const messageType = messageInfo.messageType
-
-  dispatch(successUpdateMessageToPublic(messageInfo))
 }
