@@ -16,8 +16,10 @@ class Session extends Component {
   }
 
   componentWillUnmount() {
-    // 部屋退出時，socketをdisconnectする
-    this.props.socket.disconnect()
+    if (this.props.socket) {
+      // 部屋退出時，socketをdisconnectする
+      this.props.socket.disconnect()
+    }
   }
 
   render() {
