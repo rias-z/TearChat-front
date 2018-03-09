@@ -36,8 +36,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handlePostMessageToPublic: (socket, message) =>
-    handlePostMessageToPublic(socket, message)
+  handlePostMessageToPublic: (socket, content) =>
+    handlePostMessageToPublic(socket, content)
 })
 
 export default connect(

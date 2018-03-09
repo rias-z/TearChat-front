@@ -1,8 +1,8 @@
-export const handlePostMessageToPublic = (socket, _message) => {
+export const handlePostMessageToPublic = (socket, content) => {
   try {
     const messageInfo = {
       messageType: 'public',
-      content: _message,
+      content: content,
     }
 
     // メッセージ送信
