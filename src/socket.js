@@ -32,7 +32,7 @@ class webSocket {
   receiveMessage = (dispatch) => {
     // TODO public | private | group でdispatch先を分ける
 
-    this.socket.on('receiveMessage', messageInfo => {
+    this.socket.on('receiveMessageToPublic', messageInfo => {
       dispatch(successUpdateMessageToPublic(messageInfo))
     })
 
