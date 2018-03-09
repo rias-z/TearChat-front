@@ -40,6 +40,11 @@ export default (state = initialState, action) => {
         activeUsers: action.activeUsers,
       })
     }
+    case 'SUCCESS_INITIALIZED': {
+      return Object.assign({}, state, {
+        isLoading: action.isLoading,
+      })
+    }
     default:
       return state
   }

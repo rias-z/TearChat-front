@@ -2,7 +2,6 @@ export const successInitializedRoomInfo = (room) => {
   return {
     type: 'SUCCESS_INITIALIZED_ROOM_INFO',
     room: room,
-    isLoading: true,
   }
 }
 
@@ -31,5 +30,12 @@ export const updateActiveUsers = (activeUsers) => {
   return {
     type: 'UPDATE_ACTIVE_USERS',
     activeUsers: activeUsers,
+  }
+}
+
+export const successInitialized = () => {
+  return {
+    type: 'SUCCESS_INITIALIZED',
+    isLoading: true,
   }
 }

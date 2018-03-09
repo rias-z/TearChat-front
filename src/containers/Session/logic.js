@@ -3,6 +3,7 @@ import {
   successInitializedRoomInfo,
   addNewSocket,
   assignKp,
+  successInitialized,
   assignSelfChannelId,
 } from './action'
 import { successInitializedPublicMessages } from '../PublicMessage/action'
@@ -75,6 +76,8 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
     dispatch(addNewSocket(ws))
+
+    dispatch(successInitialized())
   } catch (err) {
     const statusCode = err.status
 
