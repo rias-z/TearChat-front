@@ -1,4 +1,5 @@
 import { successUpdateMessageToPublic } from './containers/PublicMessage/action'
+import { successUpdateMessageToPrivate } from './containers/PrivateMessage/action'
 import { updateActiveUsers } from './containers/Session/action'
 
 import io from 'socket.io-client'
@@ -31,8 +32,12 @@ class webSocket {
   receiveMessage = (dispatch) => {
     // TODO public | private | group でdispatch先を分ける
 
-    this.socket.on('receiveMessage', messageInfo => {
+    this.socket.on('receiveMessageToPublic', messageInfo => {
       dispatch(successUpdateMessageToPublic(messageInfo))
+    })
+
+    this.socket.on('receiveMessageToPrivate', messageInfo => {
+      dispatch(successUpdateMessageToPrivate(messageInfo))
     })
   }
 

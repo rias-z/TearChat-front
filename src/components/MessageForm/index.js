@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-const PublicMessageForm = (props) => (
-  <div className='PublicMessageForm'>
+const MessageForm = (props) => (
+  <div className='MessageForm'>
     <form onSubmit={props.onSubmit}>
       <input type='text' name='content' defaultValue='test_comment' />
       <input type='submit' value='send' />
@@ -10,4 +10,4 @@ const PublicMessageForm = (props) => (
   </div>
 )
 
-export default PublicMessageForm
+export default MessageForm

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 // container
 import PublicMessage from '../PublicMessage'
+import PrivateMessage from '../PrivateMessage'
 
 // logic
 import { initializedRoomInfo } from './logic'
@@ -15,8 +16,10 @@ class Session extends Component {
   }
 
   componentWillUnmount() {
-    // 部屋退出時，socketをdisconnectする
-    this.props.socket.disconnect()
+    if (this.props.socket) {
+      // 部屋退出時，socketをdisconnectする
+      this.props.socket.disconnect()
+    }
   }
 
   render() {
@@ -36,11 +39,13 @@ class Session extends Component {
           kp: {this.props.kpInfo.userName}
           <br />
           members: {members}
+          isKp: {this.props.isKp.toString()}
           <br />
           ログオンユーザ: {activeUsers}
           <hr />
 
           <PublicMessage />
+          <PrivateMessage />
         </div>
       )
     } else {
@@ -61,6 +66,7 @@ const mapStateToProps = (state) => ({
   kpInfo: state.Session.kpInfo,
   membersInfo: state.Session.membersInfo,
   activeUsers: state.Session.activeUsers,
+  isKp: state.Session.isKp,
 })
 
 const mapDispatchToProps = (dispatch) => ({

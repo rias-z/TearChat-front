@@ -1,8 +1,8 @@
-export const handlePostMessageToPublic = (socket, content) => {
+export const handlePostMessageToPrivate = (socket, channelId, content) => {
   try {
     const messageInfo = {
-      messageType: 'public',
-      channelId: 0,
+      messageType: 'private',
+      channelId: channelId,
       content: content,
     }
 
@@ -13,3 +13,4 @@ export const handlePostMessageToPublic = (socket, content) => {
     console.log(err)
   }
 }
+

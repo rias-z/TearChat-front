@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // components
-import PublicMessageList from '../../components/PublicMessageList'
-import PublicMessageForm from '../../components/PublicMessageForm'
+import MessageList from '../../components/MessageList'
+import MessageForm from '../../components/MessageForm'
 
 // logic
 import { handlePostMessageToPublic } from './logic'
@@ -11,12 +11,12 @@ import { handlePostMessageToPublic } from './logic'
 
 const PublicMessage = (props) => (
   <div className='PublicMessage'>
-    <h3>全体チャット</h3>
+    <h3>PublicMessage</h3>
 
-    <PublicMessageList
-      publicMessages={props.publicMessages}
+    <MessageList
+      messages={props.publicMessages}
     />
-    <PublicMessageForm
+    <MessageForm
       onSubmit={(e) => {
         e.preventDefault()
         props.handlePostMessageToPublic(
@@ -36,8 +36,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handlePostMessageToPublic: (socket, message) =>
-    handlePostMessageToPublic(socket, message)
+  handlePostMessageToPublic: (socket, content) =>
+    handlePostMessageToPublic(socket, content)
 })
 
 export default connect(
