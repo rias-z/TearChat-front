@@ -2,6 +2,7 @@ export const handlePostMessageToPublic = (socket, content) => {
   try {
     const messageInfo = {
       messageType: 'public',
+      channelId: 0,
       content: content,
     }
 
