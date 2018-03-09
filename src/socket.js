@@ -1,4 +1,5 @@
 import { successUpdateMessageToPublic } from './containers/PublicMessage/action'
+import { successUpdateMessageToPrivate } from './containers/PrivateMessage/action'
 import { updateActiveUsers } from './containers/Session/action'
 
 import io from 'socket.io-client'
@@ -33,6 +34,10 @@ class webSocket {
 
     this.socket.on('receiveMessage', messageInfo => {
       dispatch(successUpdateMessageToPublic(messageInfo))
+    })
+
+    this.socket.on('receiveMessageToPrivate', messageInfo => {
+      dispatch(successUpdateMessageToPrivate(messageInfo))
     })
   }
 

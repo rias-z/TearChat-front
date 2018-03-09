@@ -6,13 +6,14 @@ const initialState = {
   kpInfo: null,
   membersInfo: [],
   activeUsers: [],
+  isKp: false,
+  selfChannelId: null,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SUCCESS_INITIALIZED_ROOM_INFO': {
       return Object.assign({}, state, {
-        isLoading: action.isLoading,
         roomId: action.room.roomId,
         roomName: action.room.roomName,
         kpInfo: action.room.kpInfo,
@@ -22,6 +23,16 @@ export default (state = initialState, action) => {
     case 'ADD_NEW_SOCKET': {
       return Object.assign({}, state, {
         socket: action.socket,
+      })
+    }
+    case 'ASSIGN_KP': {
+      return Object.assign({}, state, {
+        isKp: action.isKp
+      })
+    }
+    case 'ASSIGN_SELF_CHANNEL_ID': {
+      return Object.assign({}, state, {
+        selfChannelId: action.selfChannelId,
       })
     }
     case 'UPDATE_ACTIVE_USERS': {

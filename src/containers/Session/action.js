@@ -13,6 +13,20 @@ export const addNewSocket = (socket) => {
   }
 }
 
+export const assignKp = (bool) => {
+  return {
+    type: 'ASSIGN_KP',
+    isKp: bool,
+  }
+}
+
+export const assignSelfChannelId = (selfChannelId) => {
+  return {
+    type: 'ASSIGN_SELF_CHANNEL_ID',
+    selfChannelId: selfChannelId,
+  }
+}
+
 export const updateActiveUsers = (activeUsers) => {
   return {
     type: 'UPDATE_ACTIVE_USERS',

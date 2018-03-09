@@ -27,3 +27,12 @@ export const apiGetPublicMessage = async (token, roomId) => {
 
   return res.body
 }
+
+export const apiGetPrivateMessage = async (token, roomId) => {
+  const res = await request
+    .post(endpoint + '/message/get/private')
+    .set({ Authorization: token })
+    .send({ roomId: roomId })
+
+  return res.body
+}

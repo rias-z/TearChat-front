@@ -1,15 +1,31 @@
-import { successInitializedRoomInfo, addNewSocket } from './action'
+// action
+import {
+  successInitializedRoomInfo,
+  addNewSocket,
+  assignKp,
+  assignSelfChannelId,
+} from './action'
 import { successInitializedPublicMessages } from '../PublicMessage/action'
+import { successInitializedPrivateMessages } from '../PrivateMessage/action'
 import { logout } from '../App/action'
-import { apiGetRoomInfoById, apiGetPublicMessage } from './api'
+
+// api
+import {
+  apiGetRoomInfoById,
+  apiGetPublicMessage,
+  apiGetPrivateMessage,
+} from './api'
+
+// helpers
 import { clientTokenCheck } from '../../helpers/utils'
 
 // socket
 import webSocket from '../../socket'
 
 
-export const initializedRoomInfo = (props) => async (dispatch) => {
+export const initializedRoomInfo = (props) => async (dispatch, getState) => {
   try {
+    const userId = localStorage.getItem('userId')
     const roomId = localStorage.getItem('roomId')
     const accessToken = localStorage.getItem('accessToken')
 
@@ -25,16 +41,39 @@ export const initializedRoomInfo = (props) => async (dispatch) => {
     const roomInfo = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(roomInfo))
 
-    // 全体チャットの取得
+    // publicMessage取得
     const publicMessage = await apiGetPublicMessage(token, roomId)
     dispatch(successInitializedPublicMessages(publicMessage))
+
+    // privateMessage取得
+    const privateMessage = await apiGetPrivateMessage(token, roomId)
+    dispatch(successInitializedPrivateMessages(privateMessage))
+
+    // KPチェック
+    const selfUserId = getState().App.userId
+    const kpUserId = roomInfo.kpInfo.userId
+    if (selfUserId === kpUserId)
+      dispatch(assignKp(true))
+    else
+      dispatch(assignKp(false))
+
+    // MemberのchannelIdチェック
+    if (!getState().Session.isKp) {
+      const _member = roomInfo.membersInfo.find(
+        member => member.userId === Number(userId)
+      )
+      const selfChannelId = _member.channelId
+      dispatch(assignSelfChannelId(selfChannelId))
+    } else {
+      // KPの場合はchannelIdを0にセット
+      dispatch(assignSelfChannelId(0))
+    }
 
     // socket通信開始
     const ws = new webSocket()
     ws.connected(roomId, accessToken)
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
-
     dispatch(addNewSocket(ws))
   } catch (err) {
     const statusCode = err.status
