@@ -3,8 +3,8 @@ import App from './containers/App/reducer'
 import CreateRoom from './containers/CreateRoom/reducer'
 import RoomList from './containers/RoomList/reducer'
 import Session from './containers/Session/reducer'
-import PublicMessage from './containers/PublicMessage/reducer'
-import PrivateMessage from './containers/PrivateMessage/reducer'
+import Table from './containers/Table/reducer'
+import ColumnPublicMessage from './containers/ColumnPublicMessage/reducer'
 
 
 export default combineReducers({
@@ -12,6 +12,6 @@ export default combineReducers({
   CreateRoom,
   RoomList,
   Session,
-  PublicMessage,
-  PrivateMessage,
+  Table,
+  ColumnPublicMessage,
 })

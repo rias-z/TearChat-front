@@ -8,6 +8,7 @@ const initialState = {
   activeUsers: [],
   isKp: false,
   selfChannelId: null,
+  privateMessages: [],
 }
 
 export default (state = initialState, action) => {
@@ -43,6 +44,19 @@ export default (state = initialState, action) => {
     case 'SUCCESS_INITIALIZED': {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
+      })
+    }
+    case 'SUCCESS_INITIALIZED_PRIVATE_MESSAGES': {
+      return Object.assign({}, state, {
+        privateMessages: action.privateMessages
+      })
+    }
+    case 'SUCCESS_UPDATE_MESSAGE_TO_PRIVATE': {
+      return Object.assign({}, state, {
+        privateMessages: [
+          ...state.privateMessages,
+          action.message
+        ]
       })
     }
     default:

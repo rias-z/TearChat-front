@@ -1,12 +1,13 @@
-export const handlePostMessageToPublic = (socket, content) => {
+export const handlePostMessageToPrivate = (channelId, content) => (dispatch, getState) => {
   try {
     const messageInfo = {
-      messageType: 'public',
-      channelId: 0,
+      messageType: 'private',
+      channelId: channelId,
       content: content,
     }
 
     // メッセージ送信
+    const socket = getState().Session.socket
     socket.postMessage(messageInfo)
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング

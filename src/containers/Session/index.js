@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-// container
-import PublicMessage from '../PublicMessage'
-import PrivateMessage from '../PrivateMessage'
+// containers
+import SideBar from '../SideBar'
+import CharacterView from '../../components/CharacterView'
+import Table from '../Table'
+
+// components
+import MainView from '../../components/MainView'
 
 // logic
 import { initializedRoomInfo } from './logic'
@@ -24,28 +28,13 @@ class Session extends Component {
 
   render() {
     if (this.props.isLoading) {
-      const members = this.props.membersInfo.map((member, index) => (
-        <li key={index}>{member.userName}</li>
-      ))
-
-      const activeUsers = this.props.activeUsers.map((user, index) => (
-        <li key={index}>{user.userName}</li>
-      ))
-
       return (
         <div className='Session'>
-          [roomId:{this.props.roomId}] 部屋の名前: {this.props.roomName}
-          <br />
-          kp: {this.props.kpInfo.userName}
-          <br />
-          members: {members}
-          isKp: {this.props.isKp.toString()}
-          <br />
-          ログオンユーザ: {activeUsers}
-          <hr />
-
-          <PublicMessage />
-          <PrivateMessage />
+          <SideBar />
+          <MainView>
+              <Table />
+          </MainView>
+          <CharacterView />
         </div>
       )
     } else {

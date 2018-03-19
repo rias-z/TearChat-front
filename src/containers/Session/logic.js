@@ -6,8 +6,8 @@ import {
   successInitialized,
   assignSelfChannelId,
 } from './action'
-import { successInitializedPublicMessages } from '../PublicMessage/action'
-import { successInitializedPrivateMessages } from '../PrivateMessage/action'
+import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
+import { successInitializedPrivateMessages } from './action'
 import { logout } from '../App/action'
 
 // api
