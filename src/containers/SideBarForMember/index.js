@@ -6,12 +6,12 @@ import { Wrap } from './styles'
 import { addTable, removeTable } from '../Table/action'
 
 
-const SideBar = (props) => {
+const SideBarForMember = (props) => {
   const publicChannels = (props.ids.indexOf('public') === -1) ? (
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.removeTable('public')
+        props.addTable('public')
       }}
     >
       [x]
@@ -27,40 +27,26 @@ const SideBar = (props) => {
     </li>
   )
 
-  const privateChannels = props.membersInfo.map((member) => {
-    const channel = 'private_' + member.channelId
-
-    // idsチェック
-    if (props.ids.indexOf(channel) === -1) {
-      // idsにない場合
-      return (
-        <li
-          key={member.channelId}
-          onClick={(e) => {
-            e.preventDefault()
-            const id = 'private_' + member.channelId
-            props.addTable(id)
-          }}
-        >
-          [x] {member.userName}
-        </li>
-      )
-    } else {
-      // idsにある場合
-      return (
-        <li
-          key={member.channelId}
-          onClick={(e) => {
-            e.preventDefault()
-            const id = 'private_' + member.channelId
-            props.removeTable(id)
-          }}
-        >
-          [=] {member.userName}
-        </li>
-      )
-    }
-  })
+  const channel = 'private_' + props.selfChannelId
+  const privateChannels = (props.ids.indexOf(channel) === -1) ? (
+    <li
+      onClick={(e) => {
+        e.preventDefault()
+        props.addTable(channel)
+      }}
+    >
+      [x] {props.kpInfo.userName} (KP)
+    </li>
+  ) : (
+    <li
+      onClick={(e) => {
+        e.preventDefault()
+        props.removeTable(channel)
+      }}
+    >
+      [=] {props.kpInfo.userName} (KP)
+    </li>
+  )
 
   const activeUsers = props.activeUsers.map((user) => (
     <li key={user.userId}>{user.userName}</li>
@@ -68,8 +54,7 @@ const SideBar = (props) => {
 
   return (
     <Wrap>
-      <h3>SideBar</h3>
-
+      <h3>SideBarForMember</h3>
       Room [{props.roomId}]<br />
       {props.roomName}<br />
       <br />
@@ -100,6 +85,7 @@ const mapStateToProps = (state) => ({
   membersInfo: state.Session.membersInfo,
   activeUsers: state.Session.activeUsers,
   isKp: state.Session.isKp,
+  selfChannelId: state.Session.selfChannelId,
   ids: state.Table.ids,
 })
 
@@ -111,4 +97,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SideBar)
+)(SideBarForMember)

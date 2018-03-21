@@ -70,6 +70,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     ws.connected(roomId, accessToken)
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
+    ws.receiveUpdateMembers(dispatch)
     dispatch(addNewSocket(ws))
 
     dispatch(successInitialized())

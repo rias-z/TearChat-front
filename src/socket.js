@@ -4,7 +4,8 @@ import io from 'socket.io-client'
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
 import {
   successUpdateMessageToPrivate,
-  updateActiveUsers
+  updateActiveUsers,
+  updateMembersInfo,
 } from './containers/Session/action'
 
 
@@ -37,7 +38,6 @@ class WebSocket {
     // TODO public | private | group でdispatch先を分ける
 
     this.socket.on('receiveMessageToPublic', messageInfo => {
-      console.log('receiveMessageToPublic:', messageInfo)
       dispatch(successUpdateMessageToPublic(messageInfo))
     })
 
@@ -47,9 +47,9 @@ class WebSocket {
   }
 
   // メンバー更新
-  receiveUpdateMembers = () => {
-    this.socket.on('receiveUpdateMembers', members => {
-      console.log('members:', members)
+  receiveUpdateMembers = (dispatch) => {
+    this.socket.on('receiveUpdateMembers', membersInfo => {
+      dispatch(updateMembersInfo(membersInfo))
     })
   }
 

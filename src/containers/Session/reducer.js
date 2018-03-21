@@ -41,6 +41,11 @@ export default (state = initialState, action) => {
         activeUsers: action.activeUsers,
       })
     }
+    case 'UPDATE_MEMBERS_INFO': {
+      return Object.assign({}, state, {
+        membersInfo: action.membersInfo,
+      })
+    }
     case 'SUCCESS_INITIALIZED': {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
