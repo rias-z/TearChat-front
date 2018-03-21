@@ -8,6 +8,13 @@ const Lobby = (props) => (
     <h2>Lobby</h2>
 
     <h3>PCを作成/編集する</h3>
+    <input
+      type='button'
+      value='PCを作成/編集する'
+      onClick={() => {
+        props.history.push('/manager_pc')
+      }}
+    />
 
     <h3>部屋を作成する</h3>
     <input

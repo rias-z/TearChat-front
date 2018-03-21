@@ -7,6 +7,7 @@ import CreateRoom from '../CreateRoom'
 import Login from '../Login'
 import Lobby from '../Lobby'
 import MakePc from '../MakePc'
+import ManagerPc from '../ManagerPc'
 import Register from '../Register'
 import Session from '../Session'
 
@@ -15,6 +16,9 @@ import Header from '../../components/Header'
 
 // logic
 import { initializedApp, logoutApp } from './logic'
+
+// styles
+import { WrapMain } from './styles'
 
 
 class App extends Component {
@@ -34,27 +38,30 @@ class App extends Component {
             userName={this.props.userName}
           />
 
-          <Switch>
-            <Route path='/register' component={Register} />
-            <Route path='/login' component={Login} />
+          <WrapMain>
+            <Switch>
+              <Route path='/register' component={Register} />
+              <Route path='/login' component={Login} />
 
-            {(() => {
-              if (this.props.isAuthenticated) {
-                return (
-                  <Switch>
-                    <Route exact path='/' component={Lobby} />
-                    <Route path='/create_room' component={CreateRoom} />
-                    <Route path='/make_pc' component={MakePc} />
-                    <Route path='/session' component={Session} />
-                  </Switch>
-                )
-              } else {
-                return (
-                  <Redirect to='/login' />
-                )
-              }
-            })()}
-          </Switch>
+              {(() => {
+                if (this.props.isAuthenticated) {
+                  return (
+                    <Switch>
+                      <Route exact path='/' component={Lobby} />
+                      <Route path='/create_room' component={CreateRoom} />
+                      <Route path='/make_pc' component={MakePc} />
+                      <Route path='/manager_pc' component={ManagerPc} />
+                      <Route path='/session' component={Session} />
+                    </Switch>
+                  )
+                } else {
+                  return (
+                    <Redirect to='/login' />
+                  )
+                }
+              })()}
+            </Switch>
+          </WrapMain>
         </div>
       )
     } else {

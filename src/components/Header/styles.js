@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export const Wrap = styled.header`
   position: fixed;
   z-index: 200;
