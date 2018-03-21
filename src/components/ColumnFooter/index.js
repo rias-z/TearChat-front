@@ -24,7 +24,7 @@ export const Footer = styled.div`
 `
 
 
-export default function ColumnFooter ({children}) {
+export default function ColumnFooter({ children }) {
   const handleMove = (e) => {
     e.stopPropagation()
   }

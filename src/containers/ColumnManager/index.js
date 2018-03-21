@@ -6,8 +6,7 @@ import ColumnPublicMessage from '../ColumnPublicMessage'
 import ColumnPrivateMessage from '../ColumnPrivateMessage'
 
 // action
-import { removeTable } from "../Table/action";
-
+import { removeTable } from '../Table/action'
 
 
 class ColumnManager extends React.PureComponent {
@@ -21,7 +20,7 @@ class ColumnManager extends React.PureComponent {
     if (types[0] === 'public') {
       return <ColumnPublicMessage {...props} />
     } else if (types[0] === 'private') {
-      return <ColumnPrivateMessage {...props} channelId={parseInt(types[1])}/>
+      return <ColumnPrivateMessage {...props} channelId={parseInt(types[1], 10)} />
     } else if (types[0] === 'group') {
       return null
     }
@@ -33,7 +32,7 @@ const mapStateToProps = (state) => ({
   ids: state.Table.ids,
 })
 
-const mapDispatchToProps = (dispatch, {id}) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
   onClose() {
     dispatch(removeTable(id))
   }

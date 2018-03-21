@@ -7,7 +7,7 @@ export const handlePostMessageToPrivate = (channelId, content) => (dispatch, get
     }
 
     // メッセージ送信
-    const socket = getState().Session.socket
+    const { socket } = getState().Session
     socket.postMessage(messageInfo)
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング

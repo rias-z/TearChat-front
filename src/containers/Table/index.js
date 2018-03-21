@@ -6,18 +6,18 @@ import { SortablePane, Pane } from 'react-sortable-pane'
 import ColumnManager from '../ColumnManager'
 
 
-const Table = ({ids}) => {
+const Table = ({ ids }) => {
   // ids = ['public', 'private_1', ...]
   const panes = ids.map(id => (
     <Pane
       key={id}
       id={id}
       width={280}
-      height={'100%'}
+      height='100%'
       minWidth={150}
-      isResizable={{x: true, y: false, xy: false}}
+      isResizable={{ x: true, y: false, xy: false }}
     >
-      <ColumnManager id={id}/>
+      <ColumnManager id={id} />
     </Pane>
   ))
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
   ids: state.Table.ids,
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = () => ({
 })
 
 

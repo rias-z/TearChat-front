@@ -46,24 +46,21 @@ export const Title = styled.div`
   }
 `
 
+const ColumnHeader = (props) => {
+  const { onClose, name } = props
 
-class ColumnHeader extends React.Component {
-  render() {
-    const { onClose, name } = this.props
-
-    return (
-      <Wrap>
-        <Header>
-          <Title>{name}</Title>
-          <Item onClick={onClose}>
-            <IconButton>
-              <NavigationClose color={'#999999'} />
-            </IconButton>
-          </Item>
-        </Header>
-      </Wrap>
-    )
-  }
+  return (
+    <Wrap>
+      <Header>
+        <Title>{name}</Title>
+        <Item onClick={onClose}>
+          <IconButton>
+            <NavigationClose color='#999999' />
+          </IconButton>
+        </Item>
+      </Header>
+    </Wrap>
+  )
 }
 
 export default ColumnHeader

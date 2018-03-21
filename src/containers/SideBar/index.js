@@ -3,92 +3,94 @@ import { connect } from 'react-redux'
 import { Wrap } from './styles'
 
 // action
-import { addTable, removeTable } from "../Table/action";
+import { addTable, removeTable } from '../Table/action'
 
 
-class SideBar extends React.Component {
-  render() {
-    const publicChannels = (this.props.ids.indexOf('public') === -1) ?
-      <li
-        onClick={(e) => {
-          e.preventDefault()
-          this.props.addTable('public')
-        }}
-      >[x]</li>
-      :
-      <li
-        onClick={(e) => {
-          e.preventDefault()
-          this.props.removeTable('public')
-        }}
-      >[>]</li>
+const SideBar = (props) => {
+  const publicChannels = (props.ids.indexOf('public') === -1) ? (
+    <li
+      onClick={(e) => {
+        e.preventDefault()
+        props.removeTable('public')
+      }}
+    >
+      [x]
+    </li>
+  ) : (
+    <li
+      onClick={(e) => {
+        e.preventDefault()
+        props.removeTable('public')
+      }}
+    >
+      [=]
+    </li>
+  )
 
-    const privateChannels = this.props.membersInfo.map((member, idx) => {
-      const channel = 'private_' + member.channelId
+  const privateChannels = props.membersInfo.map((member) => {
+    const channel = 'private_' + member.channelId
 
-      // idsチェック
-      if (this.props.ids.indexOf(channel) === -1) {
-        // idsにない場合
-        return (
-          <li
-            key={idx}
-            onClick={(e) => {
-              e.preventDefault()
-              const id = 'private_' + member.channelId
-              this.props.addTable(id)
-            }}
-          >
-            [x] {member.userName}
-          </li>
-        )
-      } else {
-        // idsにある場合
-        return (
-          <li
-            key={idx}
-            onClick={(e) => {
-              e.preventDefault()
-              const id = 'private_' + member.channelId
-              this.props.removeTable(id)
-            }}
-          >
-            [>] {member.userName}
-          </li>
-        )
-      }
-    })
+    // idsチェック
+    if (props.ids.indexOf(channel) === -1) {
+      // idsにない場合
+      return (
+        <li
+          key={member.channelId}
+          onClick={(e) => {
+            e.preventDefault()
+            const id = 'private_' + member.channelId
+            props.addTable(id)
+          }}
+        >
+          [x] {member.userName}
+        </li>
+      )
+    } else {
+      // idsにある場合
+      return (
+        <li
+          key={member.channelId}
+          onClick={(e) => {
+            e.preventDefault()
+            const id = 'private_' + member.channelId
+            props.removeTable(id)
+          }}
+        >
+          [=] {member.userName}
+        </li>
+      )
+    }
+  })
 
-    const activeUsers = this.props.activeUsers.map((user, index) => (
-      <li key={index}>{user.userName}</li>
-    ))
+  const activeUsers = props.activeUsers.map((user) => (
+    <li key={user.userId}>{user.userName}</li>
+  ))
 
+  return (
+    <Wrap>
+      <h3>SideBar</h3>
 
-    return (
-      <Wrap>
-        <h3>SideBar</h3>
-
-        Room [{this.props.roomId}]<br />
-        {this.props.roomName}<br />
-        <br />
-        kpName: {this.props.kpInfo.userName}<br />
-        isKp: {this.props.isKp.toString()}<br />
-        <br />
-        ActiveUsers:<br />
-        {activeUsers}
-        <br />
-        PublicMessages:<br />
-        {publicChannels}
-        <br />
-        PrivateMessage:<br />
-        {privateChannels}
-        <br />
-        GroupMessage:<br />
-        <li>Group1 (CLOSE)</li>
-        <li>Group2 (CLOSE)</li>
-        <br />
-      </Wrap>
-    )
-  }
+      Room [{props.roomId}]<br />
+      {props.roomName}<br />
+      <br />
+      kpName: {props.kpInfo.userName}<br />
+      isKp: {props.isKp.toString()}<br />
+      <br />
+      ActiveUsers:<br />
+      {activeUsers}
+      <br />
+      PublicMessages:<br />
+      {publicChannels}
+      <br />
+      PrivateMessage:<br />
+      {privateChannels}
+      <br />
+      GroupMessage:<br />
+      <li>Group1 (CLOSE)</li>
+      <li>Group2 (CLOSE)</li>
+      <br />
+    </Wrap>
+  )
 }
 
 const mapStateToProps = (state) => ({

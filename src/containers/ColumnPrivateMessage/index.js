@@ -15,7 +15,9 @@ import { handlePostMessageToPrivate } from './logic'
 
 class ColumnPrivateMessage extends React.Component {
   render() {
-    const { onClose, handlePostMessageToPrivate, channelId, membersInfo } = this.props
+    const {
+      onClose, onPostMessageToPrivate, channelId, membersInfo
+    } = this.props
 
     const messages = this.props.privateMessages.filter(message => {
       return message.channelId === channelId
@@ -28,7 +30,7 @@ class ColumnPrivateMessage extends React.Component {
     return (
       <ColumnRoot>
         <ColumnHeader
-          name={"To: " + memberName}
+          name={'To: ' + memberName}
           onClose={onClose}
         />
 
@@ -39,7 +41,7 @@ class ColumnPrivateMessage extends React.Component {
         </ColumnBody>
         <ColumnFooter>
           <MessageForm
-            onPostMessage={handlePostMessageToPrivate(channelId)}
+            onPostMessage={onPostMessageToPrivate(channelId)}
           />
         </ColumnFooter>
       </ColumnRoot>
@@ -54,7 +56,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handlePostMessageToPrivate: (channelId) => (content) =>
+  onPostMessageToPrivate: (channelId) => (content) =>
     dispatch(handlePostMessageToPrivate(channelId, content)),
 })
 

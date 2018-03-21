@@ -13,30 +13,28 @@ import MessageForm from '../../components/MessageForm'
 import { handlePostMessageToPublic } from './logic'
 
 
-class ColumnPublicMessage extends React.Component {
-  render() {
-    const { onClose, handlePostMessageToPublic, publicMessages } = this.props
+const ColumnPublicMessage = (props) => {
+  const { onClose, onPostMessageToPublic, publicMessages } = props
 
-    return (
-      <ColumnRoot>
-        <ColumnHeader
-          name="Public"
-          onClose={onClose}
+  return (
+    <ColumnRoot>
+      <ColumnHeader
+        name="Public"
+        onClose={onClose}
+      />
+
+      <ColumnBody>
+        <MessageList
+          messages={publicMessages}
         />
-
-        <ColumnBody>
-          <MessageList
-            messages={publicMessages}
-          />
-        </ColumnBody>
-        <ColumnFooter>
-          <MessageForm
-            onPostMessage={handlePostMessageToPublic}
-          />
-        </ColumnFooter>
-      </ColumnRoot>
-    )
-  }
+      </ColumnBody>
+      <ColumnFooter>
+        <MessageForm
+          onPostMessage={onPostMessageToPublic}
+        />
+      </ColumnFooter>
+    </ColumnRoot>
+  )
 }
 
 const mapStateToProps = (state) => ({
@@ -44,7 +42,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handlePostMessageToPublic: (content) =>
+  onPostMessageToPublic: (content) =>
     dispatch(handlePostMessageToPublic(content)),
 })
 

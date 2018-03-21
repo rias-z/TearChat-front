@@ -9,7 +9,7 @@ const Body = styled.div`
   padding: 1rem 1rem;
 `
 
-export default function ColumnBody ({children}) {
+export default function ColumnBody({ children }) {
   const handleMove = (e) => {
     e.stopPropagation()
   }

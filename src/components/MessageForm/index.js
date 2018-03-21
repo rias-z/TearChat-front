@@ -18,8 +18,9 @@ const StyledTextArea = styled.textarea`
 
 const MessageForm = (props) => {
   const { onPostMessage } = props
+
   return (
-    <form
+    <StyledTextArea
       onKeyPress={(e) => {
         if (!e.shiftKey && e.key === 'Enter') {
           const content = e.target.value
@@ -27,9 +28,7 @@ const MessageForm = (props) => {
           e.target.value = ''
         }
       }}
-    >
-      <StyledTextArea/>
-    </form>
+    />
   )
 }
 

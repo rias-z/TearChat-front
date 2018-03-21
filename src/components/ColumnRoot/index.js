@@ -13,6 +13,6 @@ const View = styled.div`
   overflow-y: hidden;
 `
 
-export default function ColumnRoot ({children}) {
+export default function ColumnRoot({ children }) {
   return <View>{children}</View>
 }

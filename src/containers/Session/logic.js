@@ -1,3 +1,6 @@
+// socket
+import WebSocket from '../../socket'
+
 // action
 import {
   successInitializedRoomInfo,
@@ -5,9 +8,9 @@ import {
   assignKp,
   successInitialized,
   assignSelfChannelId,
+  successInitializedPrivateMessages
 } from './action'
 import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
-import { successInitializedPrivateMessages } from './action'
 import { logout } from '../App/action'
 
 // api
@@ -19,9 +22,6 @@ import {
 
 // helpers
 import { clientTokenCheck } from '../../helpers/utils'
-
-// socket
-import webSocket from '../../socket'
 
 
 export const initializedRoomInfo = (props) => async (dispatch, getState) => {
@@ -53,16 +53,11 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     // KPチェック
     const selfUserId = getState().App.userId
     const kpUserId = roomInfo.kpInfo.userId
-    if (selfUserId === kpUserId)
-      dispatch(assignKp(true))
-    else
-      dispatch(assignKp(false))
+    if (selfUserId === kpUserId) { dispatch(assignKp(true)) } else { dispatch(assignKp(false)) }
 
     // MemberのchannelIdチェック
     if (!getState().Session.isKp) {
-      const _member = roomInfo.membersInfo.find(
-        member => member.userId === Number(userId)
-      )
+      const _member = roomInfo.membersInfo.find(member => member.userId === Number(userId))
       const selfChannelId = _member.channelId
       dispatch(assignSelfChannelId(selfChannelId))
     } else {
@@ -71,7 +66,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     }
 
     // socket通信開始
-    const ws = new webSocket()
+    const ws = new WebSocket()
     ws.connected(roomId, accessToken)
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)

@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
       }
     }
     case 'REMOVE_TABLE': {
-      const id = action.id
+      const { id } = action
       return {
         ids: state.ids.filter(v => id !== v),
         nextIds: state.ids.filter(v => id !== v),
