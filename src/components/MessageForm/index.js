@@ -23,6 +23,7 @@ const MessageForm = (props) => {
     <StyledTextArea
       onKeyPress={(e) => {
         if (!e.shiftKey && e.key === 'Enter') {
+          e.preventDefault()
           const content = e.target.value
           onPostMessage(content)
           e.target.value = ''
