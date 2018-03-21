@@ -1,4 +1,4 @@
-export const handlePostMessageToPublic = (socket, content) => {
+export const handlePostMessageToPublic = (content) => (dispatch, getState) => {
   try {
     const messageInfo = {
       messageType: 'public',
@@ -7,6 +7,7 @@ export const handlePostMessageToPublic = (socket, content) => {
     }
 
     // メッセージ送信
+    const { socket } = getState().Session
     socket.postMessage(messageInfo)
   } catch (err) {
     // TODO コメント送信失敗時のエラーハンドリング

@@ -1,13 +1,17 @@
-import { successUpdateMessageToPublic } from './containers/PublicMessage/action'
-import { successUpdateMessageToPrivate } from './containers/PrivateMessage/action'
-import { updateActiveUsers } from './containers/Session/action'
-
 import io from 'socket.io-client'
+
+// actions
+import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
+import {
+  successUpdateMessageToPrivate,
+  updateActiveUsers
+} from './containers/Session/action'
+
 
 const endpoint = 'http://localhost:5000'
 
 
-class webSocket {
+class WebSocket {
   constructor() {
     this.socket = io(endpoint)
   }
@@ -33,11 +37,19 @@ class webSocket {
     // TODO public | private | group でdispatch先を分ける
 
     this.socket.on('receiveMessageToPublic', messageInfo => {
+      console.log('receiveMessageToPublic:', messageInfo)
       dispatch(successUpdateMessageToPublic(messageInfo))
     })
 
     this.socket.on('receiveMessageToPrivate', messageInfo => {
       dispatch(successUpdateMessageToPrivate(messageInfo))
+    })
+  }
+
+  // メンバー更新
+  receiveUpdateMembers = () => {
+    this.socket.on('receiveUpdateMembers', members => {
+      console.log('members:', members)
     })
   }
 
@@ -49,4 +61,4 @@ class webSocket {
   }
 }
 
-export default webSocket
+export default WebSocket

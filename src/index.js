@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
@@ -17,9 +18,11 @@ const store = createStore(
 ReactDOM.render(
   (
     <Provider store={store}>
-      <BrowserRouter>
-        <Route path='/' component={App} />
-      </BrowserRouter>
+      <MuiThemeProvider>
+        <BrowserRouter>
+          <Route path='/' component={App} />
+        </BrowserRouter>
+      </MuiThemeProvider>
     </Provider>
   ),
   document.getElementById('root')
