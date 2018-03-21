@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // containers
-import SideBar from '../SideBar'
+import SideBarManager from '../SideBarManager'
 import CharacterView from '../../components/CharacterView'
 import Table from '../Table'
 
@@ -30,7 +30,7 @@ class Session extends Component {
     if (this.props.isLoading) {
       return (
         <div className='Session'>
-          <SideBar />
+          <SideBarManager />
           <MainView>
               <Table />
           </MainView>
