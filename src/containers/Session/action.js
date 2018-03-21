@@ -33,6 +33,13 @@ export const updateActiveUsers = (activeUsers) => {
   }
 }
 
+export const updateMembersInfo = (membersInfo) => {
+  return {
+    type: 'UPDATE_MEMBERS_INFO',
+    membersInfo: membersInfo,
+  }
+}
+
 export const successInitialized = () => {
   return {
     type: 'SUCCESS_INITIALIZED',

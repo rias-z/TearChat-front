@@ -4,7 +4,8 @@ import io from 'socket.io-client'
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
 import {
   successUpdateMessageToPrivate,
-  updateActiveUsers
+  updateActiveUsers,
+  updateMembersInfo,
 } from './containers/Session/action'
 
 
@@ -47,9 +48,9 @@ class WebSocket {
   }
 
   // メンバー更新
-  receiveUpdateMembers = () => {
-    this.socket.on('receiveUpdateMembers', members => {
-      console.log('members:', members)
+  receiveUpdateMembers = (dispatch) => {
+    this.socket.on('receiveUpdateMembers', membersInfo => {
+      dispatch(updateMembersInfo(membersInfo))
     })
   }
 
