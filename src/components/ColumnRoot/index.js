@@ -9,7 +9,6 @@ const View = styled.div`
   border: 2px solid #444448;
   background: #3e3e45;
   color: #e1e8ed;
-  overflow-x: hidden;
   overflow-y: hidden;
 `
 
