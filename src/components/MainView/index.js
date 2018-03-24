@@ -7,7 +7,7 @@ const MainView = styled.div`
   left: 13rem;
   width: 100%;
   height: calc(100% - 14rem);
-  // CharacterViewを閉じている場合
+  // PcViewを閉じている場合
   // height: 100%;
   overflow-y: hidden;
   background-color: #222426;

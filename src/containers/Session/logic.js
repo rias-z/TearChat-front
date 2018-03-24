@@ -11,6 +11,7 @@ import {
   successInitializedPrivateMessages
 } from './action'
 import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
+import { successInitializedPcsInfo } from '../PcView/action'
 import { logout } from '../App/action'
 
 // api
@@ -41,6 +42,9 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     // 部屋情報の取得
     const roomInfo = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(roomInfo))
+
+    // 部屋のPCの情報取得 (=> PcView)
+    dispatch(successInitializedPcsInfo(roomInfo.pcsInfo))
 
     // publicMessage取得
     const publicMessage = await apiGetPublicMessage(token, roomId)

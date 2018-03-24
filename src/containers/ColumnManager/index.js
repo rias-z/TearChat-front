@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 // containers
 import ColumnPublicMessage from '../ColumnPublicMessage'
 import ColumnPrivateMessage from '../ColumnPrivateMessage'
+import ColumnPc from '../ColumnPc'
 
 // action
 import { removeTable } from '../Table/action'
@@ -23,6 +24,8 @@ class ColumnManager extends React.PureComponent {
       return <ColumnPrivateMessage {...props} channelId={parseInt(types[1], 10)} />
     } else if (types[0] === 'group') {
       return null
+    } else if (types[0] === 'pc') {
+      return <ColumnPc {...props} pcId={types[1]} />
     }
     return null
   }

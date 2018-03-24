@@ -6,7 +6,7 @@ const endpoint = 'http://localhost:5000/api'
 
 export const apiGetPcList = async (token) => {
   const res = await request
-    .post(endpoint + '/pc/get/all')
+    .get(endpoint + '/pc/get/all')
     .set({ Authorization: token })
 
   return res.body
