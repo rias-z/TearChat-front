@@ -2,15 +2,15 @@ import styled from 'styled-components'
 
 
 const MainView = styled.div`
-  position: absolute;
+  position: fixed;
   top: 2rem;
   left: 13rem;
-  width: 100%;
+  width: calc(100% - 13rem);
   height: calc(100% - 14rem);
-  // CharacterViewを閉じている場合
+  // PcViewを閉じている場合
   // height: 100%;
-  overflow-y: hidden;
   background-color: #222426;
+  overflow-x: scroll;
 `
 
 export default MainView
