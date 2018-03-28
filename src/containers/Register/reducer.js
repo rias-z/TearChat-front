@@ -1,3 +1,21 @@
-/**
- * Created by ryosuke on 2018/02/08.
- */
+const initialState = {
+  infoMessage: null,
+  errorMessage: null,
+}
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case 'SUCCESS_REGISTER_USER': {
+      return Object.assign({}, state, {
+        infoMessage: action.infoMessage,
+      })
+    }
+    case 'FAILED_REGISTER_USER': {
+      return Object.assign({}, state, {
+        errorMessage: action.errorMessage,
+      })
+    }
+    default:
+      return state
+  }
+}
