@@ -7,6 +7,7 @@ import CreateRoom from '../CreateRoom'
 import Login from '../Login'
 import Lobby from '../Lobby'
 import MakePc from '../MakePc'
+import UserSettings from '../UserSettings'
 import ManagerPc from '../ManagerPc'
 import Register from '../Register'
 import Session from '../Session'
@@ -50,6 +51,7 @@ class App extends Component {
                       <Route exact path='/' component={Lobby} />
                       <Route path='/create_room' component={CreateRoom} />
                       <Route path='/make_pc' component={MakePc} />
+                      <Route path='/settings' component={UserSettings} />
                       <Route path='/manager_pc' component={ManagerPc} />
                       <Route path='/session' component={Session} />
                     </Switch>

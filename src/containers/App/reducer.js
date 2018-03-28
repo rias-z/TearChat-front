@@ -3,6 +3,7 @@ const initialState = {
   isAuthenticated: false,
   userId: null,
   userName: null,
+  thumbnail: null,
   errorMessage: null
 }
 
@@ -34,6 +35,11 @@ export default (state = initialState, action) => {
         isAuthenticated: false,
         userId: null,
         userName: null
+      })
+    }
+    case 'SUCCESS_UPDATE_THUMBNAIL': {
+      return Object.assign({}, state, {
+        thumbnail: action.thumbnail,
       })
     }
     default:

@@ -26,3 +26,10 @@ export const logout = () => {
     type: 'LOGOUT'
   }
 }
+
+export const successUpdateThumbnail = (thumbnail) => {
+  return {
+    type: 'SUCCESS_UPDATE_THUMBNAIL',
+    thumbnail: thumbnail,
+  }
+}

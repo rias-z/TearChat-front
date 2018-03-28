@@ -7,6 +7,15 @@ const Lobby = (props) => (
   <div className='Lobby'>
     <h2>Lobby</h2>
 
+    <h3>ユーザ設定</h3>
+    <input
+      type='button'
+      value='ユーザ設定'
+      onClick={() => {
+        props.history.push('/settings')
+      }}
+    />
+
     <h3>PCを作成/編集する</h3>
     <input
       type='button'
