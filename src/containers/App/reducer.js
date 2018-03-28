@@ -13,15 +13,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isTokenChecked: true,
         isAuthenticated: true,
-        userId: action.userId,
-        userName: action.userName
+        userId: action.userInfo.userId,
+        userName: action.userInfo.userName,
+        thumbnail: action.userInfo.thumbnail,
       })
     }
     case 'SUCCESS_LOGIN': {
       return Object.assign({}, state, {
         isAuthenticated: true,
-        userId: action.userId,
-        userName: action.userName
+        userId: action.userInfo.userId,
+        userName: action.userInfo.userName,
+        thumbnail: action.userInfo.thumbnail,
       })
     }
     case 'FAILED_LOGIN': {

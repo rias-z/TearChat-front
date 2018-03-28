@@ -1,16 +1,14 @@
-export const successTokenCheck = (userId, userName) => {
+export const successTokenCheck = (userInfo) => {
   return {
     type: 'SUCCESS_TOKEN_CHECK',
-    userId: userId,
-    userName: userName
+    userInfo: userInfo
   }
 }
 
-export const successLogin = (userId, userName) => {
+export const successLogin = (userInfo) => {
   return {
     type: 'SUCCESS_LOGIN',
-    userId: userId,
-    userName: userName
+    userInfo: userInfo
   }
 }
 

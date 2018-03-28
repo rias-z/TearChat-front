@@ -6,14 +6,13 @@ import { clientTokenCheck } from '../../helpers/utils'
 export const initializedApp = () => async (dispatch) => {
   try {
     const token = clientTokenCheck()
-    const result = await apiTokenCheck(token)
+    const userInfo = await apiTokenCheck(token)
 
-    Object.keys(result).forEach(key => {
-      localStorage.setItem(key, result[key])
+    Object.keys(userInfo).forEach(key => {
+      localStorage.setItem(key, userInfo[key])
     })
 
-    const { userId, userName } = result
-    dispatch(successTokenCheck(userId, userName))
+    dispatch(successTokenCheck(userInfo))
   } catch (err) {
     localStorage.clear()
     dispatch(logout())
