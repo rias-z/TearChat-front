@@ -24,6 +24,16 @@ const MessageList = (props) => (
     {props.messages.map((message) => (
       <div className='message' key={message._id}>
         <WrapMessage>
+          <img
+            alt='img'
+            width='32'
+            height='32'
+            src={message.thumbnail}
+            style={{
+              'border': '1px solid black',
+              'borderRadius': '16px',
+            }}
+          />
           ({message.userName})
           <Message content={message.content} />
         </WrapMessage>

@@ -3,6 +3,7 @@ const initialState = {
   isAuthenticated: false,
   userId: null,
   userName: null,
+  thumbnail: null,
   errorMessage: null
 }
 
@@ -12,15 +13,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isTokenChecked: true,
         isAuthenticated: true,
-        userId: action.userId,
-        userName: action.userName
+        userId: action.userInfo.userId,
+        userName: action.userInfo.userName,
+        thumbnail: action.userInfo.thumbnail,
       })
     }
     case 'SUCCESS_LOGIN': {
       return Object.assign({}, state, {
         isAuthenticated: true,
-        userId: action.userId,
-        userName: action.userName
+        userId: action.userInfo.userId,
+        userName: action.userInfo.userName,
+        thumbnail: action.userInfo.thumbnail,
       })
     }
     case 'FAILED_LOGIN': {
@@ -34,6 +37,11 @@ export default (state = initialState, action) => {
         isAuthenticated: false,
         userId: null,
         userName: null
+      })
+    }
+    case 'SUCCESS_UPDATE_THUMBNAIL': {
+      return Object.assign({}, state, {
+        thumbnail: action.thumbnail,
       })
     }
     default:
