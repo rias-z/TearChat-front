@@ -33,6 +33,17 @@ class Login extends Component {
         </form>
 
         {this.props.errorMessage}
+
+        <br /><br />
+
+        <h3>新規登録</h3>
+        <input
+          type='button'
+          value='go register'
+          onClick={() => {
+            this.props.history.push('/register')
+          }}
+        />
       </div>
     )
   }

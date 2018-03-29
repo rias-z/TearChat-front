@@ -3,6 +3,7 @@ import App from './containers/App/reducer'
 import CreateRoom from './containers/CreateRoom/reducer'
 import ManagerPc from './containers/ManagerPc/reducer'
 import PcView from './containers/PcView/reducer'
+import Register from './containers/Register/reducer'
 import RoomList from './containers/RoomList/reducer'
 import Session from './containers/Session/reducer'
 import Table from './containers/Table/reducer'
@@ -14,6 +15,7 @@ export default combineReducers({
   CreateRoom,
   ManagerPc,
   PcView,
+  Register,
   RoomList,
   Session,
   Table,

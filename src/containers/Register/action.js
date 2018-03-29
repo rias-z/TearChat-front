@@ -1,3 +1,13 @@
-/**
- * Created by ryosuke on 2018/02/08.
- */
+export const successRegisterUser = (message) => {
+  return {
+    type: 'SUCCESS_REGISTER_USER',
+    infoMessage: message,
+  }
+}
+
+export const failedRegisterUser = (message) => {
+  return {
+    type: 'FAILED_REGISTER_USER',
+    errorMessage: message,
+  }
+}
