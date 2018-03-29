@@ -11,8 +11,8 @@ import PcDisplay from '../../components/PcDisplay'
 const ColumnPc = (props) => {
   const { onClose, pcId } = props
 
-  const pcIdx = props.pcsInfo.findIndex(pc => pc._id === pcId)
-  const pcInfo = props.pcsInfo[pcIdx]
+  const pcIdx = props.roomPcInfo.findIndex(pc => pc.fkPcId === pcId)
+  const pcInfo = props.roomPcInfo[pcIdx]
 
   return (
     <ColumnRoot>
@@ -29,7 +29,7 @@ const ColumnPc = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  pcsInfo: state.PcView.pcsInfo,
+  roomPcInfo: state.RoomPcView.roomPcInfo,
 })
 
 const mapDispatchToProps = () => ({

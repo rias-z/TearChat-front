@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { WrapPcView, StyledPcBox } from './styles'
+import { WrapRoomPcView, StyledPcBox } from './styles'
 
 // actions
 import { addTable, removeTable } from '../Table/action'
 
 
-const PcView = (props) => {
-  const pcChannels = props.pcsInfo.map(pc => {
-    const channel = 'pc_' + pc._id
+const RoomPcView = (props) => {
+  const pcChannels = props.roomPcInfo.map(pc => {
+    const channel = 'pc_' + pc.fkPcId
 
     // idsチェック
     if (props.ids.indexOf(channel) === -1) {
@@ -18,7 +18,7 @@ const PcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.addTable('pc_' + pc._id)
+            props.addTable('pc_' + pc.fkPcId)
           }}
         >
           [x]<br />
@@ -35,7 +35,7 @@ const PcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.removeTable('pc_' + pc._id)
+            props.removeTable('pc_' + pc.fkPcId)
           }}
         >
           [=]<br />
@@ -49,15 +49,15 @@ const PcView = (props) => {
   })
 
   return (
-    <WrapPcView>
+    <WrapRoomPcView>
       {pcChannels}
-    </WrapPcView>
+    </WrapRoomPcView>
   )
 }
 
 const mapStateToProps = (state) => ({
   ids: state.Table.ids,
-  pcsInfo: state.PcView.pcsInfo,
+  roomPcInfo: state.RoomPcView.roomPcInfo,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,4 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PcView)
+)(RoomPcView)

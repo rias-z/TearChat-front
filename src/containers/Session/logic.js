@@ -11,7 +11,7 @@ import {
   successInitializedPrivateMessages
 } from './action'
 import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
-import { successInitializedPcsInfo } from '../PcView/action'
+import { successSetRoomPcInfo } from '../RoomPcView/action'
 import { logout } from '../App/action'
 
 // api
@@ -43,8 +43,8 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     const roomInfo = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(roomInfo))
 
-    // 部屋のPCの情報取得 (=> PcView)
-    dispatch(successInitializedPcsInfo(roomInfo.pcsInfo))
+    // 部屋のPCの情報取得 (=> RoomPcView)
+    dispatch(successSetRoomPcInfo(roomInfo.roomPcInfo))
 
     // publicMessage取得
     const publicMessage = await apiGetPublicMessage(token, roomId)
@@ -75,6 +75,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
     ws.receiveUpdateMembers(dispatch)
+    ws.receiveUpdateRoomPcInfo(dispatch)
     dispatch(addNewSocket(ws))
 
     dispatch(successInitialized())

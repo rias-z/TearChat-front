@@ -8,35 +8,56 @@ import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
 
 // api
 import { apiGetPcList } from './api'
-import { addPcToView } from '../PcView/logic'
+
+// logic
+import { handleAddRoomPcInfo } from './logic'
 
 
 class PcDialog extends React.Component {
   state = {
     open: false,
-    pcList: [],
-    pcInfo: [],
+    selected: false,
+    roomPcList: [],
+    selectPcInfo: [],
   };
 
+  // Dialogを展開時，ユーザが作成したPCリストを取得する
   handleOpen = async () => {
-    const result = await apiGetPcList()
+    const roomPcList = await apiGetPcList()
 
     this.setState({
       open: true,
-      pcList: result,
+      roomPcList: roomPcList,
     })
   }
 
+  // disalogを閉じる
   handleClose = () => {
-    // 選択したPCをPcViewに追加する
-    this.props.addPcToView(this.state.pcInfo)
-
-    this.setState({ open: false })
+    this.setState({
+      open: false,
+      selected: false,
+      selectPcInfo: [],
+    })
   }
 
+  // submitボタン押下時
+  handleSubmit = () => {
+    // 選択したPCの_idをRoomPcInfoに追加する
+    this.props.handleAddRoomPcInfo(this.state.selectPcInfo._id)
+
+    // disalogを閉じる
+    this.setState({
+      open: false,
+      selected: false,
+      selectPcInfo: [],
+    })
+  }
+
+  // PC選択時
   handleSetPcInfo = (pcInfo) => {
     this.setState({
-      pcInfo: pcInfo,
+      selected: true,
+      selectPcInfo: pcInfo,
     })
   }
 
@@ -50,12 +71,13 @@ class PcDialog extends React.Component {
       <FlatButton
         label="Submit"
         primary
+        disabled={!this.state.selected}
         keyboardFocused
-        onClick={this.handleClose}
+        onClick={this.handleSubmit}
       />,
     ]
 
-    const radios = this.state.pcList.map(pc => {
+    const radios = this.state.roomPcList.map(pc => {
       return (
         <RadioButton
           key={pc._id}
@@ -91,7 +113,8 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  addPcToView: (pcInfo) => dispatch(addPcToView(pcInfo)),
+  // addPcToView: (pcInfo) => dispatch(addPcToView(pcInfo)),
+  handleAddRoomPcInfo: (fkPcId) => dispatch(handleAddRoomPcInfo(fkPcId)),
 })
 
 export default connect(

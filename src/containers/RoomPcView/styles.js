@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-export const WrapPcView = styled.header`
+export const WrapRoomPcView = styled.header`
   display: flex;
   position: fixed;
   z-index: 400;

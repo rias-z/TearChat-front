@@ -7,7 +7,7 @@ const MainView = styled.div`
   left: 13rem;
   width: calc(100% - 13rem);
   height: calc(100% - 14rem);
-  // PcViewを閉じている場合
+  // TODO RoomPcViewを表示/非表示したい
   // height: 100%;
   background-color: #222426;
   overflow-x: scroll;

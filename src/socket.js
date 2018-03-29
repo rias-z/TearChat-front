@@ -7,6 +7,7 @@ import {
   updateActiveUsers,
   updateMembersInfo,
 } from './containers/Session/action'
+import { successSetRoomPcInfo } from './containers/RoomPcView/action'
 
 
 const endpoint = 'http://localhost:5000'
@@ -28,11 +29,27 @@ class WebSocket {
     this.socket.disconnect()
   }
 
+  /**
+   * socket.emit
+   */
   // メッセージ送信
   postMessage(messageInfo) {
     this.socket.emit('postMessage', messageInfo)
   }
 
+  // RoomのPCリストにPCを追加
+  addRoomPcInfo(fkPcId) {
+    this.socket.emit('addRoomPcInfo', fkPcId)
+  }
+
+  // RoomのPCリストからPCを削除
+  removeRoomPcInfo(fkPcId) {
+    this.socket.emit('addRoomPcInfo', fkPcId)
+  }
+
+  /**
+   * socket.on
+   */
   // メッセージ受け取り
   receiveMessage = (dispatch) => {
     // TODO public | private | group でdispatch先を分ける
@@ -57,6 +74,13 @@ class WebSocket {
   receiveActiveUser = (dispatch) => {
     this.socket.on('receiveActiveUser', activeUsers => {
       dispatch(updateActiveUsers(activeUsers))
+    })
+  }
+
+  // RoomPcInfo更新
+  receiveUpdateRoomPcInfo = (dispatch) => {
+    this.socket.on('receiveUpdateRoomPcInfo', roomPcInfo => {
+      dispatch(successSetRoomPcInfo(roomPcInfo))
     })
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 // containers
 import SideBarManager from '../SideBarManager'
-import PcView from '../PcView'
+import RoomPcView from '../RoomPcView'
 import Table from '../Table'
 
 // components
@@ -34,7 +34,7 @@ class Session extends Component {
           <MainView>
               <Table />
           </MainView>
-          <PcView />
+          <RoomPcView />
         </div>
       )
     } else {
