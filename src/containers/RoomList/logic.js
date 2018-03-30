@@ -21,14 +21,14 @@ export const initializedOmittedRooms = () => async (dispatch) => {
   }
 }
 
-export const handleEnteredRoomSubmit = (props, inputRoomId) => async (dispatch) => {
+export const handleEnteredRoomSubmit = (props, roomId) => async (dispatch) => {
   try {
     const token = clientTokenCheck()
 
     // ここではRoomに参加者として登録するだけ
-    await apiEnterRoom(token, inputRoomId)
+    await apiEnterRoom(token, roomId)
 
-    localStorage.setItem('roomId', inputRoomId)
+    localStorage.setItem('roomId', roomId)
     props.history.push('/session')
   } catch (err) {
     const statusCode = err.status

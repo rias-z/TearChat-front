@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const PcDisplay = (props) => {
+const PcCard = (props) => {
   const { pcInfo } = props
 
   return (
@@ -13,4 +13,4 @@ const PcDisplay = (props) => {
   )
 }
 
-export default PcDisplay
+export default PcCard

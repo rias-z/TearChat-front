@@ -4,6 +4,14 @@ import request from 'superagent'
 const endpoint = 'http://localhost:5000/api'
 
 
+export const apiGetUserInfoById = async (token) => {
+  const res = await request
+    .get(endpoint + '/user/get')
+    .set({ Authorization: token })
+
+  return res.body
+}
+
 export const apiGetRoomInfoById = async (token, roomId) => {
   /**
    * Roomの情報を取得する

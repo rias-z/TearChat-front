@@ -15,14 +15,13 @@ export const handleCreateRoomSubmit = (props, formRoomInfo) => async (dispatch) 
       return
     }
 
-    const roomObj = {
+    const token = clientTokenCheck()
+    const roomInfo = {
       roomName: roomName,
       capacity: capacity
     }
 
-    const token = clientTokenCheck()
-
-    const result = await apiCreateRoom(token, roomObj)
+    const result = await apiCreateRoom(token, roomInfo)
 
     // Room作成成功時，ユーザはSession画面に遷移
     localStorage.setItem('roomId', result.roomId)

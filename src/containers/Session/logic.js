@@ -16,6 +16,7 @@ import { logout } from '../App/action'
 
 // api
 import {
+  apiGetUserInfoById,
   apiGetRoomInfoById,
   apiGetPublicMessage,
   apiGetPrivateMessage,
@@ -27,7 +28,6 @@ import { clientTokenCheck } from '../../helpers/utils'
 
 export const initializedRoomInfo = (props) => async (dispatch, getState) => {
   try {
-    const userId = localStorage.getItem('userId')
     const roomId = localStorage.getItem('roomId')
     const accessToken = localStorage.getItem('accessToken')
 
@@ -39,11 +39,14 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
 
     const token = clientTokenCheck()
 
-    // 部屋情報の取得
+    // ユーザ情報取得
+    const userInfo = await apiGetUserInfoById(token)
+
+    // 部屋情報取得
     const roomInfo = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(roomInfo))
 
-    // 部屋のPCの情報取得 (=> RoomPcView)
+    // RoomのPC情報取得 (=> RoomPcView)
     dispatch(successSetRoomPcInfo(roomInfo.roomPcInfo))
 
     // publicMessage取得
@@ -61,8 +64,12 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
 
     // MemberのchannelIdチェック
     if (!getState().Session.isKp) {
-      const _member = roomInfo.membersInfo.find(member => member.userId === Number(userId))
+      // メンバー情報と自ユーザ情報のfkUserIdを照合
+      const _member = roomInfo.membersInfo.find(member =>
+        member.userId === Number(userInfo.userId))
+
       const selfChannelId = _member.channelId
+
       dispatch(assignSelfChannelId(selfChannelId))
     } else {
       // KPの場合はchannelIdを0にセット
@@ -76,8 +83,11 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     ws.receiveActiveUser(dispatch)
     ws.receiveUpdateMembers(dispatch)
     ws.receiveUpdateRoomPcInfo(dispatch)
+
+    // socketをstateに追加
     dispatch(addNewSocket(ws))
 
+    // 初期化完了
     dispatch(successInitialized())
   } catch (err) {
     const statusCode = err.status
