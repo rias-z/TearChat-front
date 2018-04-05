@@ -1,6 +1,6 @@
 const initialState = {
   isLoading: false,
-  pcList: [],
+  pcInfoList: [],
 }
 
 export default (state = initialState, action) => {
@@ -10,15 +10,15 @@ export default (state = initialState, action) => {
         isLoading: action.isLoading,
       })
     }
-    case 'SUCCESS_INITIALIZED_PC_LIST': {
+    case 'SUCCESS_SET_PC_INFO_LIST': {
       return Object.assign({}, state, {
-        pcList: action.pcList
+        pcInfoList: action.pcInfoList
       })
     }
     case 'SUCCESS_ADD_PC_LIST': {
       return Object.assign({}, state, {
-        pcList: [
-          ...state.pcList,
+        pcInfoList: [
+          ...state.pcInfoList,
           action.newPc
         ]
       })

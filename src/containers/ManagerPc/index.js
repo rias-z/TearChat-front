@@ -1,17 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// components
+import PcEditDialog from '../../components/PcEditDialog'
+
 // logic
-import { initializedPcList, createPc } from './logic'
+import {
+  initializedPcList,
+  createPc,
+  handleUpdatePcInfo,
+  handleUpdatePcInfoWithThumbnail,
+} from './logic'
 
 
 const PcList = (props) => {
-  const pcList = props.pcList.map(pc => {
+  const pcList = props.pcInfoList.map(pcInfo => {
     return (
-      <div key={pc._id}>
-        {pc.pcName}
-        <li>age:{pc.age}</li>
-        <li>job:{pc.job}</li>
+      <div key={pcInfo._id}>
+        name: {pcInfo.pcName} <br />
+        thumbnail:<br />
+        <img
+          alt='img'
+          width='72'
+          height='72'
+          src={pcInfo.thumbnail}
+        />
+        <br />
+        <li>age:{pcInfo.age}</li>
+        <li>job:{pcInfo.job}</li>
+
+        <PcEditDialog
+          pcInfo={pcInfo}
+          onUpdatePcInfo={props.onUpdatePcInfo}
+          onUpdatePcInfoWithThumbnail={props.onUpdatePcInfoWithThumbnail}
+        />
+        <hr />
       </div>
     )
   })
@@ -29,16 +52,17 @@ class ManagerPc extends React.Component {
     // 部屋情報初期化
     this.props.initializedPcList(this.props)
   }
+
   render() {
+    const { pcInfoList } = this.props
+
     const onMakePc = (e) => {
       e.preventDefault()
-      const pcName = e.target.pcName.value
-      const age = e.target.age.value
-      const job = e.target.job.value
+
       const newPcInfo = {
-        pcName: pcName,
-        age: age,
-        job: job,
+        pcName: e.target.pcName.value,
+        age: e.target.age.value,
+        job: e.target.job.value,
       }
 
       this.props.createPc(newPcInfo)
@@ -49,7 +73,11 @@ class ManagerPc extends React.Component {
         <h2>ManagerPc</h2>
         <h3>作成したPC一覧</h3>
         {/* クリックしてPC編集画面をモーダルで表示 */}
-        <PcList pcList={this.props.pcList} />
+        <PcList
+          pcInfoList={pcInfoList}
+          onUpdatePcInfo={this.props.handleUpdatePcInfo}
+          onUpdatePcInfoWithThumbnail={this.props.handleUpdatePcInfoWithThumbnail}
+        />
 
         <h3>PC作成</h3>
         {/* 普段はバーで閉じてる，クリックで拡大 */}
@@ -72,12 +100,15 @@ class ManagerPc extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  pcList: state.ManagerPc.pcList,
+  pcInfoList: state.ManagerPc.pcInfoList,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   initializedPcList: () => dispatch(initializedPcList()),
   createPc: (newPcInfo) => dispatch(createPc(newPcInfo)),
+  handleUpdatePcInfo: (pcInfo) => dispatch(handleUpdatePcInfo(pcInfo)),
+  handleUpdatePcInfoWithThumbnail: (pcInfo, imageFile) =>
+    dispatch(handleUpdatePcInfoWithThumbnail(pcInfo, imageFile)),
 })
 
 export default connect(

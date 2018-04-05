@@ -17,17 +17,17 @@ class PcDialog extends React.Component {
   state = {
     open: false,
     selected: false,
-    roomPcList: [],
+    selfPcList: [],
     selectPcInfo: [],
-  };
+  }
 
   // Dialogを展開時，ユーザが作成したPCリストを取得する
   handleOpen = async () => {
-    const roomPcList = await apiGetPcList()
+    const selfPcList = await apiGetPcList()
 
     this.setState({
       open: true,
-      roomPcList: roomPcList,
+      selfPcList: selfPcList,
     })
   }
 
@@ -77,7 +77,7 @@ class PcDialog extends React.Component {
       />,
     ]
 
-    const radios = this.state.roomPcList.map(pc => {
+    const radios = this.state.selfPcList.map(pc => {
       return (
         <RadioButton
           key={pc._id}
