@@ -1,7 +1,7 @@
-export const successInitializedPcList = (pcList) => {
+export const successSetPcInfoList = (pcInfoList) => {
   return {
-    type: 'SUCCESS_INITIALIZED_PC_LIST',
-    pcList: pcList,
+    type: 'SUCCESS_SET_PC_INFO_LIST',
+    pcInfoList: pcInfoList,
   }
 }
 

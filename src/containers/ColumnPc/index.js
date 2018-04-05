@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import ColumnRoot from '../../components/ColumnRoot'
 import ColumnHeader from '../../components/ColumnHeader'
 import ColumnBody from '../../components/ColumnBody'
-import PcDisplay from '../../components/PcDisplay'
+import PcCard from '../../components/PcCard'
 
 
 const ColumnPc = (props) => {
@@ -22,7 +22,7 @@ const ColumnPc = (props) => {
       />
 
       <ColumnBody>
-        <PcDisplay pcInfo={pcInfo} />
+        <PcCard pcInfo={pcInfo} />
       </ColumnBody>
     </ColumnRoot>
   )

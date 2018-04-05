@@ -20,3 +20,21 @@ export const apiPostPc = async (token, pcInfo) => {
 
   return res.body
 }
+
+export const apiUpdatePcInfo = async (token, pcInfo) => {
+  const res = await request
+    .post(endpoint + '/pc/put')
+    .set({ Authorization: token })
+    .send({ pcInfo: pcInfo })
+
+  return res.body
+}
+
+export const apiPostPcThumbnail = async (token, imageFile) => {
+  const res = await request
+    .post(endpoint + '/image/post/pc/thumbnail')
+    .set({ Authorization: token })
+    .attach('image', imageFile)
+
+  return res.body
+}

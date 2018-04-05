@@ -6,9 +6,8 @@ export const handleLoginSubmit = (props, inputUserName, inputPassword) => async 
   try {
     const userInfo = await apiLoginRequest(inputUserName, inputPassword)
 
-    Object.keys(userInfo).forEach(key => {
-      localStorage.setItem(key, userInfo[key])
-    })
+    // ローカルストレージにアクセストークンを保存
+    localStorage.setItem('accessToken', userInfo.accessToken)
 
     dispatch(successLogin(userInfo))
     props.history.push('/')

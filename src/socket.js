@@ -18,6 +18,7 @@ class WebSocket {
     this.socket = io(endpoint)
   }
 
+  // 接続時
   connected(roomId, accessToken) {
     this.socket.emit('connected', {
       roomId: roomId,
@@ -25,6 +26,7 @@ class WebSocket {
     })
   }
 
+  // 退出時
   disconnect() {
     this.socket.disconnect()
   }
@@ -53,7 +55,6 @@ class WebSocket {
   // メッセージ受け取り
   receiveMessage = (dispatch) => {
     // TODO public | private | group でdispatch先を分ける
-
     this.socket.on('receiveMessageToPublic', messageInfo => {
       dispatch(successUpdateMessageToPublic(messageInfo))
     })
