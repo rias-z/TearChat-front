@@ -29,6 +29,9 @@ const PcList = (props) => {
         <li>age:{pcInfo.age}</li>
         <li>job:{pcInfo.job}</li>
 
+        Status:<br />
+        HP:{pcInfo.status.hp}, MP:{pcInfo.status.mp}, SAN:{pcInfo.status.san}
+
         <PcEditDialog
           pcInfo={pcInfo}
           onUpdatePcInfo={props.onUpdatePcInfo}

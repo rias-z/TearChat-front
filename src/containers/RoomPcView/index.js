@@ -22,6 +22,13 @@ const RoomPcView = (props) => {
           }}
         >
           [x]<br />
+          <img
+            alt='img'
+            width='48'
+            height='48'
+            src={pc.thumbnail}
+          />
+          <br />
           name: {pc.pcName}<br />
           age: {pc.age}<br />
           job: {pc.job}<br />
@@ -39,6 +46,13 @@ const RoomPcView = (props) => {
           }}
         >
           [=]<br />
+          <img
+            alt='img'
+            width='48'
+            height='48'
+            src={pc.thumbnail}
+          />
+          <br />
           name: {pc.pcName}<br />
           age: {pc.age}<br />
           job: {pc.job}<br />
