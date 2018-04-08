@@ -10,7 +10,7 @@ const STATIC_ENDPOINT = 'http://localhost:5000/images/'
 
 const RoomPcView = (props) => {
   const pcChannels = props.roomPcInfo.map(pc => {
-    const channel = 'pc_' + pc.fkPcId
+    const channel = 'pc_' + pc._id
 
     // idsチェック
     if (props.ids.indexOf(channel) === -1) {
@@ -20,7 +20,7 @@ const RoomPcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.addTable('pc_' + pc.fkPcId)
+            props.addTable('pc_' + pc._id)
           }}
         >
           [x]<br />
@@ -44,7 +44,7 @@ const RoomPcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.removeTable('pc_' + pc.fkPcId)
+            props.removeTable('pc_' + pc._id)
           }}
         >
           [=]<br />

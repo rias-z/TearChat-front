@@ -23,6 +23,7 @@ class PcDialog extends React.Component {
 
   // Dialogを展開時，ユーザが作成したPCリストを取得する
   handleOpen = async () => {
+    // APIを用いてPC情報のリストを取得
     const selfPcList = await apiGetPcList()
 
     this.setState({
@@ -79,7 +80,7 @@ class PcDialog extends React.Component {
 
     const radios = this.state.selfPcList.map(pc => {
       // RoomPCとして登録されているかどうか
-      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc.fkPcId === pc._id) > 0
+      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc._id === pc._id) > 0
 
       if (!isJoinedRoomPc) {
         return (
@@ -130,7 +131,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // addPcToView: (pcInfo) => dispatch(addPcToView(pcInfo)),
   handleAddRoomPcInfo: (fkPcId) => dispatch(handleAddRoomPcInfo(fkPcId)),
 })
 
