@@ -23,6 +23,7 @@ class PcDialog extends React.Component {
 
   // Dialogを展開時，ユーザが作成したPCリストを取得する
   handleOpen = async () => {
+    // APIを用いてPC情報のリストを取得
     const selfPcList = await apiGetPcList()
 
     this.setState({
@@ -78,22 +79,38 @@ class PcDialog extends React.Component {
     ]
 
     const radios = this.state.selfPcList.map(pc => {
-      return (
-        <RadioButton
-          key={pc._id}
-          value={`value${pc._id}`}
-          label={`${pc.pcName}`}
-          name='select'
-          onClick={() => this.handleSetPcInfo(pc)}
-        />
-      )
+      // RoomPCとして登録されているかどうか
+      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc._id === pc._id) > 0
+
+      if (!isJoinedRoomPc) {
+        return (
+          <RadioButton
+            key={pc._id}
+            value={`value${pc._id}`}
+            label={`${pc.pcName}`}
+            name='select'
+            onClick={() => this.handleSetPcInfo(pc)}
+          />
+        )
+      } else {
+        return (
+          <RadioButton
+            key={pc._id}
+            value={`value${pc._id}`}
+            label={`${pc.pcName}`}
+            name='select'
+            disabled
+            onClick={() => this.handleSetPcInfo(pc)}
+          />
+        )
+      }
     })
 
     return (
       <div>
-        <RaisedButton label="Scrollable Dialog" onClick={this.handleOpen} />
+        <RaisedButton label="PCを選択して追加" onClick={this.handleOpen} />
         <Dialog
-          title="Scrollable Dialog"
+          title="PCを選択して追加"
           actions={actions}
           modal={false}
           open={this.state.open}
@@ -109,11 +126,11 @@ class PcDialog extends React.Component {
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
+  roomPcInfo: state.RoomPcView.roomPcInfo,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // addPcToView: (pcInfo) => dispatch(addPcToView(pcInfo)),
   handleAddRoomPcInfo: (fkPcId) => dispatch(handleAddRoomPcInfo(fkPcId)),
 })
 
