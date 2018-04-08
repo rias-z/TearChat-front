@@ -5,6 +5,8 @@ import Dropzone from 'react-dropzone'
 
 import { handlePostImage } from './logic'
 
+import { STATIC_ENDPOINT } from '../../config/config'
+
 
 class UserSettings extends Component {
   constructor(props) {
@@ -62,7 +64,7 @@ class UserSettings extends Component {
           alt='img'
           width='32'
           height='32'
-          src={this.props.thumbnail}
+          src={STATIC_ENDPOINT + this.props.thumbnail}
         />
         <br />
 
