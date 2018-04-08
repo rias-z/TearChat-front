@@ -2,6 +2,8 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import FlatButton from 'material-ui/FlatButton'
 
+const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+
 
 const PcEditForm = (props) => {
   const {
@@ -22,7 +24,7 @@ const PcEditForm = (props) => {
       alt='img'
       width='72'
       height='72'
-      src={pcInfo.thumbnail}
+      src={STATIC_ENDPOINT + pcInfo.thumbnail}
     />
   )
 

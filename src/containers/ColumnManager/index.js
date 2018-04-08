@@ -25,7 +25,7 @@ class ColumnManager extends React.PureComponent {
     } else if (types[0] === 'group') {
       return null
     } else if (types[0] === 'pc') {
-      return <ColumnPc {...props} pcId={types[1]} />
+      return <ColumnPc {...props} fkPcId={types[1]} />
     }
     return null
   }

@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Wrap } from './styles'
 
+// containers
+import PcDialog from '../PcDialog'
+
 // action
 import { addTable, removeTable } from '../Table/action'
 
@@ -74,6 +77,7 @@ const SideBarForMember = (props) => {
       <li>Group1 (CLOSE)</li>
       <li>Group2 (CLOSE)</li>
       <br />
+      <PcDialog />
     </Wrap>
   )
 }

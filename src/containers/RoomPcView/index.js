@@ -5,10 +5,12 @@ import { WrapRoomPcView, StyledPcBox } from './styles'
 // actions
 import { addTable, removeTable } from '../Table/action'
 
+const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+
 
 const RoomPcView = (props) => {
   const pcChannels = props.roomPcInfo.map(pc => {
-    const channel = 'pc_' + pc.fkPcId
+    const channel = 'pc_' + pc._id
 
     // idsチェック
     if (props.ids.indexOf(channel) === -1) {
@@ -18,14 +20,21 @@ const RoomPcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.addTable('pc_' + pc.fkPcId)
+            props.addTable('pc_' + pc._id)
           }}
         >
           [x]<br />
-          name: {pc.pcName}<br />
-          age: {pc.age}<br />
-          job: {pc.job}<br />
-          userName: {pc.userName}
+          <img
+            alt='img'
+            width='48'
+            height='48'
+            src={STATIC_ENDPOINT + pc.thumbnail}
+          />
+          <br />
+          名前: {pc.pcName}<br />
+          年齢: {pc.age}<br />
+          職業: {pc.job}<br />
+          User: {pc.userName}
         </StyledPcBox>
       )
     } else {
@@ -35,10 +44,17 @@ const RoomPcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.removeTable('pc_' + pc.fkPcId)
+            props.removeTable('pc_' + pc._id)
           }}
         >
           [=]<br />
+          <img
+            alt='img'
+            width='48'
+            height='48'
+            src={STATIC_ENDPOINT + pc.thumbnail}
+          />
+          <br />
           name: {pc.pcName}<br />
           age: {pc.age}<br />
           job: {pc.job}<br />

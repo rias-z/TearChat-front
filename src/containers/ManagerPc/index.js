@@ -12,6 +12,8 @@ import {
   handleUpdatePcInfoWithThumbnail,
 } from './logic'
 
+const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+
 
 const PcList = (props) => {
   const pcList = props.pcInfoList.map(pcInfo => {
@@ -23,11 +25,14 @@ const PcList = (props) => {
           alt='img'
           width='72'
           height='72'
-          src={pcInfo.thumbnail}
+          src={STATIC_ENDPOINT + pcInfo.thumbnail}
         />
         <br />
         <li>age:{pcInfo.age}</li>
         <li>job:{pcInfo.job}</li>
+
+        Status:<br />
+        HP:{pcInfo.status.hp}, MP:{pcInfo.status.mp}, SAN:{pcInfo.status.san}
 
         <PcEditDialog
           pcInfo={pcInfo}

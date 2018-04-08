@@ -49,6 +49,11 @@ class WebSocket {
     this.socket.emit('addRoomPcInfo', fkPcId)
   }
 
+  // RoomPC情報更新
+  updatePcInfo(pcInfo) {
+    this.socket.emit('updatePcInfo', pcInfo)
+  }
+
   /**
    * socket.on
    */
