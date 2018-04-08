@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
 // actions
+import { setEditPcColumn } from './containers/ColumnPc/action'
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
 import {
   successUpdateMessageToPrivate,
@@ -49,6 +50,11 @@ class WebSocket {
     this.socket.emit('addRoomPcInfo', fkPcId)
   }
 
+  // RoomPC情報更新
+  updatePcInfo(pcInfo) {
+    this.socket.emit('updatePcInfo', pcInfo)
+  }
+
   /**
    * socket.on
    */
@@ -82,6 +88,7 @@ class WebSocket {
   receiveUpdateRoomPcInfo = (dispatch) => {
     this.socket.on('receiveUpdateRoomPcInfo', roomPcInfo => {
       dispatch(successSetRoomPcInfo(roomPcInfo))
+      dispatch(setEditPcColumn(false))
     })
   }
 }

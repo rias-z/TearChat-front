@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+
 
 const WrapMessage = styled.div`
   margin: 0.5rem;
@@ -28,7 +30,7 @@ const MessageList = (props) => (
             alt='img'
             width='32'
             height='32'
-            src={message.thumbnail}
+            src={STATIC_ENDPOINT + message.thumbnail}
             style={{
               'border': '1px solid black',
               'borderRadius': '16px',

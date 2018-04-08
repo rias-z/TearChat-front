@@ -46,21 +46,69 @@ export const Title = styled.div`
   }
 `
 
-const ColumnHeader = (props) => {
-  const { onClose, name } = props
+// <div>
+//   <button onClick={onEdit}>
+//     onEdit
+//   </button>
+// </div>
 
-  return (
-    <Wrap>
-      <Header>
-        <Title>{name}</Title>
-        <Item onClick={onClose}>
-          <IconButton>
-            <NavigationClose color='#999999' />
-          </IconButton>
-        </Item>
-      </Header>
-    </Wrap>
+const ColumnHeader = (props) => {
+  const {
+    onClose, onEdit, onUpdatePcInfo, name, isEdit
+  } = props
+
+  // const editButton = (name === 'PC')
+  //   ? (isEdit)
+  //     : (
+  //       <div>
+  //         edit
+  //       </div>
+  //     ) ? (
+  //       <div>
+  //         edit
+  //       </div>
+  //       )
+  //   : null
+
+  const editButton = (!isEdit) ? (
+    <div>
+      <button onClick={onEdit}>edit</button>
+    </div>
+  ) : (
+    <div>
+      <button onClick={onEdit}>close edit</button>
+      <button onClick={onUpdatePcInfo}>update</button>
+    </div>
   )
+
+  if (name !== 'PC') {
+    return (
+      <Wrap>
+        <Header>
+          <Title>{name}</Title>
+          <Item onClick={onClose}>
+            <IconButton>
+              <NavigationClose color='#999999' />
+            </IconButton>
+          </Item>
+        </Header>
+      </Wrap>
+    )
+  } else {
+    return (
+      <Wrap>
+        <Header>
+          <Title>{name}</Title>
+          {editButton}
+          <Item onClick={onClose}>
+            <IconButton>
+              <NavigationClose color='#999999' />
+            </IconButton>
+          </Item>
+        </Header>
+      </Wrap>
+    )
+  }
 }
 
 export default ColumnHeader

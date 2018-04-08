@@ -91,9 +91,9 @@ class PcDialog extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Scrollable Dialog" onClick={this.handleOpen} />
+        <RaisedButton label="PCを選択して追加" onClick={this.handleOpen} />
         <Dialog
-          title="Scrollable Dialog"
+          title="PCを選択して追加"
           actions={actions}
           modal={false}
           open={this.state.open}

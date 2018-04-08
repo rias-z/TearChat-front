@@ -5,6 +5,8 @@ import { WrapRoomPcView, StyledPcBox } from './styles'
 // actions
 import { addTable, removeTable } from '../Table/action'
 
+const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+
 
 const RoomPcView = (props) => {
   const pcChannels = props.roomPcInfo.map(pc => {
@@ -26,7 +28,7 @@ const RoomPcView = (props) => {
             alt='img'
             width='48'
             height='48'
-            src={pc.thumbnail}
+            src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
           name: {pc.pcName}<br />
@@ -50,7 +52,7 @@ const RoomPcView = (props) => {
             alt='img'
             width='48'
             height='48'
-            src={pc.thumbnail}
+            src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
           name: {pc.pcName}<br />
