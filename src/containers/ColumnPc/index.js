@@ -8,9 +8,6 @@ import ColumnBody from '../../components/ColumnBody'
 import PcCard from '../../components/PcCard'
 import PcEditCard from '../../components/PcEditCard'
 
-// actions
-import { setEditPcColumn } from './action'
-
 // logic
 import { handleUpdatePcInfo } from './logic'
 
@@ -20,45 +17,42 @@ class ColumnPc extends React.Component {
     super(props)
 
     this.state = {
+      isEdit: false,
       editPcInfo: {},
     }
   }
 
   render() {
-    const { onClose, pcId, roomPcInfo } = this.props
+    const { onClose, fkPcId, roomPcInfo } = this.props
 
     // 静的に表示するPC情報
-    const pcIdx = roomPcInfo.findIndex(pc => pc.fkPcId === pcId)
+    const pcIdx = roomPcInfo.findIndex(pc => pc._id === fkPcId)
     const pcInfo = roomPcInfo[pcIdx]
 
     const handleEdit = () => {
       // 現在のPC情報をセット
       this.setState({
+        isEdit: true,
         editPcInfo: pcInfo,
       })
-
-      this.props.setEditPcColumn(true)
     }
 
     const handleCloseEdit = () => {
-      this.props.setEditPcColumn(false)
+      this.setState({
+        isEdit: false,
+        editPcInfo: {},
+      })
     }
 
     const onUpdatePcInfo = () => {
+      // PC情報をsocketで更新
       this.props.handleUpdatePcInfo(this.state.editPcInfo)
+
+      this.setState({
+        isEdit: false,
+        editPcInfo: {},
+      })
     }
-
-    // const handleUpdatePcInfo = () => {
-    //   console.log('handleUpdatePcInfo')
-    //   console.log(this.state.editPcInfo)
-
-    //   // socketでPC情報更新
-    //   socket.updatePcInfo(this.state.editPcInfo)
-
-    //   // 成功した場合全員にPC情報の更新をブロードキャスト
-
-    //   // isEditをfalseにする
-    // }
 
     const handleChangeStatus = (key, value) => {
       // status = ['status', 'hp'] に分離
@@ -87,14 +81,14 @@ class ColumnPc extends React.Component {
       }
     }
 
-    if (!this.props.isEdit) {
+    if (!this.state.isEdit) {
       return (
         <ColumnRoot>
           <ColumnHeader
             onClose={onClose}
             onEdit={handleEdit}
             name="PC"
-            isEdit={this.props.isEdit}
+            isEdit={this.state.isEdit}
           />
           <ColumnBody>
             <PcCard pcInfo={pcInfo} />
@@ -109,8 +103,8 @@ class ColumnPc extends React.Component {
             onClose={onClose}
             onEdit={handleCloseEdit}
             name="PC"
-            isEdit={this.props.isEdit}
-            onUpdatePcInfo={() => this.props.handleUpdatePcInfo(this.state.editPcInfo)}
+            isEdit={this.state.isEdit}
+            onUpdatePcInfo={onUpdatePcInfo}
           />
           <ColumnBody>
             <PcEditCard
@@ -125,13 +119,11 @@ class ColumnPc extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  isEdit: state.ColumnPc.isEdit,
   roomPcInfo: state.RoomPcView.roomPcInfo,
   socket: state.Session.socket,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setEditPcColumn: (isEdit) => dispatch(setEditPcColumn(isEdit)),
   handleUpdatePcInfo: (pcInfo) => dispatch(handleUpdatePcInfo(pcInfo)),
 })
 

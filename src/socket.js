@@ -1,7 +1,6 @@
 import io from 'socket.io-client'
 
 // actions
-import { setEditPcColumn } from './containers/ColumnPc/action'
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
 import {
   successUpdateMessageToPrivate,
@@ -88,7 +87,6 @@ class WebSocket {
   receiveUpdateRoomPcInfo = (dispatch) => {
     this.socket.on('receiveUpdateRoomPcInfo', roomPcInfo => {
       dispatch(successSetRoomPcInfo(roomPcInfo))
-      dispatch(setEditPcColumn(false))
     })
   }
 }
