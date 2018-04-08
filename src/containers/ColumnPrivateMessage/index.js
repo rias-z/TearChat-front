@@ -16,7 +16,7 @@ import { handlePostMessageToPrivate } from './logic'
 class ColumnPrivateMessage extends React.Component {
   render() {
     const {
-      onClose, onPostMessageToPrivate, channelId, membersInfo
+      onClose, onPostMessageToPrivate, channelId, isKp, membersInfo
     } = this.props
 
     const messages = this.props.privateMessages.filter(message => {
@@ -27,10 +27,18 @@ class ColumnPrivateMessage extends React.Component {
     const memberIdx = membersInfo.findIndex(member => member.channelId === channelId)
     const memberName = membersInfo[memberIdx].userName
 
+    // KpとMemberでカラムヘッダーのタイトルを変更
+    let columnName = ''
+    if (!isKp) {
+      columnName = 'To: KP'
+    } else {
+      columnName = 'To: ' + memberName
+    }
+
     return (
       <ColumnRoot>
         <ColumnHeader
-          name={'To: ' + memberName}
+          name={columnName}
           onClose={onClose}
         />
 
@@ -51,6 +59,7 @@ class ColumnPrivateMessage extends React.Component {
 
 const mapStateToProps = (state) => ({
   privateMessages: state.Session.privateMessages,
+  isKp: state.Session.isKp,
   socket: state.Session.socket,
   membersInfo: state.Session.membersInfo,
 })
