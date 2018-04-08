@@ -58,8 +58,8 @@ const mapStateToProps = (state) => ({
   isKp: state.Session.isKp,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  initializedRoomInfo: () => dispatch(initializedRoomInfo()),
+const mapDispatchToProps = (dispatch, getState) => ({
+  initializedRoomInfo: () => dispatch(initializedRoomInfo(getState)),
 })
 
 export default connect(
