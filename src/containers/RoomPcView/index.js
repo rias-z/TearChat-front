@@ -31,10 +31,10 @@ const RoomPcView = (props) => {
             src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
-          name: {pc.pcName}<br />
-          age: {pc.age}<br />
-          job: {pc.job}<br />
-          userName: {pc.userName}
+          名前: {pc.pcName}<br />
+          年齢: {pc.age}<br />
+          職業: {pc.job}<br />
+          User: {pc.userName}
         </StyledPcBox>
       )
     } else {

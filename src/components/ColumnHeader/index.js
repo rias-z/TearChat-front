@@ -46,29 +46,11 @@ export const Title = styled.div`
   }
 `
 
-// <div>
-//   <button onClick={onEdit}>
-//     onEdit
-//   </button>
-// </div>
 
 const ColumnHeader = (props) => {
   const {
     onClose, onEdit, onUpdatePcInfo, name, isEdit
   } = props
-
-  // const editButton = (name === 'PC')
-  //   ? (isEdit)
-  //     : (
-  //       <div>
-  //         edit
-  //       </div>
-  //     ) ? (
-  //       <div>
-  //         edit
-  //       </div>
-  //       )
-  //   : null
 
   const editButton = (!isEdit) ? (
     <div>
