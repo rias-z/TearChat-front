@@ -39,6 +39,16 @@ const SideBarForMember = (props) => {
     </li>
   )
 
+  // ユーザのアクティブ状態を表示
+  const isActive = activeUsers.findIndex(fkUserId =>
+    fkUserId === kpInfo.fkUserId) >= 0
+
+  const activeIcon = (isActive) ? (
+    <span>(A)</span>
+  ) : (
+    <span>(_)</span>
+  )
+
   const channel = 'private_' + selfChannelId
   const privateChannels = (ids.indexOf(channel) === -1) ? (
     <li
@@ -47,7 +57,7 @@ const SideBarForMember = (props) => {
         addTable(channel)
       }}
     >
-      [x] {kpInfo.userName} (KP)
+      {activeIcon} [x] {kpInfo.userName} (KP)
     </li>
   ) : (
     <li
@@ -56,13 +66,9 @@ const SideBarForMember = (props) => {
         removeTable(channel)
       }}
     >
-      [=] {kpInfo.userName} (KP)
+      {activeIcon} [=] {kpInfo.userName} (KP)
     </li>
   )
-
-  const _activeUsers = activeUsers.map((user) => (
-    <li key={user.userId}>{user.userName}</li>
-  ))
 
   return (
     <Wrap>
@@ -74,9 +80,6 @@ const SideBarForMember = (props) => {
       </div>
 
       <br />
-
-      ActiveUsers:<br />
-      {_activeUsers}<br />
 
       PublicMessages:<br />
       {publicChannels}<br />
