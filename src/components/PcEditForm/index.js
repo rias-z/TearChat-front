@@ -2,7 +2,7 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import FlatButton from 'material-ui/FlatButton'
 
-const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const PcEditForm = (props) => {

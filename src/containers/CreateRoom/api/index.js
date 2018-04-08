@@ -1,7 +1,7 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiCreateRoom = async (token, roomInfo) => {
@@ -13,7 +13,7 @@ export const apiCreateRoom = async (token, roomInfo) => {
    * @return {int} roomId
    */
   const res = await request
-    .post(endpoint + '/room/create')
+    .post(API_ENDPOINT + '/room/create')
     .set({ Authorization: token })
     .send({ roomInfo: roomInfo })
 

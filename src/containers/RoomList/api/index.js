@@ -1,7 +1,7 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiGetOmittedRooms = async (token) => {
@@ -11,7 +11,7 @@ export const apiGetOmittedRooms = async (token) => {
    * @return {Object}  res.body  部屋情報
    */
   const res = await request
-    .get(endpoint + '/room/get/omitted')
+    .get(API_ENDPOINT + '/room/get/omitted')
     .set({ Authorization: token })
 
   return res.body
@@ -28,7 +28,7 @@ export const apiEnterRoom = async (token, roomId) => {
    *  500: 参加不可
    */
   await request
-    .post(endpoint + '/room/enter')
+    .post(API_ENDPOINT + '/room/enter')
     .set({ Authorization: token })
     .send({ roomId: roomId })
 }

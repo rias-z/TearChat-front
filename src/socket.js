@@ -2,20 +2,19 @@ import io from 'socket.io-client'
 
 // actions
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
+import { successSetRoomPcInfo } from './containers/RoomPcView/action'
 import {
   successUpdateMessageToPrivate,
   updateActiveUsers,
   updateMembersInfo,
 } from './containers/Session/action'
-import { successSetRoomPcInfo } from './containers/RoomPcView/action'
 
-
-const endpoint = 'http://localhost:5000'
+import { ENDPOINT } from './config/config'
 
 
 class WebSocket {
   constructor() {
-    this.socket = io(endpoint)
+    this.socket = io(ENDPOINT)
   }
 
   // 接続時

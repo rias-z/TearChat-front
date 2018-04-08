@@ -1,12 +1,12 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiRegisterRequest = async (userName, password) => {
   const res = await request
-    .post(endpoint + '/auth/register')
+    .post(API_ENDPOINT + '/auth/register')
     .send({ 'userName': userName, 'password': password })
 
   return res.body

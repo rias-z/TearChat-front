@@ -1,6 +1,6 @@
 import React from 'react'
 
-const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const PcCard = (props) => {

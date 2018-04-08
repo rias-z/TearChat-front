@@ -1,7 +1,7 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiLoginRequest = async (_userName, _password) => {
@@ -15,7 +15,7 @@ export const apiLoginRequest = async (_userName, _password) => {
    *  500: 不正
    */
   const res = await request
-    .post(endpoint + '/auth/login')
+    .post(API_ENDPOINT + '/auth/login')
     .send({ 'userName': _userName, 'password': _password })
 
   return res.body

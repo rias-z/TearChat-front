@@ -1,12 +1,12 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiPostImage = async (token, image) => {
   const res = await request
-    .post(endpoint + '/image/post')
+    .post(API_ENDPOINT + '/image/post')
     .set({ Authorization: token })
     .attach('image', image)
 

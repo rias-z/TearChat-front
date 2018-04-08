@@ -5,7 +5,7 @@ import { WrapRoomPcView, StyledPcBox } from './styles'
 // actions
 import { addTable, removeTable } from '../Table/action'
 
-const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const RoomPcView = (props) => {

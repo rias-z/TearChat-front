@@ -1,12 +1,12 @@
 import request from 'superagent'
 
 
-const endpoint = 'http://localhost:5000/api'
+import { API_ENDPOINT } from '../../../config/config'
 
 
 export const apiGetPcList = async (token) => {
   const res = await request
-    .get(endpoint + '/pc/get/all')
+    .get(API_ENDPOINT + '/pc/get/all')
     .set({ Authorization: token })
 
   return res.body
@@ -14,7 +14,7 @@ export const apiGetPcList = async (token) => {
 
 export const apiPostPc = async (token, pcInfo) => {
   const res = await request
-    .post(endpoint + '/pc/post')
+    .post(API_ENDPOINT + '/pc/post')
     .set({ Authorization: token })
     .send({ pcInfo: pcInfo })
 
@@ -23,7 +23,7 @@ export const apiPostPc = async (token, pcInfo) => {
 
 export const apiUpdatePcInfo = async (token, pcInfo) => {
   const res = await request
-    .post(endpoint + '/pc/put')
+    .post(API_ENDPOINT + '/pc/put')
     .set({ Authorization: token })
     .send({ pcInfo: pcInfo })
 
@@ -32,7 +32,7 @@ export const apiUpdatePcInfo = async (token, pcInfo) => {
 
 export const apiPostPcThumbnail = async (token, imageFile) => {
   const res = await request
-    .post(endpoint + '/image/post/pc/thumbnail')
+    .post(API_ENDPOINT + '/image/post/pc/thumbnail')
     .set({ Authorization: token })
     .attach('image', imageFile)
 

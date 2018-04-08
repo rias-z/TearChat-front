@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const WrapMessage = styled.div`

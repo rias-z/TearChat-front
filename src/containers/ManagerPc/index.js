@@ -12,7 +12,7 @@ import {
   handleUpdatePcInfoWithThumbnail,
 } from './logic'
 
-const STATIC_ENDPOINT = 'http://localhost:5000/images/'
+import { STATIC_ENDPOINT } from  '../../config/config'
 
 
 const PcList = (props) => {
