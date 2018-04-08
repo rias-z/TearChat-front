@@ -80,7 +80,7 @@ class PcDialog extends React.Component {
 
     const radios = this.state.selfPcList.map(pc => {
       // RoomPCとして登録されているかどうか
-      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc._id === pc._id) > 0
+      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc._id === pc._id) >= 0
 
       if (!isJoinedRoomPc) {
         return (
