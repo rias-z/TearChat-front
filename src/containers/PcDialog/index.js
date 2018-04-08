@@ -78,15 +78,31 @@ class PcDialog extends React.Component {
     ]
 
     const radios = this.state.selfPcList.map(pc => {
-      return (
-        <RadioButton
-          key={pc._id}
-          value={`value${pc._id}`}
-          label={`${pc.pcName}`}
-          name='select'
-          onClick={() => this.handleSetPcInfo(pc)}
-        />
-      )
+      // RoomPCとして登録されているかどうか
+      const isJoinedRoomPc = this.props.roomPcInfo.findIndex(roomPc => roomPc.fkPcId === pc._id) > 0
+
+      if (!isJoinedRoomPc) {
+        return (
+          <RadioButton
+            key={pc._id}
+            value={`value${pc._id}`}
+            label={`${pc.pcName}`}
+            name='select'
+            onClick={() => this.handleSetPcInfo(pc)}
+          />
+        )
+      } else {
+        return (
+          <RadioButton
+            key={pc._id}
+            value={`value${pc._id}`}
+            label={`${pc.pcName}`}
+            name='select'
+            disabled
+            onClick={() => this.handleSetPcInfo(pc)}
+          />
+        )
+      }
     })
 
     return (
@@ -109,7 +125,8 @@ class PcDialog extends React.Component {
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
+  roomPcInfo: state.RoomPcView.roomPcInfo,
 })
 
 const mapDispatchToProps = (dispatch) => ({
