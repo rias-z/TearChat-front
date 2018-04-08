@@ -2,38 +2,39 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { WrapRoomPcView, StyledPcBox } from './styles'
 
+import { STATIC_ENDPOINT } from '../../config/config'
+
 // actions
 import { addTable, removeTable } from '../Table/action'
 
-import { STATIC_ENDPOINT } from '../../config/config'
-
 
 const RoomPcView = (props) => {
-  const pcChannels = props.roomPcInfo.map(pc => {
+  const { addTable, removeTable } = props
+  const { ids, roomPcInfo } = props
+
+  const pcChannels = roomPcInfo.map(pc => {
     const channel = 'pc_' + pc._id
 
     // idsチェック
-    if (props.ids.indexOf(channel) === -1) {
+    if (ids.indexOf(channel) === -1) {
       // idsにない場合
       return (
         <StyledPcBox
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.addTable('pc_' + pc._id)
+            addTable('pc_' + pc._id)
           }}
         >
           [x]<br />
           <img
             alt='img'
-            width='48'
-            height='48'
+            width='72'
+            height='72'
             src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
           名前: {pc.pcName}<br />
-          年齢: {pc.age}<br />
-          職業: {pc.job}<br />
           User: {pc.userName}
         </StyledPcBox>
       )
@@ -44,20 +45,18 @@ const RoomPcView = (props) => {
           key={pc._id}
           onClick={(e) => {
             e.preventDefault()
-            props.removeTable('pc_' + pc._id)
+            removeTable('pc_' + pc._id)
           }}
         >
           [=]<br />
           <img
             alt='img'
-            width='48'
-            height='48'
+            width='72'
+            height='72'
             src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
           名前: {pc.pcName}<br />
-          年齢: {pc.age}<br />
-          職業: {pc.job}<br />
           User: {pc.userName}
         </StyledPcBox>
       )
@@ -72,8 +71,8 @@ const RoomPcView = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  ids: state.Table.ids,
   roomPcInfo: state.RoomPcView.roomPcInfo,
+  ids: state.Table.ids,
 })
 
 const mapDispatchToProps = (dispatch) => ({

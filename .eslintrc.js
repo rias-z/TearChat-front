@@ -21,6 +21,7 @@ module.exports = {
     'jsx-quotes': 0,
     'max-len': [WARN, 100], // 1行の長さ80文字以上は警告
     'no-else-return': 0,
+    'no-shadow': 0,
     'no-underscore-dangle': 0,
     'object-shorthand': 0,
     'prefer-template': 0,

@@ -13,13 +13,16 @@ class Register extends Component {
   }
 
   render() {
+    const { handleRegisterSubmit } = this.props
+    const { infoMessage, errorMessage } = this.props
+
     return (
       <div className='Register'>
         <h2>Register</h2>
 
         <form onSubmit={(e) => {
           e.preventDefault()
-          this.props.handleRegisterSubmit(
+          handleRegisterSubmit(
             e.target.userName.value,
             e.target.password.value
           )
@@ -32,8 +35,8 @@ class Register extends Component {
           <input type='submit' value='register' />
         </form>
 
-        {this.props.infoMessage}
-        {this.props.errorMessage}
+        {infoMessage}
+        {errorMessage}
       </div>
     )
   }
@@ -41,8 +44,8 @@ class Register extends Component {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.App.isAuthenticated,
-  infoMessage: state.Register.infoMessage,
   errorMessage: state.Register.errorMessage,
+  infoMessage: state.Register.infoMessage,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({

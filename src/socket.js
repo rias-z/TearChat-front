@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-// actions
+// action
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
 import { successSetRoomPcInfo } from './containers/RoomPcView/action'
 import {

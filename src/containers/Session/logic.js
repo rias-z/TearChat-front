@@ -31,7 +31,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     const roomId = localStorage.getItem('roomId')
     const accessToken = localStorage.getItem('accessToken')
 
-    // roomIdがない場合，Lobbyに遷移
+    // roomIdがない場合，/に遷移
     if (!roomId) {
       props.history.push('/')
       return
@@ -63,6 +63,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     if (selfUserId === kpUserId) { dispatch(assignKp(true)) } else { dispatch(assignKp(false)) }
 
     // MemberのchannelIdチェック
+    // HACKME isKpをプロパティから取得するとなぜかエラーになる
     if (!getState().Session.isKp) {
       // メンバー情報と自ユーザ情報のfkUserIdを照合
       const _member = roomInfo.membersInfo.find(member =>
@@ -78,6 +79,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
 
     // socket通信開始
     const ws = new WebSocket()
+    // socket.onのセット
     ws.connected(roomId, accessToken)
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
@@ -87,10 +89,12 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     // socketをstateに追加
     dispatch(addNewSocket(ws))
 
-    // 初期化完了
+    // すべての処理を終えた後にisloadをtrueにする
     dispatch(successInitialized())
   } catch (err) {
     const statusCode = err.status
+
+    console.log(err)
 
     if (statusCode === 401) {
       localStorage.clear()

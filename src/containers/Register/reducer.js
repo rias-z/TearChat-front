@@ -1,6 +1,6 @@
 const initialState = {
-  infoMessage: null,
   errorMessage: null,
+  infoMessage: null,
 }
 
 export default (state = initialState, action) => {

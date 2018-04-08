@@ -10,11 +10,20 @@ import { addTable, removeTable } from '../Table/action'
 
 
 const SideBarForKp = (props) => {
-  const publicChannels = (props.ids.indexOf('public') === -1) ? (
+  const { addTable, removeTable } = props
+  const {
+    roomName,
+    kpInfo,
+    membersInfo,
+    activeUsers,
+    ids,
+  } = props
+
+  const publicChannels = (ids.indexOf('public') === -1) ? (
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.addTable('public')
+        addTable('public')
       }}
     >
       [x]
@@ -23,18 +32,18 @@ const SideBarForKp = (props) => {
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.removeTable('public')
+        removeTable('public')
       }}
     >
       [=]
     </li>
   )
 
-  const privateChannels = props.membersInfo.map((member) => {
+  const privateChannels = membersInfo.map((member) => {
     const channel = 'private_' + member.channelId
 
     // idsチェック
-    if (props.ids.indexOf(channel) === -1) {
+    if (ids.indexOf(channel) === -1) {
       // idsにない場合
       return (
         <li
@@ -42,7 +51,7 @@ const SideBarForKp = (props) => {
           onClick={(e) => {
             e.preventDefault()
             const id = 'private_' + member.channelId
-            props.addTable(id)
+            addTable(id)
           }}
         >
           [x] {member.userName}
@@ -56,7 +65,7 @@ const SideBarForKp = (props) => {
           onClick={(e) => {
             e.preventDefault()
             const id = 'private_' + member.channelId
-            props.removeTable(id)
+            removeTable(id)
           }}
         >
           [=] {member.userName}
@@ -65,45 +74,42 @@ const SideBarForKp = (props) => {
     }
   })
 
-  const activeUsers = props.activeUsers.map((user) => (
+  const _activeUsers = activeUsers.map((user) => (
     <li key={user.userId}>{user.userName}</li>
   ))
 
   return (
     <Wrap>
-      <h3>SideBarForKp</h3>
+      <h3>{roomName}</h3>
 
-      Room [{props.roomId}]<br />
-      {props.roomName}<br />
+      <div>
+        部屋情報<br />
+        KP: {kpInfo.userName}<br />
+      </div>
+
       <br />
-      kpName: {props.kpInfo.userName}<br />
-      isKp: {props.isKp.toString()}<br />
-      <br />
+
       ActiveUsers:<br />
-      {activeUsers}
-      <br />
+      {_activeUsers}<br />
+
       PublicMessages:<br />
-      {publicChannels}
-      <br />
+      {publicChannels}<br />
+
       PrivateMessage:<br />
-      {privateChannels}
+      {privateChannels}<br />
+
       <br />
-      GroupMessage:<br />
-      <li>Group1 (CLOSE)</li>
-      <li>Group2 (CLOSE)</li>
-      <br />
+
       <PcDialog />
     </Wrap>
   )
 }
 
 const mapStateToProps = (state) => ({
-  roomId: state.Session.roomId,
-  roomName: state.Session.roomName,
+  activeUsers: state.Session.activeUsers,
   kpInfo: state.Session.kpInfo,
   membersInfo: state.Session.membersInfo,
-  activeUsers: state.Session.activeUsers,
-  isKp: state.Session.isKp,
+  roomName: state.Session.roomName,
   ids: state.Table.ids,
 })
 

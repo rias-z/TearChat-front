@@ -1,14 +1,14 @@
 const initialState = {
-  isLoading: false,
-  roomId: null,
-  roomName: null,
-  socket: null,
-  kpInfo: null,
-  membersInfo: [],
   activeUsers: [],
   isKp: false,
-  selfChannelId: null,
+  isLoading: false,
+  kpInfo: null,
+  membersInfo: [],
   privateMessages: [],
+  roomId: null,
+  roomName: null,
+  selfChannelId: null,
+  socket: null,
 }
 
 export default (state = initialState, action) => {

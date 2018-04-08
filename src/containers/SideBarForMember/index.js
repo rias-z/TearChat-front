@@ -10,11 +10,20 @@ import { addTable, removeTable } from '../Table/action'
 
 
 const SideBarForMember = (props) => {
-  const publicChannels = (props.ids.indexOf('public') === -1) ? (
+  const { addTable, removeTable } = props
+  const {
+    activeUsers,
+    ids,
+    kpInfo,
+    roomName,
+    selfChannelId,
+  } = props
+
+  const publicChannels = (ids.indexOf('public') === -1) ? (
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.addTable('public')
+        addTable('public')
       }}
     >
       [x]
@@ -23,72 +32,69 @@ const SideBarForMember = (props) => {
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.removeTable('public')
+        removeTable('public')
       }}
     >
       [=]
     </li>
   )
 
-  const channel = 'private_' + props.selfChannelId
-  const privateChannels = (props.ids.indexOf(channel) === -1) ? (
+  const channel = 'private_' + selfChannelId
+  const privateChannels = (ids.indexOf(channel) === -1) ? (
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.addTable(channel)
+        addTable(channel)
       }}
     >
-      [x] {props.kpInfo.userName} (KP)
+      [x] {kpInfo.userName} (KP)
     </li>
   ) : (
     <li
       onClick={(e) => {
         e.preventDefault()
-        props.removeTable(channel)
+        removeTable(channel)
       }}
     >
-      [=] {props.kpInfo.userName} (KP)
+      [=] {kpInfo.userName} (KP)
     </li>
   )
 
-  const activeUsers = props.activeUsers.map((user) => (
+  const _activeUsers = activeUsers.map((user) => (
     <li key={user.userId}>{user.userName}</li>
   ))
 
   return (
     <Wrap>
-      <h3>SideBarForMember</h3>
-      Room [{props.roomId}]<br />
-      {props.roomName}<br />
+      <h3>{roomName}</h3>
+
+      <div>
+        部屋情報<br />
+        KP: {kpInfo.userName}<br />
+      </div>
+
       <br />
-      kpName: {props.kpInfo.userName}<br />
-      isKp: {props.isKp.toString()}<br />
-      <br />
+
       ActiveUsers:<br />
-      {activeUsers}
-      <br />
+      {_activeUsers}<br />
+
       PublicMessages:<br />
-      {publicChannels}
-      <br />
+      {publicChannels}<br />
+
       PrivateMessage:<br />
-      {privateChannels}
+      {privateChannels}<br />
+
       <br />
-      GroupMessage:<br />
-      <li>Group1 (CLOSE)</li>
-      <li>Group2 (CLOSE)</li>
-      <br />
+
       <PcDialog />
     </Wrap>
   )
 }
 
 const mapStateToProps = (state) => ({
-  roomId: state.Session.roomId,
-  roomName: state.Session.roomName,
-  kpInfo: state.Session.kpInfo,
-  membersInfo: state.Session.membersInfo,
   activeUsers: state.Session.activeUsers,
-  isKp: state.Session.isKp,
+  kpInfo: state.Session.kpInfo,
+  roomName: state.Session.roomName,
   selfChannelId: state.Session.selfChannelId,
   ids: state.Table.ids,
 })

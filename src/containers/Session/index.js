@@ -20,14 +20,18 @@ class Session extends Component {
   }
 
   componentWillUnmount() {
-    if (this.props.socket) {
-      // 部屋退出時，socketをdisconnectする
-      this.props.socket.disconnect()
+    const { socket } = this.props
+
+    // 部屋退出時，socketをdisconnectする
+    if (socket) {
+      socket.disconnect()
     }
   }
 
   render() {
-    if (this.props.isLoading) {
+    const { isLoading } = this.props
+
+    if (isLoading) {
       return (
         <div className='Session'>
           <SideBarManager />
@@ -49,13 +53,7 @@ class Session extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.Session.isLoading,
-  roomId: state.Session.roomId,
-  roomName: state.Session.roomName,
   socket: state.Session.socket,
-  kpInfo: state.Session.kpInfo,
-  membersInfo: state.Session.membersInfo,
-  activeUsers: state.Session.activeUsers,
-  isKp: state.Session.isKp,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({

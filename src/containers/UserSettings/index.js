@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import Dropzone from 'react-dropzone'
 
-import { handlePostImage } from './logic'
-
 import { STATIC_ENDPOINT } from '../../config/config'
+
+// logic
+import { handlePostImage } from './logic'
 
 
 class UserSettings extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       imageFile: [],
       errorMessage: '',
@@ -29,26 +30,25 @@ class UserSettings extends Component {
     }
   }
 
-  onPostImage = () => {
-    this.props.handlePostImage(this.state.imageFile)
-  }
-
   render() {
-    const preview = (Object.keys(this.state.imageFile).length > 0) ? (
+    const { handlePostImage, userName, thumbnail } = this.props
+    const { imageFile, errorMessage } = this.state
+
+    const preview = (Object.keys(imageFile).length > 0) ? (
       <div>
         プレビュー<br />
         <img
           alt='img'
           width='72'
           height='72'
-          src={this.state.imageFile.preview}
+          src={imageFile.preview}
         />
 
         <br /><br />
 
         <button
           type='submit'
-          onClick={this.onPostImage}
+          onClick={() => handlePostImage(imageFile)}
         >
           プロフィール画像を変更
         </button>
@@ -58,13 +58,13 @@ class UserSettings extends Component {
     return (
       <div className='UserSettings'>
         <h3>ユーザ設定</h3>
-        名前: {this.props.userName} <br />
+        名前: {userName} <br />
         サムネイル:
         <img
           alt='img'
           width='32'
           height='32'
-          src={STATIC_ENDPOINT + this.props.thumbnail}
+          src={STATIC_ENDPOINT + thumbnail}
         />
         <br />
 
@@ -85,13 +85,11 @@ class UserSettings extends Component {
         >
           <div>Drop Zone (72x72) png/jpg/jpeg</div>
         </Dropzone>
-
         <br />
 
         {preview}
 
-        {this.state.errorMessage}
-
+        {errorMessage}
       </div>
     )
   }

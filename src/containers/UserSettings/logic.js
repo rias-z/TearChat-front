@@ -1,6 +1,8 @@
+// api
 import { apiPostImage } from './api'
 import { clientTokenCheck } from '../../helpers/utils'
 
+// action
 import { successUpdateThumbnail } from '../App/action'
 
 

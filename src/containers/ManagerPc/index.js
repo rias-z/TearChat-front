@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { STATIC_ENDPOINT } from '../../config/config'
+
 // components
 import PcEditDialog from '../../components/PcEditDialog'
 
@@ -11,8 +13,6 @@ import {
   handleUpdatePcInfo,
   handleUpdatePcInfoWithThumbnail,
 } from './logic'
-
-import { STATIC_ENDPOINT } from  '../../config/config'
 
 
 const PcList = (props) => {
@@ -85,7 +85,7 @@ class ManagerPc extends React.Component {
         />
 
         <h3>PC作成</h3>
-        {/* 普段はバーで閉じてる，クリックで拡大 */}
+        {/* TODO 普段はバーで閉じてる，クリックで拡大 */}
 
         <form
           onSubmit={onMakePc}
@@ -109,11 +109,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  initializedPcList: () => dispatch(initializedPcList()),
   createPc: (newPcInfo) => dispatch(createPc(newPcInfo)),
   handleUpdatePcInfo: (pcInfo) => dispatch(handleUpdatePcInfo(pcInfo)),
   handleUpdatePcInfoWithThumbnail: (pcInfo, imageFile) =>
     dispatch(handleUpdatePcInfoWithThumbnail(pcInfo, imageFile)),
+  initializedPcList: () => dispatch(initializedPcList()),
 })
 
 export default connect(

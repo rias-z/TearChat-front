@@ -1,7 +1,10 @@
 import { successGetOmittedRooms, failedEnteredRoom } from './action'
 import { logout } from '../App/action'
-import { apiGetOmittedRooms, apiEnterRoom } from './api'
+
 import { clientTokenCheck } from '../../helpers/utils'
+
+// api
+import { apiGetOmittedRooms, apiEnterRoom } from './api'
 
 
 // Roomの簡易情報を取得

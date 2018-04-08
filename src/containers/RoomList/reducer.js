@@ -1,7 +1,7 @@
 const initialState = {
-  rooms: null,
+  errorMessage: null,
   isLoading: false,
-  errorMessage: null
+  rooms: null,
 }
 
 export default (state = initialState, action) => {

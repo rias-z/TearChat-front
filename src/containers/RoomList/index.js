@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Room from '../../components/Room'
 
+// logic
 import { initializedOmittedRooms, handleEnteredRoomSubmit } from './logic'
 
 
@@ -13,21 +14,24 @@ class RoomList extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
+    const { handleEnteredRoomSubmit } = this.props
+    const { errorMessage, isLoading, rooms } = this.props
+
+    if (isLoading) {
       return (
         <div className='RoomList'>
-          {this.props.rooms.map(room => (
+          {rooms.map(room => (
             <Room
               key={room.roomId}
               {...room}
               onClick={(e) => {
                 e.preventDefault()
-                this.props.handleEnteredRoomSubmit(room.roomId)
+                handleEnteredRoomSubmit(room.roomId)
               }}
             />
           ))}
 
-          {this.props.errorMessage}
+          {errorMessage}
         </div>
       )
     } else {
@@ -41,14 +45,15 @@ class RoomList extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  errorMessage: state.RoomList.errorMessage,
   isLoading: state.RoomList.isLoading,
   rooms: state.RoomList.rooms,
-  errorMessage: state.RoomList.errorMessage,
 })
 
 const mapDispatchToProps = (dispatch, getState) => ({
+  handleEnteredRoomSubmit: (roomId) =>
+    dispatch(handleEnteredRoomSubmit(getState, roomId)),
   initializedOmittedRooms: () => dispatch(initializedOmittedRooms()),
-  handleEnteredRoomSubmit: (roomId) => dispatch(handleEnteredRoomSubmit(getState, roomId))
 })
 
 export default connect(
