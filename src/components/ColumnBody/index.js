@@ -4,8 +4,7 @@ import styled from 'styled-components'
 
 const Body = styled.div`
   height: calc(100% - 10rem);
-  overflow-y: auto;
-  padding: 1rem 1rem;
+  padding: 1rem 0.5rem;
 `
 
 export default function ColumnBody({ children }) {
