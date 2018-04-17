@@ -41,7 +41,7 @@ class PcEditDialog extends Component {
     // API PC情報を保存する
     const _pcInfo = {
       _id: this.props.pcInfo._id,
-      pcName: e.target.pcName.value,
+      name: e.target.name.value,
       age: e.target.age.value,
       job: e.target.job.value,
     }

@@ -31,7 +31,7 @@ const PcEditForm = (props) => {
   return (
     <div key={pcInfo._id}>
       <form onSubmit={handleSubmit}>
-        名前: <input type='text' name='pcName' defaultValue={pcInfo.pcName} />
+        名前: <input type='text' name='name' defaultValue={pcInfo.name} />
         <br />
 
         サムネイル:<br />

@@ -24,6 +24,36 @@ export const initializedPcList = () => async (dispatch) => {
   }
 }
 
+export const handleMakePc = (pcInfo) => async (dispatch) => {
+  try {
+    const token = clientTokenCheck()
+
+    const newPcInfo = await apiPostPc(token, pcInfo)
+
+    dispatch(successAddPcList(newPcInfo))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const handleMakePcWithThumbnail = (pcInfo, imageFiles) => async (dispatch) => {
+  try {
+    const token = clientTokenCheck()
+
+    // サムネ画像を保存してファイル名を取得
+    const imageFilename = await apiPostPcThumbnail(token, imageFiles)
+
+    // PC情報にサムネ情報を追加する
+    const pcInfoWithThumbnail = Object.assign({}, pcInfo, imageFilename)
+
+    const newPcInfo = await apiPostPc(token, pcInfoWithThumbnail)
+
+    dispatch(successAddPcList(newPcInfo))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const createPc = (pcInfo) => async (dispatch) => {
   try {
     const token = clientTokenCheck()

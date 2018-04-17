@@ -18,16 +18,17 @@ const PcEditCard = (props) => {
       名前:
       <input
         type='text'
-        name='pcName'
-        defaultValue={pcInfo.pcName}
-        onChange={(e) => onChangeStatus('pcName', e.target.value)}
+        name='name'
+        defaultValue={pcInfo.personal.name}
+        // TODO nameを変更する
+        onChange={(e) => onChangeStatus('name', e.target.value)}
       />
       <br />
       年齢:
       <input
         type='text'
         name='age'
-        defaultValue={pcInfo.age}
+        defaultValue={pcInfo.personal.age}
         onChange={(e) => onChangeStatus('age', e.target.value)}
       />
       <br />
@@ -35,7 +36,7 @@ const PcEditCard = (props) => {
       <input
         type='text'
         name='job'
-        defaultValue={pcInfo.job}
+        defaultValue={pcInfo.personal.job}
         onChange={(e) => onChangeStatus('job', e.target.value)}
       />
 
@@ -45,7 +46,7 @@ const PcEditCard = (props) => {
       <input
         type='text'
         name='status_hp'
-        defaultValue={pcInfo.status.hp}
+        defaultValue={pcInfo.status.hp.totalPoint}
         onChange={(e) => onChangeStatus('status_hp', e.target.value)}
       />
       <br />
@@ -53,7 +54,7 @@ const PcEditCard = (props) => {
       <input
         type='text'
         name='status_mp'
-        defaultValue={pcInfo.status.mp}
+        defaultValue={pcInfo.status.mp.totalPoint}
         onChange={(e) => onChangeStatus('status_mp', e.target.value)}
       />
       <br />
@@ -61,7 +62,7 @@ const PcEditCard = (props) => {
       <input
         type='text'
         name='status_san'
-        defaultValue={pcInfo.status.san}
+        defaultValue={pcInfo.status.san.totalPoint}
         onChange={(e) => onChangeStatus('status_san', e.target.value)}
       />
       <br />
