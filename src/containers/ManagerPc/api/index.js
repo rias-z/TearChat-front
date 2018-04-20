@@ -12,7 +12,7 @@ export const apiGetPcList = async (token) => {
   return res.body
 }
 
-export const apiPostPc = async (token, pcInfo) => {
+export const apiPostPcInfo = async (token, pcInfo) => {
   const res = await request
     .post(API_ENDPOINT + '/pc/post')
     .set({ Authorization: token })
@@ -30,7 +30,7 @@ export const apiUpdatePcInfo = async (token, pcInfo) => {
   return res.body
 }
 
-export const apiPostPcThumbnail = async (token, imageFile) => {
+export const apiPostPcInfoThumbnail = async (token, imageFile) => {
   const res = await request
     .post(API_ENDPOINT + '/image/post/pc/thumbnail')
     .set({ Authorization: token })

@@ -4,7 +4,7 @@ import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const PcEditCard = (props) => {
-  const { pcInfo, onChangeStatus } = props
+  const { pcInfo, onChangeValue } = props
 
   return (
     <div className='ColumnPc'>
@@ -18,25 +18,26 @@ const PcEditCard = (props) => {
       名前:
       <input
         type='text'
-        name='pcName'
-        defaultValue={pcInfo.pcName}
-        onChange={(e) => onChangeStatus('pcName', e.target.value)}
+        name='personal_name'
+        defaultValue={pcInfo.personal.name}
+        // TODO nameを変更する
+        onChange={onChangeValue}
       />
       <br />
       年齢:
       <input
         type='text'
-        name='age'
-        defaultValue={pcInfo.age}
-        onChange={(e) => onChangeStatus('age', e.target.value)}
+        name='personal_age'
+        defaultValue={pcInfo.personal.age}
+        onChange={onChangeValue}
       />
       <br />
       職業:
       <input
         type='text'
-        name='job'
-        defaultValue={pcInfo.job}
-        onChange={(e) => onChangeStatus('job', e.target.value)}
+        name='personal_job'
+        defaultValue={pcInfo.personal.job}
+        onChange={onChangeValue}
       />
 
       <hr />
@@ -45,24 +46,24 @@ const PcEditCard = (props) => {
       <input
         type='text'
         name='status_hp'
-        defaultValue={pcInfo.status.hp}
-        onChange={(e) => onChangeStatus('status_hp', e.target.value)}
+        defaultValue={pcInfo.status.hp.totalPoint}
+        onChange={onChangeValue}
       />
       <br />
       MP:
       <input
         type='text'
         name='status_mp'
-        defaultValue={pcInfo.status.mp}
-        onChange={(e) => onChangeStatus('status_mp', e.target.value)}
+        defaultValue={pcInfo.status.mp.totalPoint}
+        onChange={onChangeValue}
       />
       <br />
       SAN:
       <input
         type='text'
         name='status_san'
-        defaultValue={pcInfo.status.san}
-        onChange={(e) => onChangeStatus('status_san', e.target.value)}
+        defaultValue={pcInfo.status.san.totalPoint}
+        onChange={onChangeValue}
       />
       <br />
     </div>

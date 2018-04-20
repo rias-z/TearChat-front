@@ -9,7 +9,7 @@ import PcCard from '../../components/PcCard'
 import PcEditCard from '../../components/PcEditCard'
 
 // logic
-import { handleUpdatePcInfo } from './logic'
+import { handleUpdatePcInfo, setChangeValue } from './logic'
 
 
 class ColumnPc extends React.Component {
@@ -54,31 +54,10 @@ class ColumnPc extends React.Component {
       })
     }
 
-    const handleChangeStatus = (key, value) => {
-      // status = ['status', 'hp'] に分離
-      const statusKey = key.split('_')
+    const handleChangeValue = (e) => {
+      e.preventDefault()
 
-      if (statusKey[0] !== 'status') {
-        // ステータス以外の変更
-        this.setState({
-          editPcInfo: {
-            ...this.state.editPcInfo,
-            [key]: value,
-          }
-        })
-      } else {
-        // ステータスの変更
-        // TODO valueのnumチェック
-        this.setState({
-          editPcInfo: {
-            ...this.state.editPcInfo,
-            status: {
-              ...this.state.editPcInfo.status,
-              [statusKey[1]]: Number(value),
-            }
-          }
-        })
-      }
+      setChangeValue(this, e.target.name, e.target.value)
     }
 
     if (!this.state.isEdit) {
@@ -109,7 +88,7 @@ class ColumnPc extends React.Component {
           <ColumnBody>
             <PcEditCard
               pcInfo={this.state.editPcInfo}
-              onChangeStatus={handleChangeStatus}
+              onChangeValue={handleChangeValue}
             />
           </ColumnBody>
         </ColumnRoot>

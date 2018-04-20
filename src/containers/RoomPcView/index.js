@@ -34,8 +34,8 @@ const RoomPcView = (props) => {
             src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
-          名前: {pc.pcName}<br />
-          User: {pc.userName}
+          名前: {pc.personal.name}<br />
+          User: {pc.fkUserId.userName}
         </StyledPcBox>
       )
     } else {
@@ -56,8 +56,8 @@ const RoomPcView = (props) => {
             src={STATIC_ENDPOINT + pc.thumbnail}
           />
           <br />
-          名前: {pc.pcName}<br />
-          User: {pc.userName}
+          名前: {pc.personal.name}<br />
+          User: {pc.fkUserId.userName}
         </StyledPcBox>
       )
     }

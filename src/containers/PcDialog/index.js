@@ -89,7 +89,7 @@ class PcDialog extends React.Component {
           <RadioButton
             key={pc._id}
             value={`value${pc._id}`}
-            label={`${pc.pcName}`}
+            label={`${pc.personal.name}`}
             name='select'
             onClick={() => this.handleSetPcInfo(pc)}
           />
@@ -99,7 +99,7 @@ class PcDialog extends React.Component {
           <RadioButton
             key={pc._id}
             value={`value${pc._id}`}
-            label={`${pc.pcName}`}
+            label={`${pc.personal.name}`}
             name='select'
             disabled
             onClick={() => this.handleSetPcInfo(pc)}

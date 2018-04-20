@@ -15,15 +15,15 @@ const PcCard = (props) => {
         src={STATIC_ENDPOINT + pcInfo.thumbnail}
       />
       <br />
-      名前: {pcInfo.pcName}<br />
-      年齢: {pcInfo.age}<br />
-      職業: {pcInfo.job}<br />
+      名前: {pcInfo.personal.name}<br />
+      年齢: {pcInfo.personal.age}<br />
+      職業: {pcInfo.personal.job}<br />
 
       <hr />
       Status:<br />
-      HP:{pcInfo.status.hp}<br />
-      MP:{pcInfo.status.mp}<br />
-      SAN:{pcInfo.status.san}<br />
+      HP:{pcInfo.status.hp.totalPoint}<br />
+      MP:{pcInfo.status.mp.totalPoint}<br />
+      SAN:{pcInfo.status.san.totalPoint}<br />
     </div>
   )
 }

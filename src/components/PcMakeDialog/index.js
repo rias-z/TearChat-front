@@ -3,18 +3,23 @@ import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 
-// components
+// conponents
 import PcEditForm from '../PcEditForm'
 
 // logic
-import { setChangeValue } from '../../helpers/pcEdit'
+import { initializedEditPcInfo, setChangeValue } from '../../helpers/pcEdit'
 
 
-class PcEditDialog extends Component {
+class PcMakeDialog extends Component {
   state = {
     open: false,
     editPcInfo: {},
     imageFiles: [],
+  }
+
+  componentWillMount() {
+    // editPcInfo初期化
+    initializedEditPcInfo(this)
   }
 
   handleDrop = (imageFiles) => {
@@ -26,23 +31,23 @@ class PcEditDialog extends Component {
   }
 
   handleOpen = () => {
-    const { editPcInfo } = this.props
-
-    // PC情報をeditPcInfoに格納
     this.setState({
       open: true,
-      editPcInfo: editPcInfo,
     })
   }
 
   handleClose = () => {
+    // editPcInfo初期化
+    initializedEditPcInfo(this)
+
     this.setState({
       open: false,
       imageFiles: [],
     })
   }
 
-  handleSubmitEditPcInfo = async (e) => {
+
+  handleSubmitMakePcInfo = async (e) => {
     e.preventDefault()
     const { onUpdatePcInfo, onUpdatePcInfoWithThumbnail } = this.props
 
@@ -54,24 +59,25 @@ class PcEditDialog extends Component {
     }
 
     // editPcInfo初期化
+    initializedEditPcInfo(this)
     this.setState({
       open: false,
-      editPcInfo: {},
       imageFiles: [],
     })
   }
 
   handleChangeValue = (e) => {
     e.preventDefault()
+
     setChangeValue(this, e.target.name, e.target.value)
   }
 
   render() {
     return (
       <div>
-        <RaisedButton label="編集する" onClick={this.handleOpen} />
+        <RaisedButton label="PCを作成する" onClick={this.handleOpen} />
         <Dialog
-          title="PC編集ダイアログ"
+          title="PC作成ダイアログ"
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
@@ -82,15 +88,14 @@ class PcEditDialog extends Component {
             editPcInfo={this.state.editPcInfo}
             imageFiles={this.state.imageFiles}
             onClose={this.handleClose}
-            onSubmit={this.handleSubmitEditPcInfo}
+            onSubmit={this.handleSubmitMakePcInfo}
             onChangeValue={this.handleChangeValue}
             onDrop={this.handleDrop}
           />
-
         </Dialog>
       </div>
     )
   }
 }
 
-export default PcEditDialog
+export default PcMakeDialog
