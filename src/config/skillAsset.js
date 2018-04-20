@@ -13,7 +13,7 @@ export const skillAsset = [
         initialPoint: 50,
       },
       {
-        name: 'pubch',
+        name: 'punch',
         displayName: 'パンチ',
         initialPoint: 50,
       },

@@ -7,7 +7,7 @@ import { Input, Table, Th, Td } from './styles'
 
 
 const StatusTable = (props) => {
-  const { editPcInfo } = props
+  const { statusPcInfo } = props
   const { onChangeValue } = props
 
   const renderStatusTableHeader = () => {
@@ -36,10 +36,10 @@ const StatusTable = (props) => {
           <Input
             type='text'
             name={'status_' + status.name + '_point'}
+            value={statusPcInfo[status.name].point}
             readOnly={status.readonly && true}
             colorTheme={status.readonly && '#cccccc'}
             onChange={onChangeValue}
-            value={editPcInfo.status[status.name].point || ''}
           />
         </Td>
       )
@@ -52,7 +52,6 @@ const StatusTable = (props) => {
             type='text'
             name={'status_' + status.name + '_modifyPoint'}
             onChange={onChangeValue}
-            value={editPcInfo.status[status.name].modifyPoint || ''}
           />
         </Td>
       )
@@ -66,7 +65,7 @@ const StatusTable = (props) => {
             name={'status_' + status.name + 'totalPoint'}
             readOnly
             colorTheme='#cccccc'
-            value={editPcInfo.status[status.name].totalPoint}
+            defaultValue={statusPcInfo[status.name].totalPoint}
           />
         </Td>
       )

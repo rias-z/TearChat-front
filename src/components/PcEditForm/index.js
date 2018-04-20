@@ -4,37 +4,45 @@ import FlatButton from 'material-ui/FlatButton'
 
 import { STATIC_ENDPOINT } from '../../config/config'
 
+// components
+import StatusTable from '../StatusTable'
+import SkillPointsTable from '../SkillPointsTable'
+import SkillTable from '../SkillTable'
+
 
 const PcEditForm = (props) => {
+  const { editPcInfo, imageFiles } = props
   const {
-    pcInfo, imageFile, onDrop, handleClose, handleSubmit
+    onClose, onSubmit, onChangeValue, onDrop
   } = props
 
-  const preview = (Object.keys(imageFile).length > 0) ? (
-    <div>
+  const renderPersonalTable = () => {
+    const thumbnail = (editPcInfo.thumbnail) ? (
       <img
         alt='img'
         width='72'
         height='72'
-        src={imageFile.preview}
+        src={STATIC_ENDPOINT + editPcInfo.thumbnail}
       />
-    </div>
-  ) : (
-    <img
-      alt='img'
-      width='72'
-      height='72'
-      src={STATIC_ENDPOINT + pcInfo.thumbnail}
-    />
-  )
+    ) : (
+      <div>72x72</div>
+    )
 
-  return (
-    <div key={pcInfo._id}>
-      <form onSubmit={handleSubmit}>
-        名前: <input type='text' name='name' defaultValue={pcInfo.name} />
-        <br />
+    const preview = (Object.keys(imageFiles).length > 0) ? (
+      <div>
+        <img
+          alt='img'
+          width='72'
+          height='72'
+          src={imageFiles.preview}
+        />
+      </div>
+    ) : thumbnail
 
-        サムネイル:<br />
+    return (
+      <div className='personal'>
+        <h3>パーソナルデータ</h3>
+        サムネイル:
         <Dropzone
           accept="image/jpg,image/jpeg,image/png"
           onDrop={onDrop}
@@ -50,21 +58,63 @@ const PcEditForm = (props) => {
         >
           {preview}
         </Dropzone>
-        <br />
 
-        年齢: <input type='text' name='age' defaultValue={pcInfo.age} />
-        <br />
+        名前*:
+        <input
+          type='text'
+          name='personal_name'
+          onChange={onChangeValue}
+          defaultValue={editPcInfo.personal.name}
+          required
+        /><br />
+        年齢:
+        <input
+          type='text'
+          name='personal_age'
+          onChange={onChangeValue}
+          defaultValue={editPcInfo.personal.age}
+        /><br />
+        職業:
+        <input
+          type='text'
+          name='personal_job'
+          onChange={onChangeValue}
+          defaultValue={editPcInfo.personal.job}
+        /><br />
+      </div>
 
-        職業: <input type='text' name='job' defaultValue={pcInfo.job} />
-        <br />
+    )
+  }
+
+  return (
+    <div className='PcEditForm'>
+      <form onSubmit={onSubmit}>
+        {renderPersonalTable()}
+
+        <StatusTable
+          editPcInfo={editPcInfo}
+          onChangeValue={onChangeValue}
+        />
+        <hr />
+
+        <SkillPointsTable
+          editPcInfo={editPcInfo}
+          onChangeValue={onChangeValue}
+        />
+        <hr />
+
+        <SkillTable
+          editPcInfo={editPcInfo}
+          onChangeValue={onChangeValue}
+        />
         <hr />
 
         <FlatButton
           label="Cancel"
           primary
-          onClick={handleClose}
+          onClick={onClose}
         />
-        {/* TODO 変更がない場合はsubmitボタンを押せないようにする */}
+
         <FlatButton
           type='submit'
           label="Submit"

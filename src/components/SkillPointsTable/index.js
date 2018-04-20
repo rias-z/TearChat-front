@@ -7,20 +7,20 @@ import { Input, Table, Tbody, Th, Td } from './styles'
 
 
 const SkillPointsTable = (props) => {
-  const { makePcInfo } = props
+  const { editPcInfo } = props
 
   const renderSkillPointsTableBody = () => {
-    const { eduPoints, intPoints } = makePcInfo.skillPoints
+    const { eduPoints, intPoints } = editPcInfo.skillPoints
     let usedEduPoints = 0
     let usedIntPoints = 0
 
-    Object.keys(makePcInfo.skill).forEach(skillSet => {
-      Object.keys(makePcInfo.skill[skillSet]).forEach(skill => {
-        if (makePcInfo.skill[skillSet][skill].eduPoint > 0) {
-          usedEduPoints += makePcInfo.skill[skillSet][skill].eduPoint
+    Object.keys(editPcInfo.skill).forEach(skillSet => {
+      Object.keys(editPcInfo.skill[skillSet]).forEach(skill => {
+        if (editPcInfo.skill[skillSet][skill].eduPoint > 0) {
+          usedEduPoints += editPcInfo.skill[skillSet][skill].eduPoint
         }
-        if (makePcInfo.skill[skillSet][skill].intPoint > 0) {
-          usedIntPoints += makePcInfo.skill[skillSet][skill].intPoint
+        if (editPcInfo.skill[skillSet][skill].intPoint > 0) {
+          usedIntPoints += editPcInfo.skill[skillSet][skill].intPoint
         }
       })
     })

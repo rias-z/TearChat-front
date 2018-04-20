@@ -10,14 +10,16 @@ import PcMakeDialog from '../../components/PcMakeDialog'
 // logic
 import {
   initializedPcList,
-  handleMakePc,
-  handleMakePcWithThumbnail,
+  handlePostPcInfo,
+  handlePostPcInfoWithThumbnail,
   handleUpdatePcInfo,
   handleUpdatePcInfoWithThumbnail,
 } from './logic'
 
 
 const PcList = (props) => {
+  const { onUpdatePcInfo, onUpdatePcInfoWithThumbnail } = props
+
   const pcList = props.pcInfoList.map(pcInfo => {
     return (
       <div key={pcInfo._id}>
@@ -25,6 +27,7 @@ const PcList = (props) => {
         名前: {pcInfo.personal.name}__
         年齢: {pcInfo.personal.age}__
         職業: {pcInfo.personal.job}
+        <br />
         サムネイル:<br />
         <img
           alt='img'
@@ -38,9 +41,9 @@ const PcList = (props) => {
         SAN: {pcInfo.status.san.totalPoint}
 
         <PcEditDialog
-          pcInfo={pcInfo}
-          onUpdatePcInfo={props.onUpdatePcInfo}
-          onUpdatePcInfoWithThumbnail={props.onUpdatePcInfoWithThumbnail}
+          editPcInfo={pcInfo}
+          onUpdatePcInfo={onUpdatePcInfo}
+          onUpdatePcInfoWithThumbnail={onUpdatePcInfoWithThumbnail}
         />
         <hr />
       </div>
@@ -49,6 +52,8 @@ const PcList = (props) => {
 
   return (
     <div className='PcList'>
+      <h3>作成したPC一覧</h3>
+      <hr />
       { pcList }
     </div>
   )
@@ -63,26 +68,27 @@ class ManagerPc extends React.Component {
 
   render() {
     const { pcInfoList } = this.props
+    const {
+      handlePostPcInfo,
+      handlePostPcInfoWithThumbnail,
+      handleUpdatePcInfo,
+      handleUpdatePcInfoWithThumbnail
+    } = this.props
 
     return (
       <div className='ManagerPc'>
         <h2>PC管理画面</h2>
 
         <PcMakeDialog
-          onMakePc={this.props.handleMakePc}
-          onMakePcWithThumbnail={this.props.handleMakePcWithThumbnail}
+          onUpdatePcInfo={handlePostPcInfo}
+          onUpdatePcInfoWithThumbnail={handlePostPcInfoWithThumbnail}
         />
-
-        <h3>作成したPC一覧</h3>
-
-        <hr />
 
         <PcList
           pcInfoList={pcInfoList}
-          onUpdatePcInfo={this.props.handleUpdatePcInfo}
-          onUpdatePcInfoWithThumbnail={this.props.handleUpdatePcInfoWithThumbnail}
+          onUpdatePcInfo={handleUpdatePcInfo}
+          onUpdatePcInfoWithThumbnail={handleUpdatePcInfoWithThumbnail}
         />
-
       </div>
     )
   }
@@ -94,10 +100,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleMakePc: (pcInfo) => dispatch(handleMakePc(pcInfo)),
-  handleMakePcWithThumbnail: (pcInfo, imageFiles) =>
-    dispatch(handleMakePcWithThumbnail(pcInfo, imageFiles)),
-  // createPc: (newPcInfo) => dispatch(createPc(newPcInfo)),
+  handlePostPcInfo: (pcInfo) => dispatch(handlePostPcInfo(pcInfo)),
+  handlePostPcInfoWithThumbnail: (pcInfo, imageFile) =>
+    dispatch(handlePostPcInfoWithThumbnail(pcInfo, imageFile)),
   handleUpdatePcInfo: (pcInfo) => dispatch(handleUpdatePcInfo(pcInfo)),
   handleUpdatePcInfoWithThumbnail: (pcInfo, imageFile) =>
     dispatch(handleUpdatePcInfoWithThumbnail(pcInfo, imageFile)),

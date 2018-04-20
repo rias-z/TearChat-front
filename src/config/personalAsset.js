@@ -1,5 +1,6 @@
 export const personalAsset = {
   name: '',
-  age: 0,
+  age: '',
   job: '',
+  thumbnail: '',
 }

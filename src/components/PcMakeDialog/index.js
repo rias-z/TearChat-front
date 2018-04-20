@@ -4,26 +4,22 @@ import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 
 // conponents
-import PcMakeForm from '../PcMakeForm'
+import PcEditForm from '../PcEditForm'
 
 // logic
-import { initializedTableState, setChangeValue } from './logic'
+import { initializedEditPcInfo, setChangeValue } from '../../helpers/pcEdit'
 
 
 class PcMakeDialog extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      open: false,
-      makePcInfo: {},
-      imageFiles: [],
-    }
+  state = {
+    open: false,
+    editPcInfo: {},
+    imageFiles: [],
   }
 
   componentWillMount() {
-    // makePcInfo初期化
-    initializedTableState(this)
+    // editPcInfo初期化
+    initializedEditPcInfo(this)
   }
 
   handleDrop = (imageFiles) => {
@@ -34,7 +30,6 @@ class PcMakeDialog extends Component {
     }
   }
 
-
   handleOpen = () => {
     this.setState({
       open: true,
@@ -42,8 +37,8 @@ class PcMakeDialog extends Component {
   }
 
   handleClose = () => {
-    // makePcInfo初期化
-    initializedTableState(this)
+    // editPcInfo初期化
+    initializedEditPcInfo(this)
 
     this.setState({
       open: false,
@@ -52,19 +47,19 @@ class PcMakeDialog extends Component {
   }
 
 
-  handleSubmitMakePc = async (e) => {
+  handleSubmitMakePcInfo = async (e) => {
     e.preventDefault()
-    const { onMakePc, onMakePcWithThumbnail } = this.props
+    const { onUpdatePcInfo, onUpdatePcInfoWithThumbnail } = this.props
 
     // PC情報保存
     if (Object.keys(this.state.imageFiles).length > 0) {
-      await onMakePcWithThumbnail(this.state.makePcInfo, this.state.imageFiles)
+      await onUpdatePcInfoWithThumbnail(this.state.editPcInfo, this.state.imageFiles)
     } else {
-      await onMakePc(this.state.makePcInfo)
+      await onUpdatePcInfo(this.state.editPcInfo)
     }
 
-    // makePcInfo初期化
-    initializedTableState(this)
+    // editPcInfo初期化
+    initializedEditPcInfo(this)
     this.setState({
       open: false,
       imageFiles: [],
@@ -89,11 +84,11 @@ class PcMakeDialog extends Component {
           autoScrollBodyContent
           contentStyle={{ width: '80%', maxWidth: 'none' }}
         >
-          <PcMakeForm
-            makePcInfo={this.state.makePcInfo}
+          <PcEditForm
+            editPcInfo={this.state.editPcInfo}
             imageFiles={this.state.imageFiles}
             onClose={this.handleClose}
-            onSubmit={this.handleSubmitMakePc}
+            onSubmit={this.handleSubmitMakePcInfo}
             onChangeValue={this.handleChangeValue}
             onDrop={this.handleDrop}
           />

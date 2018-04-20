@@ -6,60 +6,64 @@ import RaisedButton from 'material-ui/RaisedButton'
 // components
 import PcEditForm from '../PcEditForm'
 
+// logic
+import { setChangeValue } from '../../helpers/pcEdit'
+
 
 class PcEditDialog extends Component {
   state = {
     open: false,
-    imageFile: [],
+    editPcInfo: {},
+    imageFiles: [],
   }
 
-  onDrop = (imageFile) => {
-    if (Object.keys(imageFile).length > 0) {
+  handleDrop = (imageFiles) => {
+    if (Object.keys(imageFiles).length > 0) {
       this.setState({
-        imageFile: imageFile[0],
+        imageFiles: imageFiles[0],
       })
     }
   }
 
   handleOpen = () => {
+    const { editPcInfo } = this.props
+
+    // PC情報をeditPcInfoに格納
     this.setState({
       open: true,
+      editPcInfo: editPcInfo,
     })
   }
 
   handleClose = () => {
     this.setState({
       open: false,
-      imageFile: [],
+      imageFiles: [],
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmitEditPcInfo = async (e) => {
     e.preventDefault()
-    // TODO 情報漏れがないかチェック
+    const { onUpdatePcInfo, onUpdatePcInfoWithThumbnail } = this.props
 
-    // API PC情報を保存する
-    const _pcInfo = {
-      _id: this.props.pcInfo._id,
-      name: e.target.name.value,
-      age: e.target.age.value,
-      job: e.target.job.value,
-    }
-    const _imageFile = this.state.imageFile
-
-    if (Object.keys(_imageFile).length > 0) {
-      // 画像変更あり
-      this.props.onUpdatePcInfoWithThumbnail(_pcInfo, _imageFile)
+    // PC情報保存
+    if (Object.keys(this.state.imageFiles).length > 0) {
+      await onUpdatePcInfoWithThumbnail(this.state.editPcInfo, this.state.imageFiles)
     } else {
-      // 画像変更なし
-      this.props.onUpdatePcInfo(_pcInfo)
+      await onUpdatePcInfo(this.state.editPcInfo)
     }
 
-    // dialogを閉じる
+    // editPcInfo初期化
     this.setState({
       open: false,
-      imageFile: [],
+      editPcInfo: {},
+      imageFiles: [],
     })
+  }
+
+  handleChangeValue = (e) => {
+    e.preventDefault()
+    setChangeValue(this, e.target.name, e.target.value)
   }
 
   render() {
@@ -67,19 +71,22 @@ class PcEditDialog extends Component {
       <div>
         <RaisedButton label="編集する" onClick={this.handleOpen} />
         <Dialog
-          title="PC編集画面"
+          title="PC編集ダイアログ"
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent
+          contentStyle={{ width: '80%', maxWidth: 'none' }}
         >
           <PcEditForm
-            pcInfo={this.props.pcInfo}
-            imageFile={this.state.imageFile}
-            onDrop={this.onDrop}
-            handleClose={this.handleClose}
-            handleSubmit={this.handleSubmit}
+            editPcInfo={this.state.editPcInfo}
+            imageFiles={this.state.imageFiles}
+            onClose={this.handleClose}
+            onSubmit={this.handleSubmitEditPcInfo}
+            onChangeValue={this.handleChangeValue}
+            onDrop={this.handleDrop}
           />
+
         </Dialog>
       </div>
     )

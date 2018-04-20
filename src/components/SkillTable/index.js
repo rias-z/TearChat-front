@@ -7,7 +7,7 @@ import { Input, Table, Tbody, Th, Td } from './styles'
 
 
 const SkillTable = (props) => {
-  const { makePcInfo } = props
+  const { editPcInfo } = props
   const { onChangeValue } = props
 
   const renderSkillTableHeader = () => {
@@ -29,7 +29,9 @@ const SkillTable = (props) => {
     const frame = contents.map(skill => {
       const name = 'skill_' + skillSetName + '_' + skill.name
 
-      const { initialPoint, totalPoint } = makePcInfo.skill[skillSetName][skill.name]
+      const {
+        initialPoint, eduPoint, intPoint, modifyPoint, totalPoint
+      } = editPcInfo.skill[skillSetName][skill.name]
 
       return (
         <tr key={name}>
@@ -43,9 +45,30 @@ const SkillTable = (props) => {
               value={initialPoint}
             />
           </Td>
-          <Td><Input type='text' name={name + '_eduPoint'} onChange={onChangeValue} /></Td>
-          <Td><Input type='text' name={name + '_intPoint'} onChange={onChangeValue} /></Td>
-          <Td><Input type='text' name={name + '_modifyPoint'} onChange={onChangeValue} /></Td>
+          <Td>
+            <Input
+              type='text'
+              name={name + '_eduPoint'}
+              onChange={onChangeValue}
+              value={eduPoint || ''}
+            />
+          </Td>
+          <Td>
+            <Input
+              type='text'
+              name={name + '_intPoint'}
+              onChange={onChangeValue}
+              value={intPoint || ''}
+            />
+          </Td>
+          <Td>
+            <Input
+              type='text'
+              name={name + '_modifyPoint'}
+              onChange={onChangeValue}
+              value={modifyPoint || ''}
+            />
+          </Td>
           <Td>
             <Input
               colorTheme='#cccccc'

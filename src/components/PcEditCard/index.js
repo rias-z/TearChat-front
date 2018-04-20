@@ -4,7 +4,7 @@ import { STATIC_ENDPOINT } from '../../config/config'
 
 
 const PcEditCard = (props) => {
-  const { pcInfo, onChangeStatus } = props
+  const { pcInfo, onChangeValue } = props
 
   return (
     <div className='ColumnPc'>
@@ -18,26 +18,26 @@ const PcEditCard = (props) => {
       名前:
       <input
         type='text'
-        name='name'
+        name='personal_name'
         defaultValue={pcInfo.personal.name}
         // TODO nameを変更する
-        onChange={(e) => onChangeStatus('name', e.target.value)}
+        onChange={onChangeValue}
       />
       <br />
       年齢:
       <input
         type='text'
-        name='age'
+        name='personal_age'
         defaultValue={pcInfo.personal.age}
-        onChange={(e) => onChangeStatus('age', e.target.value)}
+        onChange={onChangeValue}
       />
       <br />
       職業:
       <input
         type='text'
-        name='job'
+        name='personal_job'
         defaultValue={pcInfo.personal.job}
-        onChange={(e) => onChangeStatus('job', e.target.value)}
+        onChange={onChangeValue}
       />
 
       <hr />
@@ -47,7 +47,7 @@ const PcEditCard = (props) => {
         type='text'
         name='status_hp'
         defaultValue={pcInfo.status.hp.totalPoint}
-        onChange={(e) => onChangeStatus('status_hp', e.target.value)}
+        onChange={onChangeValue}
       />
       <br />
       MP:
@@ -55,7 +55,7 @@ const PcEditCard = (props) => {
         type='text'
         name='status_mp'
         defaultValue={pcInfo.status.mp.totalPoint}
-        onChange={(e) => onChangeStatus('status_mp', e.target.value)}
+        onChange={onChangeValue}
       />
       <br />
       SAN:
@@ -63,7 +63,7 @@ const PcEditCard = (props) => {
         type='text'
         name='status_san'
         defaultValue={pcInfo.status.san.totalPoint}
-        onChange={(e) => onChangeStatus('status_san', e.target.value)}
+        onChange={onChangeValue}
       />
       <br />
     </div>
