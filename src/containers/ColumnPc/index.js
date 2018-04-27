@@ -9,7 +9,11 @@ import PcCard from '../../components/PcCard'
 import PcEditCard from '../../components/PcEditCard'
 
 // logic
-import { handleUpdatePcInfo, setChangeValue } from './logic'
+import {
+  handleUpdatePcInfo,
+  handleUpdatePcInfoWithThumbnail,
+  setChangeValue,
+} from './logic'
 
 
 class ColumnPc extends React.Component {
@@ -23,7 +27,12 @@ class ColumnPc extends React.Component {
   }
 
   render() {
-    const { onClose, fkPcId, roomPcInfo } = this.props
+    const { fkPcId, roomPcInfo } = this.props
+    const {
+      onClose,
+      handleUpdatePcInfo,
+      handleUpdatePcInfoWithThumbnail
+    } = this.props
 
     // 静的に表示するPC情報
     const pcIdx = roomPcInfo.findIndex(pc => pc._id === fkPcId)
@@ -37,28 +46,28 @@ class ColumnPc extends React.Component {
       })
     }
 
-    const handleCloseEdit = () => {
-      this.setState({
-        isEdit: false,
-        editPcInfo: {},
-      })
-    }
+    // const handleCloseEdit = () => {
+    //   this.setState({
+    //     isEdit: false,
+    //     editPcInfo: {},
+    //   })
+    // }
 
-    const onUpdatePcInfo = () => {
-      // PC情報をsocketで更新
-      this.props.handleUpdatePcInfo(this.state.editPcInfo)
+    // const onUpdatePcInfo = () => {
+    //   // PC情報をsocketで更新
+    //   this.props.handleUpdatePcInfo(this.state.editPcInfo)
 
-      this.setState({
-        isEdit: false,
-        editPcInfo: {},
-      })
-    }
+    //   this.setState({
+    //     isEdit: false,
+    //     editPcInfo: {},
+    //   })
+    // }
 
-    const handleChangeValue = (e) => {
-      e.preventDefault()
+    // const handleChangeValue = (e) => {
+    //   e.preventDefault()
 
-      setChangeValue(this, e.target.name, e.target.value)
-    }
+    //   setChangeValue(this, e.target.name, e.target.value)
+    // }
 
     if (!this.state.isEdit) {
       return (
@@ -70,7 +79,11 @@ class ColumnPc extends React.Component {
             isEdit={this.state.isEdit}
           />
           <ColumnBody>
-            <PcCard pcInfo={pcInfo} />
+            <PcCard
+              pcInfo={pcInfo}
+              onUpdatePcInfo={handleUpdatePcInfo}
+              onUpdatePcInfoWithThumbnail={handleUpdatePcInfoWithThumbnail}
+            />
           </ColumnBody>
         </ColumnRoot>
       )
@@ -78,7 +91,7 @@ class ColumnPc extends React.Component {
       // PC EDITモード
       return (
         <ColumnRoot>
-          <ColumnHeader
+          {/* <ColumnHeader
             onClose={onClose}
             onEdit={handleCloseEdit}
             name="PC"
@@ -90,7 +103,7 @@ class ColumnPc extends React.Component {
               pcInfo={this.state.editPcInfo}
               onChangeValue={handleChangeValue}
             />
-          </ColumnBody>
+          </ColumnBody> */}
         </ColumnRoot>
       )
     }
@@ -104,6 +117,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleUpdatePcInfo: (pcInfo) => dispatch(handleUpdatePcInfo(pcInfo)),
+  handleUpdatePcInfoWithThumbnail: (pcInfo, imageFile) =>
+    dispatch(handleUpdatePcInfoWithThumbnail(pcInfo, imageFile))
 })
 
 export default connect(
