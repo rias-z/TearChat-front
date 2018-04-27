@@ -14,9 +14,6 @@ export const Table = styled.table`
   border: 1px solid #bbbbbb;
 `
 
-export const Tbody = styled.tbody`
-`
-
 export const Td = styled.td.attrs({
   width: props => props.width || '40px'
 })`

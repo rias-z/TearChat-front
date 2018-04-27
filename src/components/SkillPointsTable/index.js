@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { statusAsset } from '../../config/statusAsset'
-
 // styles
-import { Input, Table, Tbody, Th, Td } from './styles'
+import { Input, Table, Td } from './styles'
 
 
 const SkillPointsTable = (props) => {
@@ -26,7 +24,7 @@ const SkillPointsTable = (props) => {
     })
 
     return (
-      <Tbody>
+      <tbody>
         <tr>
           <Td>職業P</Td>
           <Td>
@@ -67,7 +65,7 @@ const SkillPointsTable = (props) => {
             />
           </Td>
         </tr>
-      </Tbody>
+      </tbody>
     )
   }
 
