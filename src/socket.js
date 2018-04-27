@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 // action
 import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
-import { successSetRoomPcInfo } from './containers/RoomPcView/action'
+import { successSetRoomPcInfo, successSetSelfRoomPcInfo } from './containers/RoomPcView/action'
 import {
   successUpdateMessageToPrivate,
   updateActiveUsers,
@@ -83,9 +83,23 @@ class WebSocket {
   }
 
   // RoomPcInfo更新
-  receiveUpdateRoomPcInfo = (dispatch) => {
+  receiveUpdateRoomPcInfo = (dispatch, selfUserId) => {
     this.socket.on('receiveUpdateRoomPcInfo', roomPcInfo => {
       dispatch(successSetRoomPcInfo(roomPcInfo))
+
+      // 自分の操作PCをselfRoomPcInfoとして登録
+      const selfRoomPcInfo = []
+      roomPcInfo.forEach((pcInfo, idx) => {
+        if (pcInfo.fkUserId.userId === selfUserId) {
+          selfRoomPcInfo.push({
+            fkPcId: pcInfo._id,
+            idx: idx,
+            pcInfo: pcInfo,
+          })
+        }
+      })
+      // RoomのPC情報取得 (=> RoomPcView)
+      dispatch(successSetSelfRoomPcInfo(selfRoomPcInfo))
     })
   }
 }

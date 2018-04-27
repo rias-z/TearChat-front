@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import App from './containers/App/reducer'
 import CreateRoom from './containers/CreateRoom/reducer'
 import ManagerPc from './containers/ManagerPc/reducer'
+import OperationPc from './containers/OperationPc/reducer'
 import RoomPcView from './containers/RoomPcView/reducer'
 import Register from './containers/Register/reducer'
 import RoomList from './containers/RoomList/reducer'
@@ -17,6 +18,7 @@ export default combineReducers({
   RoomPcView,
   Register,
   RoomList,
+  OperationPc,
   Session,
   Table,
   ColumnPublicMessage,

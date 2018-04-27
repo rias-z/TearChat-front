@@ -20,7 +20,6 @@ const PcEditCard = (props) => {
         type='text'
         name='personal_name'
         defaultValue={pcInfo.personal.name}
-        // TODO nameを変更する
         onChange={onChangeValue}
       />
       <br />

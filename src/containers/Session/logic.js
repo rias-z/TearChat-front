@@ -11,7 +11,7 @@ import {
   successInitializedPrivateMessages
 } from './action'
 import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
-import { successSetRoomPcInfo } from '../RoomPcView/action'
+import { successSetRoomPcInfo, successSetSelfRoomPcInfo } from '../RoomPcView/action'
 import { logout } from '../App/action'
 
 // api
@@ -46,9 +46,6 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     const roomInfo = await apiGetRoomInfoById(token, roomId)
     dispatch(successInitializedRoomInfo(roomInfo))
 
-    // RoomのPC情報取得 (=> RoomPcView)
-    dispatch(successSetRoomPcInfo(roomInfo.roomPcInfo))
-
     // publicMessage取得
     const publicMessage = await apiGetPublicMessage(token, roomId)
     dispatch(successInitializedPublicMessages(publicMessage))
@@ -77,6 +74,23 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
       dispatch(assignSelfChannelId(0))
     }
 
+    // RoomのPC情報取得 (=> RoomPcView)
+    dispatch(successSetRoomPcInfo(roomInfo.roomPcInfo))
+
+    // 自分の操作PCをselfRoomPcInfoとして登録
+    const selfRoomPcInfo = []
+    roomInfo.roomPcInfo.forEach((pcInfo, idx) => {
+      if (pcInfo.fkUserId.userId === selfUserId) {
+        selfRoomPcInfo.push({
+          fkPcId: pcInfo._id,
+          idx: idx,
+          pcInfo: pcInfo,
+        })
+      }
+    })
+    // RoomのPC情報取得 (=> RoomPcView)
+    dispatch(successSetSelfRoomPcInfo(selfRoomPcInfo))
+
     // socket通信開始
     const ws = new WebSocket()
     // socket.onのセット
@@ -84,7 +98,7 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
     ws.receiveMessage(dispatch)
     ws.receiveActiveUser(dispatch)
     ws.receiveUpdateMembers(dispatch)
-    ws.receiveUpdateRoomPcInfo(dispatch)
+    ws.receiveUpdateRoomPcInfo(dispatch, selfUserId)
 
     // socketをstateに追加
     dispatch(addNewSocket(ws))

@@ -52,7 +52,7 @@ class MessageList extends React.Component {
                   'borderRadius': '16px',
                 }}
               />
-              ({message.userName})
+              {message.displayName}
               <Message content={message.content} />
             </WrapMessage>
           </div>

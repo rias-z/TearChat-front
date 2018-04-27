@@ -4,6 +4,7 @@ import { Wrap } from './styles'
 
 // containers
 import PcDialog from '../PcDialog'
+import OperationPc from '../OperationPc'
 
 // action
 import { addTable, removeTable } from '../Table/action'
@@ -104,6 +105,8 @@ const SideBarForKp = (props) => {
       <br />
 
       <PcDialog />
+
+      <OperationPc />
     </Wrap>
   )
 }
