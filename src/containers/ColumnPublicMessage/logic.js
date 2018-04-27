@@ -1,8 +1,11 @@
 export const handlePostMessageToPublic = (content) => (dispatch, getState) => {
   try {
+    const { selectFkPcId } = getState().OperationPc
+
     const messageInfo = {
       messageType: 'public',
       channelId: 0,
+      fkPcId: selectFkPcId,
       content: content,
     }
 
