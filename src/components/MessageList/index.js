@@ -6,6 +6,7 @@ import { STATIC_ENDPOINT } from '../../config/config'
 
 const StyledMessageList = styled.div`
   height: 100%;
+  overflow-y: auto;
 `
 
 const WrapMessage = styled.div`
@@ -30,12 +31,17 @@ class MessageList extends React.Component {
     this.scrollToBottom()
   }
 
+  componentDidUpdate() {
+    this.scrollToBottom()
+  }
+
   scrollToBottom = () => {
     const messageList = ReactDOM.findDOMNode(this)
     messageList.scrollTop = messageList.scrollHeight
   }
 
   render() {
+    console.log('*** render MessageList')
     return (
       <StyledMessageList className='MessageList'>
         {this.props.messages.map((message) => (
