@@ -6,7 +6,6 @@ import { STATIC_ENDPOINT } from '../../config/config'
 
 const StyledMessageList = styled.div`
   height: 100%;
-  overflow-y: auto;
 `
 
 const WrapMessage = styled.div`

@@ -48,20 +48,8 @@ export const Title = styled.div`
 
 
 const ColumnHeader = (props) => {
-  const {
-    onClose, onEdit, onUpdatePcInfo, name, isEdit
-  } = props
-
-  const editButton = (!isEdit) ? (
-    <div>
-      <button onClick={onEdit}>edit</button>
-    </div>
-  ) : (
-    <div>
-      <button onClick={onEdit}>close edit</button>
-      <button onClick={onUpdatePcInfo}>update</button>
-    </div>
-  )
+  const { name } = props
+  const { onClose } = props
 
   if (name !== 'PC') {
     return (
@@ -81,7 +69,6 @@ const ColumnHeader = (props) => {
       <Wrap>
         <Header>
           <Title>{name}</Title>
-          {editButton}
           <Item onClick={onClose}>
             <IconButton>
               <NavigationClose color='#999999' />

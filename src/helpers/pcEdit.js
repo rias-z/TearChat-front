@@ -15,6 +15,17 @@ export const initializedEditPcInfo = (component) => {
         totalPoint: 0,
       }
     })
+
+    if (status.name === 'hp' || status.name === 'mp' || status.name === 'san') {
+      statusState = Object.assign({}, statusState, {
+        [status.name]: {
+          point: 0,
+          modifyPoint: 0,
+          totalPoint: 0,
+          currentPoint: 0,
+        }
+      })
+    }
   })
 
   const skillPoints = {
@@ -39,7 +50,7 @@ export const initializedEditPcInfo = (component) => {
           eduPoint: 0,
           intPoint: 0,
           modifyPoint: 0,
-          totalPoint: 0,
+          totalPoint: _initialPoint,
         }
       })
     })
@@ -60,7 +71,20 @@ export const initializedEditPcInfo = (component) => {
 }
 
 export const _setStatusState = (statusState, name, valueType, value) => {
+  // 現在値の変更の場合
+  if (valueType === 'currentPoint') {
+    const updateStatusState = Object.assign({}, statusState, {
+      [name]: {
+        ...statusState[name],
+        [valueType]: value,
+      }
+    })
+
+    return updateStatusState
+  }
+
   let totalPoint = value
+
 
   if (valueType === 'point') {
     totalPoint += statusState[name].modifyPoint
@@ -91,6 +115,7 @@ export const _setStatusState = (statusState, name, valueType, value) => {
           ...statusState.hp,
           point: hpPoint,
           totalPoint: hpTotalPoint,
+          currentPoint: hpTotalPoint,
         }
       }
       break
@@ -101,17 +126,19 @@ export const _setStatusState = (statusState, name, valueType, value) => {
         mp: {
           ...statusState.mp,
           point: totalPoint + statusState.mp.modifyPoint,
-          totalPoint: totalPoint
+          totalPoint: totalPoint,
+          currentPoint: totalPoint,
         },
         san: {
           ...statusState.san,
           point: totalPoint + statusState.san.modifyPoint,
-          totalPoint: totalPoint * 5
+          totalPoint: totalPoint * 5,
+          currentPoint: totalPoint * 5,
         },
         lucky: {
           ...statusState.lucky,
           point: totalPoint + statusState.lucky.modifyPoint,
-          totalPoint: totalPoint * 5
+          totalPoint: totalPoint * 5,
         }
       }
       break
@@ -122,7 +149,7 @@ export const _setStatusState = (statusState, name, valueType, value) => {
         idea: {
           ...statusState.idea,
           point: totalPoint + statusState.idea.modifyPoint,
-          totalPoint: totalPoint * 5
+          totalPoint: totalPoint * 5,
         }
       }
       break
@@ -133,7 +160,7 @@ export const _setStatusState = (statusState, name, valueType, value) => {
         knowledge: {
           ...statusState.knowledge,
           point: totalPoint + statusState.knowledge.modifyPoint,
-          totalPoint: totalPoint * 5
+          totalPoint: totalPoint * 5,
         }
       }
       break
@@ -305,6 +332,7 @@ export const setChangeValue = (component, target, value) => {
           skill: newSkillState,
         }
       })
+
       break
     }
     // target = skill_battle_avoidance_eduPoint

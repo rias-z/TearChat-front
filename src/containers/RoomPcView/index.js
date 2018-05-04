@@ -35,7 +35,7 @@ const RoomPcView = (props) => {
           />
           <br />
           名前: {pc.personal.name}<br />
-          User: {pc.fkUserId.userName}
+          Player: {pc.fkUserId.userName}
         </StyledPcBox>
       )
     } else {
@@ -57,7 +57,7 @@ const RoomPcView = (props) => {
           />
           <br />
           名前: {pc.personal.name}<br />
-          User: {pc.fkUserId.userName}
+          Player: {pc.fkUserId.userName}
         </StyledPcBox>
       )
     }

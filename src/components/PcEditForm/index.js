@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton'
 import { STATIC_ENDPOINT } from '../../config/config'
 
 // components
+import CurrentStatusTable from '../CurrentStatusTable'
 import StatusTable from '../StatusTable'
 import SkillPointsTable from '../SkillPointsTable'
 import SkillTable from '../SkillTable'
@@ -96,6 +97,11 @@ const PcEditForm = (props) => {
           onChangeValue={onChangeValue}
         />
         <hr />
+
+        <CurrentStatusTable
+          editPcInfo={editPcInfo}
+          onChangeValue={onChangeValue}
+        />
 
         <SkillPointsTable
           editPcInfo={editPcInfo}
