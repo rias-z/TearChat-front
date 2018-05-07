@@ -5,6 +5,7 @@ import { Wrap } from './styles'
 // containers
 import PcDialog from '../PcDialog'
 import OperationPc from '../OperationPc'
+import OperationDiceDisplay from '../OperationDiceDisplay'
 
 // action
 import { addTable, removeTable } from '../Table/action'
@@ -82,10 +83,10 @@ const SideBarForMember = (props) => {
 
       <br />
 
-      PublicMessages:<br />
+      PublicChannels:<br />
       {publicChannels}<br />
 
-      PrivateMessage:<br />
+      PrivateChannels:<br />
       {privateChannels}<br />
 
       <br />
@@ -93,12 +94,13 @@ const SideBarForMember = (props) => {
       <PcDialog />
 
       <OperationPc />
+
+      <OperationDiceDisplay />
     </Wrap>
   )
 }
 
 const mapStateToProps = (state) => ({
-  // roomPcInfo: state.RoomPcView.roomPcInfo,
   activeUsers: state.Session.activeUsers,
   kpInfo: state.Session.kpInfo,
   roomName: state.Session.roomName,

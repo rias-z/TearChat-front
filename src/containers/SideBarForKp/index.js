@@ -5,6 +5,7 @@ import { Wrap } from './styles'
 // containers
 import PcDialog from '../PcDialog'
 import OperationPc from '../OperationPc'
+import OperationDiceDisplay from '../OperationDiceDisplay'
 
 // action
 import { addTable, removeTable } from '../Table/action'
@@ -96,10 +97,10 @@ const SideBarForKp = (props) => {
 
       <br />
 
-      PublicMessages:<br />
+      PublicChannels:<br />
       {publicChannels}<br />
 
-      PrivateMessage:<br />
+      PrivateChannels:<br />
       {privateChannels}<br />
 
       <br />
@@ -107,6 +108,8 @@ const SideBarForKp = (props) => {
       <PcDialog />
 
       <OperationPc />
+
+      <OperationDiceDisplay />
     </Wrap>
   )
 }
