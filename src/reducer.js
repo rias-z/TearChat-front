@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import Admin from './containers/Admin/reducer'
 import App from './containers/App/reducer'
 import CreateRoom from './containers/CreateRoom/reducer'
 import ManagerPc from './containers/ManagerPc/reducer'
@@ -12,6 +13,7 @@ import ColumnPublicMessage from './containers/ColumnPublicMessage/reducer'
 
 
 export default combineReducers({
+  Admin,
   App,
   CreateRoom,
   ManagerPc,
