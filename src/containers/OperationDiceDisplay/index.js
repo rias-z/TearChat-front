@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import DropDownMenu from 'material-ui/DropDownMenu'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
