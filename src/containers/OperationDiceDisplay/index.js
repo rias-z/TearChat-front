@@ -51,6 +51,7 @@ class OperationDiceDisplay extends React.Component {
   handleThrowDice = (e) => {
     e.preventDefault()
     const { channelValue, diceValue } = this.state
+    const { onPostMessageToPublic, onPostMessageToPrivate } = this.props
 
     const diceTimes = Number(diceValue.split('d')[0])
     const diceSurface = diceValue.split('d')[1]
@@ -68,7 +69,10 @@ class OperationDiceDisplay extends React.Component {
     }
 
     if (channelValue === 'public') {
-      console.log(message)
+      onPostMessageToPublic(message)
+    } else {
+      const channelId = parseInt(channelValue.split('_')[1], 10)
+      onPostMessageToPrivate(channelId, message)
     }
   }
 
@@ -182,8 +186,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPostMessageToPublic: (content) =>
     dispatch(handlePostMessageToPublic(content)),
-  onPostMessageToPrivate: (content) =>
-    dispatch(handlePostMessageToPrivate(content)),
+  onPostMessageToPrivate: (channelId, content) =>
+    dispatch(handlePostMessageToPrivate(channelId, content)),
 })
 
 export default connect(
