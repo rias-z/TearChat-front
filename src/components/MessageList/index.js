@@ -41,7 +41,6 @@ class MessageList extends React.Component {
   }
 
   render() {
-    console.log('*** render MessageList')
     return (
       <StyledMessageList className='MessageList'>
         {this.props.messages.map((message) => (
