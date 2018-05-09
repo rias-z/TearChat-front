@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 // components
 import AdminLogin from '../../components/AdminLogin'
+import AdminUserList from '../AdminUserList'
 
 // logic
 import { handleLoginSubmit } from './logic'
@@ -23,7 +24,7 @@ const Admin = (props) => {
             handleLoginSubmit(
               e.target.userName.value,
               e.target.password.value
-             )
+            )
           }}
         />
         {errorMessage}
@@ -34,6 +35,7 @@ const Admin = (props) => {
       <div>
         <h2>管理者画面</h2>
         <div>AdminUser: {userName}</div>
+        <AdminUserList />
       </div>
     )
   }
