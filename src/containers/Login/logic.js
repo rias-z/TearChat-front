@@ -19,6 +19,17 @@ export const handleLoginSubmit = (props, userName, password) => async (dispatch)
     dispatch(successLogin(userInfo))
     props.history.push('/')
   } catch (err) {
-    dispatch(failedLogin())
+    const statusCode = err.status
+
+    if (statusCode === 401) {
+      dispatch(failedLogin({
+        errorMessage: 'まだ承認されていません'
+      }))
+      return
+    }
+
+    dispatch(failedLogin({
+      errorMessage: 'ログイン失敗'
+    }))
   }
 }

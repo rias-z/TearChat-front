@@ -12,10 +12,10 @@ export const successLogin = (userInfo) => {
   }
 }
 
-export const failedLogin = () => {
+export const failedLogin = (result) => {
   return {
     type: 'FAILED_LOGIN',
-    errorMessage: 'failed Login'
+    errorMessage: result.errorMessage,
   }
 }
 

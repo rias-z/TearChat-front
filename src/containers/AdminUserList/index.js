@@ -48,7 +48,6 @@ class AdminUserList extends React.Component {
             }
           })()}
           <br />
-          <br />
         </div>
       )
     })
