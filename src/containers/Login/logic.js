@@ -1,10 +1,17 @@
+import hash from 'hash.js'
+
 import { apiLoginRequest } from './api'
 import { successLogin, failedLogin } from '../App/action'
 
+// config
+import { config } from '../../config/secretConfig'
 
-export const handleLoginSubmit = (props, inputUserName, inputPassword) => async (dispatch) => {
+
+export const handleLoginSubmit = (props, userName, password) => async (dispatch) => {
   try {
-    const userInfo = await apiLoginRequest(inputUserName, inputPassword)
+    const hashPassword = hash.sha256().update(password + config.SECRET_KEY).digest('hex')
+
+    const userInfo = await apiLoginRequest(userName, hashPassword)
 
     // ローカルストレージにアクセストークンを保存
     localStorage.setItem('accessToken', userInfo.accessToken)
@@ -12,6 +19,17 @@ export const handleLoginSubmit = (props, inputUserName, inputPassword) => async 
     dispatch(successLogin(userInfo))
     props.history.push('/')
   } catch (err) {
-    dispatch(failedLogin())
+    const statusCode = err.status
+
+    if (statusCode === 401) {
+      dispatch(failedLogin({
+        errorMessage: 'まだ承認されていません'
+      }))
+      return
+    }
+
+    dispatch(failedLogin({
+      errorMessage: 'ログイン失敗'
+    }))
   }
 }
