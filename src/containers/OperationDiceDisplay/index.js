@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
+import MenuItem from 'material-ui/MenuItem'
+import RaisedButton from 'material-ui/RaisedButton'
+import SelectField from 'material-ui/SelectField'
 
 // logic
 import { handlePostMessageToPublic } from '../ColumnPublicMessage/logic'
 import { handlePostMessageToPrivate } from '../ColumnPrivateMessage/logic'
 
 const StyledDiv = styled.div`
-  height: 20rem
-  padding: 0rem 1rem;
+  margin: 0.2rem;
+  padding: 0rem 1rem 1rem 1rem;
   background-color: #708090;
 `
 
@@ -104,15 +105,9 @@ class OperationDiceDisplay extends React.Component {
             value={this.state.channelValue}
             onChange={this.handleChangeChannel}
             maxHeight={160}
-            style={{
-              width: '8rem',
-            }}
-            labelStyle={{
-              color: 'white'
-            }}
-            floatingLabelStyle={{
-              color: 'white'
-            }}
+            style={{ width: '8rem' }}
+            labelStyle={{ color: 'white' }}
+            floatingLabelStyle={{ color: 'white' }}
           >
             <MenuItem value='public' primaryText='public' />
             <Divider />
@@ -167,9 +162,7 @@ class OperationDiceDisplay extends React.Component {
         {diceItems()}
 
         <form onSubmit={this.handleThrowDice}>
-          <button type='submit'>
-            ダイスを振る
-          </button>
+          <RaisedButton type='submit' label="ダイスを振る" />
         </form>
       </StyledDiv>
     )

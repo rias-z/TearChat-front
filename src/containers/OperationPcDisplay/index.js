@@ -1,14 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import DropDownMenu from 'material-ui/DropDownMenu'
+import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
+import styled from 'styled-components'
+
+// containers
+import PcDialog from '../PcDialog'
 
 // action
 import { setSelectFkPcId } from './action'
 
 
-class OperationPc extends React.Component {
+const StyledDiv = styled.div`
+  margin: 0.2rem;
+  padding: 0rem 1rem 1rem 1rem;
+  background-color: #607080;
+`
+
+
+class OperationPcDisplay extends React.Component {
   constructor(props) {
     super(props)
 
@@ -37,14 +48,26 @@ class OperationPc extends React.Component {
     })
 
     return (
-      <div>
-        <h3>OperationPc</h3>
-        <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+      <StyledDiv>
+        <h3>PC操作</h3>
+
+        {/* PC選択 */}
+        <SelectField
+          floatingLabelText='SelectPC'
+          value={this.state.value}
+          onChange={this.handleChange}
+          style={{ width: '8rem' }}
+          labelStyle={{ color: 'white' }}
+          floatingLabelStyle={{ color: 'white' }}
+        >
           <MenuItem value={-1} primaryText="PC未選択" />
           <Divider />
           {menuItems}
-        </DropDownMenu>
-      </div>
+        </SelectField>
+
+        {/* PC追加 */}
+        <PcDialog />
+      </StyledDiv>
     )
   }
 }
@@ -60,4 +83,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OperationPc)
+)(OperationPcDisplay)

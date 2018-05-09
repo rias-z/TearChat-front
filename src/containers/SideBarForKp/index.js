@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Wrap } from './styles'
 
 // containers
-import PcDialog from '../PcDialog'
-import OperationPc from '../OperationPc'
+import OperationPcDisplay from '../OperationPcDisplay'
 import OperationDiceDisplay from '../OperationDiceDisplay'
 
 // action
@@ -105,9 +104,7 @@ const SideBarForKp = (props) => {
 
       <br />
 
-      <PcDialog />
-
-      <OperationPc />
+      <OperationPcDisplay />
 
       <OperationDiceDisplay />
     </Wrap>
