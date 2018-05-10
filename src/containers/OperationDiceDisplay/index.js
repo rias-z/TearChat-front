@@ -13,7 +13,7 @@ import { handlePostMessageToPrivate } from '../ColumnPrivateMessage/logic'
 const StyledDiv = styled.div`
   margin: 0.2rem;
   padding: 0rem 1rem 1rem 1rem;
-  background-color: #708090;
+  background-color: #4e5965;
 `
 
 const DICE = [

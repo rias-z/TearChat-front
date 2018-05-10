@@ -14,7 +14,7 @@ export const Wrap = styled.header`
   flex-direction: column;
   width: 12rem;
   height: 100%;
-  color: white;
-  background-color: #604c66;
+  color: #e1e8ed;
+  background-color: #27282b;
   overflow-y: scroll;
 `

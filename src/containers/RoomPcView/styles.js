@@ -11,7 +11,7 @@ export const WrapRoomPcView = styled.header`
   bottom: 0;
   width: calc(100% - 13rem);
   height: 12rem;
-  background-color: CadetBlue;
+  background-color: #31333a;
   color: white;
   overflow: scroll;
 `
@@ -21,6 +21,6 @@ export const StyledPcBox = styled.div`
   width: 10rem;
   margin: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: palevioletred;
+  background-color: #4e5965;
   overflow: scroll;
 `

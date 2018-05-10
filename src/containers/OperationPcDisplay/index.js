@@ -15,7 +15,7 @@ import { setSelectFkPcId } from './action'
 const StyledDiv = styled.div`
   margin: 0.2rem;
   padding: 0rem 1rem 1rem 1rem;
-  background-color: #607080;
+  background-color: #4e5965;
 `
 
 
