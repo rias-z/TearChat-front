@@ -1,10 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Wrap } from './styles'
-
-// containers
-import OperationPcDisplay from '../OperationPcDisplay'
-import OperationDiceDisplay from '../OperationDiceDisplay'
 
 // action
 import { addTable, removeTable } from '../Table/action'
@@ -13,8 +8,6 @@ import { addTable, removeTable } from '../Table/action'
 const SideBarForKp = (props) => {
   const { addTable, removeTable } = props
   const {
-    roomName,
-    kpInfo,
     membersInfo,
     activeUsers,
     ids,
@@ -86,36 +79,19 @@ const SideBarForKp = (props) => {
   })
 
   return (
-    <Wrap>
-      <h3>{roomName}</h3>
-
-      <div>
-        部屋情報<br />
-        KP: {kpInfo.userName}<br />
-      </div>
-
-      <br />
-
+    <div>
       PublicChannels:<br />
       {publicChannels}<br />
 
       PrivateChannels:<br />
       {privateChannels}<br />
-
-      <br />
-
-      <OperationPcDisplay />
-
-      <OperationDiceDisplay />
-    </Wrap>
+    </div>
   )
 }
 
 const mapStateToProps = (state) => ({
   activeUsers: state.Session.activeUsers,
-  kpInfo: state.Session.kpInfo,
   membersInfo: state.Session.membersInfo,
-  roomName: state.Session.roomName,
   ids: state.Table.ids,
 })
 

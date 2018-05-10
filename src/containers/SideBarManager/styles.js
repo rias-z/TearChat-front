@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrap = styled.header`
+export const StyledDiv = styled.div`
   display: flex;
   position: fixed;
   z-index: 300;
