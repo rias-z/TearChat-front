@@ -32,17 +32,12 @@ class OperationDiceDisplay extends React.Component {
   }
 
   handleChangeChannel = (e, index, value) => {
-    // this.props.setSelectFkPcId(value)
-    console.log(value)
-
     this.setState({
       channelValue: value,
     })
   }
 
   handleChangeDice = (e, index, value) => {
-    console.log(value)
-
     this.setState({
       diceValue: value,
     })
