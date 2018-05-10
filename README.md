@@ -1,15 +1,14 @@
-# CRevo
+# TearChat-front
 
 ## 環境
-node v9.3.0
+- node v9.3.0
+- npm v5.6.0
 
 ## 起動
-### front
 ```$ npm start```
 
 ## セットアップ
 ```$ npm install```
-- npm v5.6.0
 
 ## 技術とか
 - front
@@ -17,7 +16,6 @@ node v9.3.0
         - react-router-dom
     - redux
         - redux-thunk
-        - reselect
     - eslint (airbnb)
     - request
         - superagent
@@ -27,5 +25,3 @@ node v9.3.0
         - mongoose (mongoDB orm)
 - db
     - mongoDB
-        
-
