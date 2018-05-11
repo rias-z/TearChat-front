@@ -105,9 +105,22 @@ export const _setStatusState = (statusState, name, valueType, value) => {
   let updateFixedStatusState = {}
   switch (name) {
     // HP
-    case 'con':
+    case 'con': {
+      const hpPoint = Math.floor((totalPoint + statusState.siz.totalPoint) / 2)
+      const hpTotalPoint = hpPoint + statusState.hp.modifyPoint
+
+      updateFixedStatusState = {
+        hp: {
+          ...statusState.hp,
+          point: hpPoint,
+          totalPoint: hpTotalPoint,
+          currentPoint: hpTotalPoint,
+        }
+      }
+      break
+    }
     case 'siz': {
-      const hpPoint = Math.floor((totalPoint + statusState[name].totalPoint) / 2)
+      const hpPoint = Math.floor((totalPoint + statusState.con.totalPoint) / 2)
       const hpTotalPoint = hpPoint + statusState.hp.modifyPoint
 
       updateFixedStatusState = {
@@ -131,13 +144,13 @@ export const _setStatusState = (statusState, name, valueType, value) => {
         },
         san: {
           ...statusState.san,
-          point: totalPoint + statusState.san.modifyPoint,
+          point: (totalPoint * 5) + statusState.san.modifyPoint,
           totalPoint: totalPoint * 5,
           currentPoint: totalPoint * 5,
         },
         lucky: {
           ...statusState.lucky,
-          point: totalPoint + statusState.lucky.modifyPoint,
+          point: (totalPoint * 5) + statusState.lucky.modifyPoint,
           totalPoint: totalPoint * 5,
         }
       }
@@ -148,7 +161,7 @@ export const _setStatusState = (statusState, name, valueType, value) => {
       updateFixedStatusState = {
         idea: {
           ...statusState.idea,
-          point: totalPoint + statusState.idea.modifyPoint,
+          point: (totalPoint * 5) + statusState.idea.modifyPoint,
           totalPoint: totalPoint * 5,
         }
       }
@@ -159,7 +172,7 @@ export const _setStatusState = (statusState, name, valueType, value) => {
       updateFixedStatusState = {
         knowledge: {
           ...statusState.knowledge,
-          point: totalPoint + statusState.knowledge.modifyPoint,
+          point: (totalPoint * 5) + statusState.knowledge.modifyPoint,
           totalPoint: totalPoint * 5,
         }
       }
@@ -218,20 +231,20 @@ export const _setSkillState = (statusState, skillState, name) => {
   switch (name) {
     // 回避初期値
     case 'dex': {
-      const avoidanceInitialPoint = statusState.dex.totalPoint * 2
+      const dodgeInitialPoint = statusState.dex.totalPoint * 2
       const totalPoint = (
-        avoidanceInitialPoint +
-        skillState.battle.avoidance.intPoint +
-        skillState.battle.avoidance.eduPoint +
-        skillState.battle.avoidance.modifyPoint
+        dodgeInitialPoint +
+        skillState.battle.dodge.intPoint +
+        skillState.battle.dodge.eduPoint +
+        skillState.battle.dodge.modifyPoint
       )
 
       addSkillState = {
         battle: {
           ...skillState.battle,
-          avoidance: {
-            ...skillState.battle.avoidance,
-            initialPoint: avoidanceInitialPoint,
+          dodge: {
+            ...skillState.battle.dodge,
+            initialPoint: dodgeInitialPoint,
             totalPoint: totalPoint
           }
         }
@@ -335,7 +348,7 @@ export const setChangeValue = (component, target, value) => {
 
       break
     }
-    // target = skill_battle_avoidance_eduPoint
+    // target = skill_battle_dodge_eduPoint
     case 'skill': {
       const skillType = target.split('_')[1]
       const name = target.split('_')[2]
