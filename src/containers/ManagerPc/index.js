@@ -16,44 +16,77 @@ import {
   handleUpdatePcInfoWithThumbnail,
 } from './logic'
 
+// styles
+import {
+  ManagerPcDiv,
+  FlexDiv,
+  FlexPartDiv,
+  PartDiv,
+  WrapDiv,
+  PcEditDialogDiv
+} from './styles'
+
 
 const PcList = (props) => {
   const { onUpdatePcInfo, onUpdatePcInfoWithThumbnail } = props
 
   const pcList = props.pcInfoList.map(pcInfo => {
     return (
-      <div key={pcInfo._id}>
-        <h3>パーソナルデータ</h3>
-        名前: {pcInfo.personal.name}__
-        年齢: {pcInfo.personal.age}__
-        職業: {pcInfo.personal.job}
-        <br />
-        サムネイル:<br />
-        <img
-          alt='img'
-          width='72'
-          height='72'
-          src={STATIC_ENDPOINT + pcInfo.thumbnail}
-        />
+      <FlexDiv key={pcInfo._id}>
+        <WrapDiv>
+          <h3>{pcInfo.personal.name}</h3>
 
-        <h3>ステータス</h3>
-        HP: {pcInfo.status.hp.totalPoint}__
-        SAN: {pcInfo.status.san.totalPoint}
+          <FlexPartDiv>
+            <PartDiv>
+              <img
+                alt='img'
+                width='72'
+                height='72'
+                src={STATIC_ENDPOINT + pcInfo.thumbnail}
+              />
+            </PartDiv>
+            <PartDiv>
+              年齢: {pcInfo.personal.age}
+              <br />
+              職業: {pcInfo.personal.job}
+            </PartDiv>
+          </FlexPartDiv>
 
-        <PcEditDialog
-          editPcInfo={pcInfo}
-          onUpdatePcInfo={onUpdatePcInfo}
-          onUpdatePcInfoWithThumbnail={onUpdatePcInfoWithThumbnail}
-        />
-        <hr />
-      </div>
+          <br />
+
+          <strong>[ ステータス ]</strong>
+          <br />
+          STR: {pcInfo.status.str.totalPoint}/
+          CON: {pcInfo.status.con.totalPoint}/
+          POW: {pcInfo.status.pow.totalPoint}/
+          DEX: {pcInfo.status.dex.totalPoint}/
+          APP: {pcInfo.status.app.totalPoint}/
+          SIZ: {pcInfo.status.siz.totalPoint}/
+          INT: {pcInfo.status.int.totalPoint}/
+          EDU: {pcInfo.status.edu.totalPoint}
+          <br />
+          HP: {pcInfo.status.hp.totalPoint}/
+          MP: {pcInfo.status.mp.totalPoint}/
+          SAN: {pcInfo.status.san.totalPoint}/
+          アイデア: {pcInfo.status.idea.totalPoint}/
+          幸運: {pcInfo.status.lucky.totalPoint}/
+          知識: {pcInfo.status.knowledge.totalPoint}
+
+        </WrapDiv>
+        <PcEditDialogDiv>
+          <PcEditDialog
+            editPcInfo={pcInfo}
+            onUpdatePcInfo={onUpdatePcInfo}
+            onUpdatePcInfoWithThumbnail={onUpdatePcInfoWithThumbnail}
+          />
+        </PcEditDialogDiv>
+      </FlexDiv>
     )
   })
 
   return (
     <div className='PcList'>
       <h3>作成したPC一覧</h3>
-      <hr />
       { pcList }
     </div>
   )
@@ -76,7 +109,7 @@ class ManagerPc extends React.Component {
     } = this.props
 
     return (
-      <div className='ManagerPc'>
+      <ManagerPcDiv className='ManagerPc'>
         <h2>PC管理画面</h2>
 
         <PcMakeDialog
@@ -89,7 +122,7 @@ class ManagerPc extends React.Component {
           onUpdatePcInfo={handleUpdatePcInfo}
           onUpdatePcInfoWithThumbnail={handleUpdatePcInfoWithThumbnail}
         />
-      </div>
+      </ManagerPcDiv>
     )
   }
 }

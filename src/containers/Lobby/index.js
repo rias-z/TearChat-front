@@ -1,45 +1,65 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 
+// containers
 import RoomList from '../RoomList'
+
+// styles
+import { LobbyDiv, FlexDiv, WrapDiv } from './styles'
 
 
 const Lobby = (props) => (
-  <div className='Lobby'>
+  <LobbyDiv className='Lobby'>
     <h2>Lobby</h2>
 
-    <h3>ユーザ設定</h3>
-    <input
-      type='button'
-      value='ユーザ設定'
-      onClick={() => {
-        props.history.push('/settings')
-      }}
-    />
+    <FlexDiv>
+      <WrapDiv>
+        <h3>ユーザ設定</h3>
+        <RaisedButton
+          label='ユーザ設定'
+          onClick={() => {
+            props.history.push('/settings')
+          }}
+          style={{
+            margin: '0 0 0 1rem'
+          }}
+        />
+      </WrapDiv>
 
-    <h3>PCを作成/編集する</h3>
-    <input
-      type='button'
-      value='PCを作成/編集する'
-      onClick={() => {
-        props.history.push('/manager_pc')
-      }}
-    />
+      <WrapDiv>
+        <h3>PCを作成/編集する</h3>
+        <RaisedButton
+          label='PCを作成/編集する'
+          onClick={() => {
+            props.history.push('/manager_pc')
+          }}
+          style={{
+            margin: '0 0 0 1rem'
+          }}
+        />
+      </WrapDiv>
+    </FlexDiv>
 
-    <h3>部屋を作成する</h3>
-    <input
-      type='button'
-      value='部屋を作成する'
-      onClick={() => {
-        props.history.push('/create_room')
-      }}
-    />
+    <FlexDiv>
+      <WrapDiv>
+        <h3>部屋を作成する</h3>
+        <RaisedButton
+          label='部屋を作成する'
+          onClick={() => {
+            props.history.push('/create_room')
+          }}
+          style={{
+            margin: '0 0 0 1rem'
+          }}
+        />
+      </WrapDiv>
+    </FlexDiv>
 
     <h3>部屋一覧</h3>
     <RoomList
       {...props}
     />
-
-  </div>
+  </LobbyDiv>
 )
 
 export default Lobby
