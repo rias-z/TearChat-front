@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
         privateMessages: action.privateMessages
       })
     }
-    case 'SUCCESS_UPDATE_MESSAGE_TO_PRIVATE': {
+    case 'SUCCESS_UPDATE_PRIVATE_MESSAGE': {
       return Object.assign({}, state, {
         privateMessages: [
           ...state.privateMessages,

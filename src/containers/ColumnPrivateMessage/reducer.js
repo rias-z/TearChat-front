@@ -1,18 +1,18 @@
 const initialState = {
-  publicMessages: []
+  privateMessages: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SUCCESS_INITIALIZED_PUBLIC_MESSAGES': {
+    case 'SUCCESS_INITIALIZED_PRIVATE_MESSAGES': {
       return Object.assign({}, state, {
-        publicMessages: action.publicMessages
+        privateMessages: action.privateMessages
       })
     }
-    case 'SUCCESS_UPDATE_PUBLIC_MESSAGE': {
+    case 'SUCCESS_UPDATE_PRIVATE_MESSAGE': {
       return Object.assign({}, state, {
-        publicMessages: [
-          ...state.publicMessages,
+        privateMessages: [
+          ...state.privateMessages,
           action.message
         ]
       })

@@ -58,7 +58,7 @@ class ColumnPrivateMessage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  privateMessages: state.Session.privateMessages,
+  privateMessages: state.ColumnPrivateMessage.privateMessages,
   isKp: state.Session.isKp,
   socket: state.Session.socket,
   membersInfo: state.Session.membersInfo,

@@ -9,27 +9,18 @@ export const successInitialized = () => {
   }
 }
 
+// 退出時初期化
+export const successLeaveSession = () => {
+  return {
+    type: 'SUCCESS_LEAVE_SESSION',
+  }
+}
+
 // 部屋情報取得
 export const successInitializedRoomInfo = (room) => {
   return {
     type: 'SUCCESS_INITIALIZED_ROOM_INFO',
     room: room,
-  }
-}
-
-// プライベートメッセージ取得
-export const successInitializedPrivateMessages = (privateMessages) => {
-  return {
-    type: 'SUCCESS_INITIALIZED_PRIVATE_MESSAGES',
-    privateMessages: privateMessages,
-  }
-}
-
-// パブリックメッセージ取得
-export const successUpdateMessageToPrivate = (message) => {
-  return {
-    type: 'SUCCESS_UPDATE_MESSAGE_TO_PRIVATE',
-    message: message,
   }
 }
 

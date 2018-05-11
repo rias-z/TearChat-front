@@ -8,9 +8,9 @@ import {
   assignKp,
   successInitialized,
   assignSelfChannelId,
-  successInitializedPrivateMessages
 } from './action'
 import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
+import { successInitializedPrivateMessages } from '../ColumnPrivateMessage/action'
 import { successSetRoomPcInfo, successSetSelfRoomPcInfo } from '../RoomPcView/action'
 import { logout } from '../App/action'
 

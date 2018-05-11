@@ -1,10 +1,10 @@
 import io from 'socket.io-client'
 
 // action
-import { successUpdateMessageToPublic } from './containers/ColumnPublicMessage/action'
+import { successUpdatePublicMessage } from './containers/ColumnPublicMessage/action'
+import { successUpdatePrivateMessage } from './containers/ColumnPrivateMessage/action'
 import { successSetRoomPcInfo, successSetSelfRoomPcInfo } from './containers/RoomPcView/action'
 import {
-  successUpdateMessageToPrivate,
   updateActiveUsers,
   updateMembersInfo,
 } from './containers/Session/action'
@@ -60,11 +60,11 @@ class WebSocket {
   receiveMessage = (dispatch) => {
     // TODO public | private | group でdispatch先を分ける
     this.socket.on('receiveMessageToPublic', messageInfo => {
-      dispatch(successUpdateMessageToPublic(messageInfo))
+      dispatch(successUpdatePublicMessage(messageInfo))
     })
 
     this.socket.on('receiveMessageToPrivate', messageInfo => {
-      dispatch(successUpdateMessageToPrivate(messageInfo))
+      dispatch(successUpdatePrivateMessage(messageInfo))
     })
   }
 
