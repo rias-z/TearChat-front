@@ -7,6 +7,9 @@ import { STATIC_ENDPOINT } from '../../config/config'
 // logic
 import { handlePostImage } from './logic'
 
+// styles
+import { UserSettingsDiv } from './styles'
+
 
 class UserSettings extends Component {
   constructor(props) {
@@ -56,16 +59,18 @@ class UserSettings extends Component {
     ) : null
 
     return (
-      <div className='UserSettings'>
-        <h3>ユーザ設定</h3>
+      <UserSettingsDiv className='UserSettings'>
+        <h2>UserSettings</h2>
         名前: {userName} <br />
-        サムネイル:
+        現在サムネイル:
         <img
           alt='img'
           width='32'
           height='32'
           src={STATIC_ENDPOINT + thumbnail}
         />
+        <br />
+
         <br />
 
         新しいプロフィール画像をアップロードする<br />
@@ -78,8 +83,8 @@ class UserSettings extends Component {
           style={{
             'width': '10rem',
             'height': '6rem',
-            'border': '1px solid black',
-            'backgroundColor': '#eeeeee',
+            'border': '1px solid #e1e8ed',
+            'backgroundColor': '#222426',
             'textAlign': 'center',
           }}
         >
@@ -90,7 +95,7 @@ class UserSettings extends Component {
         {preview}
 
         {errorMessage}
-      </div>
+      </UserSettingsDiv>
     )
   }
 }

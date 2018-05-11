@@ -7,10 +7,12 @@ import CreateRoomForm from '../../components/CreateRoomForm'
 // logic
 import { handleCreateRoomSubmit } from './logic'
 
+// styles
+import { CreateRoomDiv } from './styles'
+
 
 const CreateRoom = (props) => (
-  <div className='CreateRoom'>
-    <h2>CreateRoom</h2>
+  <CreateRoomDiv className='CreateRoom'>
     <CreateRoomForm
       errorMessage={props.errorMessage}
       onSubmit={(e) => {
@@ -18,7 +20,7 @@ const CreateRoom = (props) => (
         props.handleCreateRoomSubmit(e.target)
       }}
     />
-  </div>
+  </CreateRoomDiv>
 )
 
 const mapStateToProps = (state) => ({

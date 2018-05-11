@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/RaisedButton'
 
 // logic
 import { handleRegisterSubmit } from './logic'
+
+// styles
+import { RegisterDiv } from './styles'
 
 
 class Register extends Component {
@@ -17,7 +21,7 @@ class Register extends Component {
     const { infoMessage, errorMessage } = this.props
 
     return (
-      <div className='Register'>
+      <RegisterDiv className='Register'>
         <h2>Register</h2>
 
         <form onSubmit={(e) => {
@@ -31,13 +35,13 @@ class Register extends Component {
           userName: <input name='userName' type='text' />
           <br />
           password: <input name='password' type='text' />
-          <br />
-          <input type='submit' value='register' />
+          <br /><br />
+          <RaisedButton type='submit' label='登録' />
         </form>
 
         {infoMessage}
         {errorMessage}
-      </div>
+      </RegisterDiv>
     )
   }
 }
