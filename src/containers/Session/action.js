@@ -10,9 +10,9 @@ export const successInitialized = () => {
 }
 
 // 退出時初期化
-export const successLeaveSession = () => {
+export const successClearSession = () => {
   return {
-    type: 'SUCCESS_LEAVE_SESSION',
+    type: 'SUCCESS_CLEAR_SESSION',
   }
 }
 

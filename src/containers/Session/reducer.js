@@ -64,6 +64,9 @@ export default (state = initialState, action) => {
         ]
       })
     }
+    case 'SUCCESS_CLEAR_SESSION': {
+      return initialState
+    }
     default:
       return state
   }

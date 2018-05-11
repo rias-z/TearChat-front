@@ -11,3 +11,9 @@ export const successUpdatePublicMessage = (message) => {
     message: message,
   }
 }
+
+export const successClearPublicMessage = () => {
+  return {
+    type: 'SUCCESS_CLEAR_PUBLIC_MESSAGE'
+  }
+}

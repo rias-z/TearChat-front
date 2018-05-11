@@ -10,7 +10,7 @@ import Table from '../Table'
 import MainView from '../../components/MainView'
 
 // logic
-import { initializedRoomInfo } from './logic'
+import { initializedRoomInfo, leaveSession } from './logic'
 
 
 class Session extends Component {
@@ -25,6 +25,9 @@ class Session extends Component {
     // 部屋退出時，socketをdisconnectする
     if (socket) {
       socket.disconnect()
+
+      // stateを初期化
+      this.props.leaveSession()
     }
   }
 
@@ -58,6 +61,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, getState) => ({
   initializedRoomInfo: () => dispatch(initializedRoomInfo(getState)),
+  leaveSession: () => dispatch(leaveSession()),
 })
 
 export default connect(

@@ -11,3 +11,9 @@ export const successUpdatePrivateMessage = (message) => {
     message: message,
   }
 }
+
+export const successClearPrivateMessage = () => {
+  return {
+    type: 'SUCCESS_CLEAR_PRIVATE_MESSAGE'
+  }
+}

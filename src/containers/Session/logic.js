@@ -8,10 +8,21 @@ import {
   assignKp,
   successInitialized,
   assignSelfChannelId,
+  successClearSession,
 } from './action'
-import { successInitializedPublicMessages } from '../ColumnPublicMessage/action'
-import { successInitializedPrivateMessages } from '../ColumnPrivateMessage/action'
-import { successSetRoomPcInfo, successSetSelfRoomPcInfo } from '../RoomPcView/action'
+import {
+  successInitializedPublicMessages,
+  successClearPublicMessage
+} from '../ColumnPublicMessage/action'
+import {
+  successInitializedPrivateMessages,
+  successClearPrivateMessage
+} from '../ColumnPrivateMessage/action'
+import {
+  successSetRoomPcInfo,
+  successSetSelfRoomPcInfo,
+  successClearRoomPcView,
+} from '../RoomPcView/action'
 import { logout } from '../App/action'
 
 // api
@@ -115,4 +126,11 @@ export const initializedRoomInfo = (props) => async (dispatch, getState) => {
       dispatch(logout())
     }
   }
+}
+
+export const leaveSession = () => (dispatch) => {
+  dispatch(successClearSession())
+  dispatch(successClearPublicMessage())
+  dispatch(successClearPrivateMessage())
+  dispatch(successClearRoomPcView())
 }

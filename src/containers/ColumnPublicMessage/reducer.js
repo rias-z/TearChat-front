@@ -17,6 +17,9 @@ export default (state = initialState, action) => {
         ]
       })
     }
+    case 'SUCCESS_CLEAR_PUBLIC_MESSAGE': {
+      return initialState
+    }
     default:
       return state
   }

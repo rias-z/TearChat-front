@@ -16,6 +16,9 @@ export default (state = initialState, action) => {
         selfRoomPcInfo: action.selfRoomPcInfo,
       })
     }
+    case 'SUCCESS_CLEAR_ROOM_PC_VIEW': {
+      return initialState
+    }
     default:
       return state
   }

@@ -13,3 +13,9 @@ export const successSetSelfRoomPcInfo = (selfRoomPcInfo) => {
     selfRoomPcInfo: selfRoomPcInfo,
   }
 }
+
+export const successClearRoomPcView = () => {
+  return {
+    type: 'SUCCESS_CLEAR_ROOM_PC_VIEW'
+  }
+}
